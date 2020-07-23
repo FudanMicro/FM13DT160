@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion parent.ext.compileSdkVersion
+    defaultConfig {
+        applicationId "com.fmsh.DT160"
+        minSdkVersion parent.ext.minSdkVersion
+        targetSdkVersion parent.ext.targetSdkVersion
+        versionCode parent.ext.versionCode
+        versionName parent.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation libSupportButterknife
+    annotationProcessor libSupportButterknifeAnnotationProcessor
+    implementation libSupportRecyclerView
+    implementation libSupportDesign
+    implementation libSupportAppcompat_v7
+    implementation libSupportAppcompat_v4
+    implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.orhanobut:logger:1.15'
+    implementation 'com.qmuiteam:qmui:1.4.0'
+    implementation 'com.qmuiteam:arch:0.6.1'
+    annotationProcessor "com.qmuiteam:arch-compiler:0.6.1"
+    // use annotationProcessor if java
+    implementation files('libs/jxl.jar')
+}

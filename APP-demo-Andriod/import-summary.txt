@@ -1,0 +1,85 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* ic_launcher-web.png
+* proguard-project.txt
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:18.+
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => nfcosService4XM\src\main\AndroidManifest.xml
+* assets\ => nfcosService4XM\src\main\assets\
+* libs\NFCOS_Client_4.1.1.jar => nfcosService4XM\libs\NFCOS_Client_4.1.1.jar
+* res\ => nfcosService4XM\src\main\res\
+* src\ => nfcosService4XM\src\main\java\
+* src\cn\com\fmsh\nfcos\client\service\xm\ActParameter.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\ActParameter.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\BroadCastParameter.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\BroadCastParameter.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\CardAppInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\CardAppInfo.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\CardAppManager.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\CardAppManager.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\CardAppRecord.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\CardAppRecord.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\CardAppStatus.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\CardAppStatus.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\InvoiceToken.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\InvoiceToken.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\IssueProcess.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\IssueProcess.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\IssuerPrepareResult.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\IssuerPrepareResult.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\LoginInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\LoginInfo.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\NfcosActivity.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\NfcosActivity.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\NfcosBusinessOrder.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\NfcosBusinessOrder.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\NfcosMainOrder.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\NfcosMainOrder.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\NfcosPayOrder.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\NfcosPayOrder.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\Notice.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\Notice.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\PreDepositInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\PreDepositInfo.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\STTicketInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\STTicketInfo.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\STTicketRecord.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\STTicketRecord.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\TicketOperateResult.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\TicketOperateResult.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\UserInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\UserInfo.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\VersionInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\VersionInfo.aidl
+* src\cn\com\fmsh\nfcos\client\service\xm\VoucherInfo.aidl => nfcosService4XM\src\main\aidl\cn\com\fmsh\nfcos\client\service\xm\VoucherInfo.aidl
+
+Missing Android Support Repository:
+-----------------------------------
+Some useful libraries, such as the Android Support Library, are
+installed from a special Maven repository, which should be installed
+via the SDK manager.
+
+It looks like this library is missing from your SDK installation at:
+null
+
+To install it, open the SDK manager, and in the Extras category,
+select "Android Support Repository". You may also want to install the
+"Google Repository" if you want to use libraries like Google Play
+Services.
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

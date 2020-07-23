@@ -1,0 +1,504 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		172952B622FA6ECF00D8387E /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 172952B422FA6ECF00D8387E /* CommonUtils.m */; };
+		173CEC1D22EAF82E003F9833 /* ModelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 173CEC1B22EAF82E003F9833 /* ModelButton.m */; };
+		17555DC022ED2FD300453394 /* QFPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17555DBE22ED2FD200453394 /* QFPickerView.m */; };
+		176AD20E22E170280015D0A9 /* NFCTagHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 176AD20D22E170280015D0A9 /* NFCTagHelper.m */; };
+		17A282F022E55E2E0003EC57 /* NFCTagObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A282EC22E55E2E0003EC57 /* NFCTagObject.m */; };
+		17C0EF7F22EAE1DE00E06BFD /* MeasureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0EF7D22EAE1DE00E06BFD /* MeasureViewController.m */; };
+		17D82CBD23210A0700DDC384 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17D82CBB23210A0700DDC384 /* LaunchScreen.storyboard */; };
+		D401D0882109A2EC0047EAEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D401D08A2109A2EC0047EAEE /* Localizable.strings */; };
+		D41BB43F20F32B05003B55EF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D41BB43E20F32B05003B55EF /* AppDelegate.m */; };
+		D41BB44720F32B07003B55EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D41BB44620F32B07003B55EF /* Assets.xcassets */; };
+		D41BB44D20F32B07003B55EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D41BB44C20F32B07003B55EF /* main.m */; };
+		D41BB46F20F5B3F1003B55EF /* GraphicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41BB46E20F5B3F1003B55EF /* GraphicViewController.m */; };
+		D47B8EE320FF0DD70060FCCC /* fusioncharts.charts.js in Resources */ = {isa = PBXBuildFile; fileRef = D47B8EDF20FF0DD70060FCCC /* fusioncharts.charts.js */; };
+		D47B8EE420FF0DD70060FCCC /* fusioncharts.js in Resources */ = {isa = PBXBuildFile; fileRef = D47B8EE020FF0DD70060FCCC /* fusioncharts.js */; };
+		D47B8EE520FF0DD70060FCCC /* fusioncharts.widgets.js in Resources */ = {isa = PBXBuildFile; fileRef = D47B8EE120FF0DD70060FCCC /* fusioncharts.widgets.js */; };
+		D4C0F455210700DA001E9231 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4C0F454210700DA001E9231 /* LoggingViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		172952B422FA6ECF00D8387E /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
+		172952B522FA6ECF00D8387E /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
+		173CEC1B22EAF82E003F9833 /* ModelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelButton.m; sourceTree = "<group>"; };
+		173CEC1C22EAF82E003F9833 /* ModelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelButton.h; sourceTree = "<group>"; };
+		17555DBE22ED2FD200453394 /* QFPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFPickerView.m; sourceTree = "<group>"; };
+		17555DBF22ED2FD300453394 /* QFPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFPickerView.h; sourceTree = "<group>"; };
+		176AD20C22E170280015D0A9 /* NFCTagHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCTagHelper.h; sourceTree = "<group>"; };
+		176AD20D22E170280015D0A9 /* NFCTagHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFCTagHelper.m; sourceTree = "<group>"; };
+		17A282EC22E55E2E0003EC57 /* NFCTagObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFCTagObject.m; sourceTree = "<group>"; };
+		17A282ED22E55E2E0003EC57 /* NFCTagObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCTagObject.h; sourceTree = "<group>"; };
+		17C0EF7D22EAE1DE00E06BFD /* MeasureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureViewController.m; sourceTree = "<group>"; };
+		17C0EF7E22EAE1DE00E06BFD /* MeasureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureViewController.h; sourceTree = "<group>"; };
+		17D82CBC23210A0700DDC384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FMTemperature/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D401D0892109A2EC0047EAEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D401D0962109A9560047EAEE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D41BB43A20F32B05003B55EF /* DT160 TLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DT160 TLogger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41BB43D20F32B05003B55EF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D41BB43E20F32B05003B55EF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D41BB44620F32B07003B55EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D41BB44B20F32B07003B55EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D41BB44C20F32B07003B55EF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D41BB46320F58B3B003B55EF /* nfcTemperature.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nfcTemperature.pch; sourceTree = "<group>"; };
+		D41BB46D20F5B3F1003B55EF /* GraphicViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphicViewController.h; sourceTree = "<group>"; };
+		D41BB46E20F5B3F1003B55EF /* GraphicViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphicViewController.m; sourceTree = "<group>"; };
+		D41BB47120F5E0EB003B55EF /* FMTemperature.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FMTemperature.entitlements; sourceTree = "<group>"; };
+		D47B8EDF20FF0DD70060FCCC /* fusioncharts.charts.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = fusioncharts.charts.js; sourceTree = "<group>"; };
+		D47B8EE020FF0DD70060FCCC /* fusioncharts.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = fusioncharts.js; sourceTree = "<group>"; };
+		D47B8EE120FF0DD70060FCCC /* fusioncharts.widgets.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = fusioncharts.widgets.js; sourceTree = "<group>"; };
+		D4C0F453210700DA001E9231 /* LoggingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggingViewController.h; sourceTree = "<group>"; };
+		D4C0F454210700DA001E9231 /* LoggingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoggingViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D41BB43720F32B05003B55EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		172952BB22FA6FAC00D8387E /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				172952B522FA6ECF00D8387E /* CommonUtils.h */,
+				172952B422FA6ECF00D8387E /* CommonUtils.m */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		D41BB43120F32B05003B55EF = {
+			isa = PBXGroup;
+			children = (
+				D41BB43C20F32B05003B55EF /* FMTemperature */,
+				D41BB43B20F32B05003B55EF /* Products */,
+				D41BB46020F36749003B55EF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D41BB43B20F32B05003B55EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D41BB43A20F32B05003B55EF /* DT160 TLogger.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D41BB43C20F32B05003B55EF /* FMTemperature */ = {
+			isa = PBXGroup;
+			children = (
+				172952BB22FA6FAC00D8387E /* Global */,
+				D47B8EDE20FF0DD70060FCCC /* FusionChart */,
+				D41BB47720F5FA6E003B55EF /* Language */,
+				D41BB47220F5EEE4003B55EF /* Model */,
+				D41BB45C20F36705003B55EF /* NFCHelper */,
+				D41BB45420F3319E003B55EF /* Controller */,
+				D41BB43D20F32B05003B55EF /* AppDelegate.h */,
+				D41BB43E20F32B05003B55EF /* AppDelegate.m */,
+				D41BB44620F32B07003B55EF /* Assets.xcassets */,
+				D41BB47120F5E0EB003B55EF /* FMTemperature.entitlements */,
+				17D82CBB23210A0700DDC384 /* LaunchScreen.storyboard */,
+				D41BB44B20F32B07003B55EF /* Info.plist */,
+				D41BB44C20F32B07003B55EF /* main.m */,
+				D41BB46320F58B3B003B55EF /* nfcTemperature.pch */,
+			);
+			path = FMTemperature;
+			sourceTree = "<group>";
+		};
+		D41BB45420F3319E003B55EF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				17555DBF22ED2FD300453394 /* QFPickerView.h */,
+				17555DBE22ED2FD200453394 /* QFPickerView.m */,
+				D4C0F4522106FFD9001E9231 /* LoggingView */,
+				D41BB46920F5B3B4003B55EF /* GraphicsView */,
+				D41BB46720F5B395003B55EF /* MeasureView */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D41BB45C20F36705003B55EF /* NFCHelper */ = {
+			isa = PBXGroup;
+			children = (
+				17A282ED22E55E2E0003EC57 /* NFCTagObject.h */,
+				17A282EC22E55E2E0003EC57 /* NFCTagObject.m */,
+				176AD20C22E170280015D0A9 /* NFCTagHelper.h */,
+				176AD20D22E170280015D0A9 /* NFCTagHelper.m */,
+			);
+			path = NFCHelper;
+			sourceTree = "<group>";
+		};
+		D41BB46020F36749003B55EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D41BB46720F5B395003B55EF /* MeasureView */ = {
+			isa = PBXGroup;
+			children = (
+				17C0EF7E22EAE1DE00E06BFD /* MeasureViewController.h */,
+				17C0EF7D22EAE1DE00E06BFD /* MeasureViewController.m */,
+			);
+			path = MeasureView;
+			sourceTree = "<group>";
+		};
+		D41BB46920F5B3B4003B55EF /* GraphicsView */ = {
+			isa = PBXGroup;
+			children = (
+				D41BB46D20F5B3F1003B55EF /* GraphicViewController.h */,
+				D41BB46E20F5B3F1003B55EF /* GraphicViewController.m */,
+			);
+			path = GraphicsView;
+			sourceTree = "<group>";
+		};
+		D41BB47220F5EEE4003B55EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				173CEC1C22EAF82E003F9833 /* ModelButton.h */,
+				173CEC1B22EAF82E003F9833 /* ModelButton.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D41BB47720F5FA6E003B55EF /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				D401D08A2109A2EC0047EAEE /* Localizable.strings */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
+		D47B8EDE20FF0DD70060FCCC /* FusionChart */ = {
+			isa = PBXGroup;
+			children = (
+				D47B8EDF20FF0DD70060FCCC /* fusioncharts.charts.js */,
+				D47B8EE020FF0DD70060FCCC /* fusioncharts.js */,
+				D47B8EE120FF0DD70060FCCC /* fusioncharts.widgets.js */,
+			);
+			path = FusionChart;
+			sourceTree = "<group>";
+		};
+		D4C0F4522106FFD9001E9231 /* LoggingView */ = {
+			isa = PBXGroup;
+			children = (
+				D4C0F453210700DA001E9231 /* LoggingViewController.h */,
+				D4C0F454210700DA001E9231 /* LoggingViewController.m */,
+			);
+			path = LoggingView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D41BB43920F32B05003B55EF /* FMTemperature */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D41BB45020F32B07003B55EF /* Build configuration list for PBXNativeTarget "FMTemperature" */;
+			buildPhases = (
+				D41BB43620F32B05003B55EF /* Sources */,
+				D41BB43720F32B05003B55EF /* Frameworks */,
+				D41BB43820F32B05003B55EF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FMTemperature;
+			productName = FMTemperature;
+			productReference = D41BB43A20F32B05003B55EF /* DT160 TLogger.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41BB43220F32B05003B55EF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "复旦微电子集团股份科技有限公司";
+				TargetAttributes = {
+					D41BB43920F32B05003B55EF = {
+						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.NearFieldCommunicationTagReading = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = D41BB43520F32B05003B55EF /* Build configuration list for PBXProject "FMTemperature" */;
+			compatibilityVersion = "Xcode 11.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = D41BB43120F32B05003B55EF;
+			productRefGroup = D41BB43B20F32B05003B55EF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D41BB43920F32B05003B55EF /* FMTemperature */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D41BB43820F32B05003B55EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D41BB44720F32B07003B55EF /* Assets.xcassets in Resources */,
+				D47B8EE320FF0DD70060FCCC /* fusioncharts.charts.js in Resources */,
+				D401D0882109A2EC0047EAEE /* Localizable.strings in Resources */,
+				17D82CBD23210A0700DDC384 /* LaunchScreen.storyboard in Resources */,
+				D47B8EE420FF0DD70060FCCC /* fusioncharts.js in Resources */,
+				D47B8EE520FF0DD70060FCCC /* fusioncharts.widgets.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D41BB43620F32B05003B55EF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D41BB44D20F32B07003B55EF /* main.m in Sources */,
+				176AD20E22E170280015D0A9 /* NFCTagHelper.m in Sources */,
+				17555DC022ED2FD300453394 /* QFPickerView.m in Sources */,
+				17C0EF7F22EAE1DE00E06BFD /* MeasureViewController.m in Sources */,
+				D4C0F455210700DA001E9231 /* LoggingViewController.m in Sources */,
+				D41BB43F20F32B05003B55EF /* AppDelegate.m in Sources */,
+				172952B622FA6ECF00D8387E /* CommonUtils.m in Sources */,
+				17A282F022E55E2E0003EC57 /* NFCTagObject.m in Sources */,
+				D41BB46F20F5B3F1003B55EF /* GraphicViewController.m in Sources */,
+				173CEC1D22EAF82E003F9833 /* ModelButton.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		17D82CBB23210A0700DDC384 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17D82CBC23210A0700DDC384 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D401D08A2109A2EC0047EAEE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D401D0892109A2EC0047EAEE /* en */,
+				D401D0962109A9560047EAEE /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D41BB44E20F32B07003B55EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D41BB44F20F32B07003B55EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D41BB45120F32B07003B55EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FMTemperature/FMTemperature.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.5;
+				DEVELOPMENT_TEAM = C2TRZ3QGA9;
+				GCC_PREFIX_HEADER = "${SRCROOT}/FMTemperature/nfcTemperature.pch";
+				IBSC_FLATTEN_NIBS = NO;
+				INFOPLIST_FILE = FMTemperature/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.5;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fmsh.TagMeasureNew;
+				PRODUCT_NAME = "DT160 TLogger";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		D41BB45220F32B07003B55EF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FMTemperature/FMTemperature.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.5;
+				DEVELOPMENT_TEAM = C2TRZ3QGA9;
+				GCC_PREFIX_HEADER = "${SRCROOT}/FMTemperature/nfcTemperature.pch";
+				IBSC_FLATTEN_NIBS = NO;
+				INFOPLIST_FILE = FMTemperature/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.5;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fmsh.TagMeasureNew;
+				PRODUCT_NAME = "DT160 TLogger";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D41BB43520F32B05003B55EF /* Build configuration list for PBXProject "FMTemperature" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D41BB44E20F32B07003B55EF /* Debug */,
+				D41BB44F20F32B07003B55EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D41BB45020F32B07003B55EF /* Build configuration list for PBXNativeTarget "FMTemperature" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D41BB45120F32B07003B55EF /* Debug */,
+				D41BB45220F32B07003B55EF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41BB43220F32B05003B55EF /* Project object */;
+}

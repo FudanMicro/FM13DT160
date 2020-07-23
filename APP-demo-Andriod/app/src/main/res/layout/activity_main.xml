@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity">
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"/>
+    <FrameLayout
+        android:id="@+id/fl_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ></FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/qmui_config_color_gray_9"
+        >
+    </View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+
+        <CheckBox
+            android:id="@+id/cb_lab1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:textColor="@color/text_selector"
+            android:text="@string/text_lab1"
+            android:button="@null"
+            android:drawablePadding="1dp"
+            android:checked="true"
+            android:background="@null"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/lab1_selector"
+            />
+
+        <CheckBox
+            android:id="@+id/cb_lab2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/text_selector"
+            android:button="@null"
+            android:background="@null"
+            android:text="@string/text_lab2"
+            android:gravity="center_horizontal"
+            android:drawableTop="@drawable/lab2_selector"
+            />
+
+
+
+    </LinearLayout>
+
+
+    
+
+   
+</LinearLayout>

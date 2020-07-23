@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  FMTemperature
+
+  Created by gaolailong on 2018/7/26.
+  Copyright © 2018年 复旦微电子集团股份科技有限公司. All rights reserved.
+*/
+//温差标签
+"connecttingWithNFC" = "正在与标签建立连接";
+"userCancelWithNFC" = "用户取消会话";
+"timeOutCancel" = "NFC会话超时";
+"unKnowStatu" = "不支持该固件";
+"temperatureException" = "缺少测温数据";
+"compeleteWithNFC" = "在达到预设的运行时间后停止记录";
+"systemError" = "NFCReaderSessionInvalidationErrorSystemIsBusy";
+
+"ACCEPTABLE_STRING" = "可接受";
+"LOW_STRING" = "低";
+"HIGH_STRING" = "高";
+"RECORDED_VALUES_STRING" = " 数值已被记录";
+"MIN_TEMPERATURE_STEP" = "最小测温间隔: ";
+"MIN_LIMIT_STRING" = "最小限制值: ";
+"MAX_LIMIT_STRING" = "最大限制值: ";
+"MIN_RECORD_STRING" = "最小记录值: ";
+"MAX_RECORD_STRING" = "最大记录值: ";
+"DEVICE_ID_CELL_LABEL" = "NFC 编号: ";
+"State" = "状态: ";
+"second" = "秒";
+"Type" = " 类型";
+"None" = "无";
+
+//带开启检测的NFC TAG标签
+"fmshTipType" = "带开启检测的NFC TAG";
+
+//TabController
+"FM_Tab_Measurement" = "即时测量";
+"FM_Tab_Logging" = "定时测量";
+
+//Measurement Page
+"FM_Measurement_Result" = "测量结果";
+"FM_Field_Strength" = "场强";
+"FM_Temperature" = "温度";
+"FM_Voltage" = "电压";
+"FM_Type" = "类型";
+"FM_Response" = "指令响应";
+"FM_CMD_Measurement" = "基础测量";
+"FM_Wakeup" = "唤醒";
+"FM_Check_Status" = "检测唤醒";
+"FM_Check_Result" = "检测结果";
+"FM_Sleep" = "休眠";
+"FM_UHF_Initialization" = "超高频初始化";
+"FM_LED_Control" = "LED控制";
+"FM_Success" = "成功";
+"FM_Fail" = "失败";
+
+//Logging Page
+"FM_Logging_Config" = "测量配置";
+"FM_Delay_Time" = "测量延时";
+"FM_Time_Interval" = "测量间隔";
+"FM_Logging_Points" = "测量次数";
+"FM_Low_Temperature_Thresholds" = "最小温度阈值";
+"FM_High_Temperature_Thresholds" = "最大温度阈值";
+"FM_Start_Logging" = "启动定时测量";
+"FM_Read_Data" = "查看测量结果";
+"FM_Stop_Logging" = "停止定时测量";
+"FM_Confirm" = "确定";
+"FM_Cancel" = "取消";
+"FM_Back" = "返回";
+
+//Detail Data Page
+"FM_Data_Details" = "详细数据";
+"FM_Summary" = "概要信息";
+"FM_Status" = "状态";
+"FM_Start_Time" = "开始时间";
+"FM_Minimum_Temperature" = "最低温度";
+"FM_Maximum_Temperature" = "最高温度";
+"FM_Limited_Temperature_Range" = "测温范围";
+"FM_Number_Of_Over_Low_Threshold" = "温度超下限次数";
+"FM_Number_Of_Over_High_Threshold" = "温度超上限次数";
+"FM_Ongoing" = "正在测量";
+"FM_Waiting" = "等待测量";
+"FM_Error_Status" = "状态异常";
+"FM_Finished" = "测量完成";
+"FM_Send_Mail" = "发送邮件";

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvDelay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:text="@string/text_measure_delay"
+        />
+    <TextView
+        android:id="@+id/tvInterval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:text="@string/text_measure_interval"
+
+        />
+    <TextView
+        android:id="@+id/tvCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:text="@string/text_measure_count"
+
+        />
+    <TextView
+        android:id="@+id/tvMinTp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:visibility="visible"
+        android:text="@string/text_min_tp"
+
+        />
+    <TextView
+        android:id="@+id/tvMAxTp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:visibility="visible"
+        android:text="@string/text_max_tp"
+        />
+
+    <Button
+        android:id="@+id/applyConfigButton"
+        style="@style/ButtonTheme"
+        android:layout_marginTop="20dp"
+        android:text="@string/applyConfig"/>
+
+    <Button
+        android:id="@+id/resultButton"
+        style="@style/ButtonTheme"
+        android:text="@string/config_text10"/>
+
+    <Button
+        android:id="@+id/stopButton"
+        style="@style/ButtonTheme"
+        android:text="@string/config_text8"/>
+
+</LinearLayout>

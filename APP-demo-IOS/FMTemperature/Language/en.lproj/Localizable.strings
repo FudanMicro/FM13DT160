@@ -1,0 +1,87 @@
+/* 
+  Localizable.strings
+  FMTemperature
+
+  Created by gaolailong on 2018/7/26.
+  Copyright © 2018年 复旦微电子集团股份科技有限公司. All rights reserved.
+*/
+//温差标签
+//正在与标签建立连接
+"connecttingWithNFC" = "Establishing NFC connection with tag";
+//用户取消会话
+"userCancelWithNFC" = "User cancelled NFC session";
+//NFC会话超时
+"timeOutCancel" = "NFC session timeout";
+"unKnowStatu" = "Firmware not supported.";
+"temperatureException" = "Lack of temperature measurement data";
+"compeleteWithNFC" = "Logging was stopped after the configured running time.";
+"systemError" = "NFCReaderSessionInvalidationErrorSystemIsBusy";
+
+"ACCEPTABLE_STRING" = "Acceptable";
+"LOW_STRING" = "Low";
+"HIGH_STRING" = "High";
+"RECORDED_VALUES_STRING" = " values have been recorded";
+"MIN_TEMPERATURE_STEP" = "Minimum step value: ";
+"MIN_LIMIT_STRING" = "Minimum limit value: ";
+"MAX_LIMIT_STRING" = "Maximum limit value: ";
+"MIN_RECORD_STRING" = "Minimum record value: ";
+"MAX_RECORD_STRING" = "Maximum record value: ";
+"DEVICE_ID_CELL_LABEL" = "NFC ID: ";
+"State" = "State: ";
+"second" = " second";
+"Type" = " Type";
+"None" = "None";
+
+//带开启检测的NFC TAG标签
+"fmshTipType" = "带开启检测的NFC TAG";
+
+//TabController
+"FM_Tab_Measurement" = "Measurement";
+"FM_Tab_Logging" = "Logging";
+
+//Measurement Page
+"FM_Measurement_Result" = "Measurement Result";
+"FM_Field_Strength" = "HF Field Strength";
+"FM_Temperature" = "Temperature";
+"FM_Voltage" = "Voltage";
+"FM_Type" = "Type";
+"FM_Response" = "Response";
+"FM_CMD_Measurement" = "Measurement";
+"FM_Wakeup" = "Wakeup";
+"FM_Check_Status" = "Wakeup Check";
+"FM_Check_Result" = "Result";
+"FM_Sleep" = "Sleep";
+"FM_UHF_Initialization" = "UHF Initialization";
+"FM_LED_Control" = "LED Control";
+"FM_Success" = "Success";
+"FM_Fail" = "Fail";
+
+//Logging Page
+"FM_Logging_Config" = "Logging Configuration";
+"FM_Delay_Time" = "Delay Time To Start";
+"FM_Time_Interval" = "Time Interval";
+"FM_Logging_Points" = "Logging Points";
+"FM_Low_Temperature_Thresholds" = "Low Temperature Thresholds";
+"FM_High_Temperature_Thresholds" = "High Temperature Thresholds";
+"FM_Start_Logging" = "Start Logging";
+"FM_Read_Data" = "Read Data";
+"FM_Stop_Logging" = "Stop Logging";
+"FM_Confirm" = "Confirm";
+"FM_Cancel" = "Cancel";
+"FM_Back" = "Back";
+
+//Detail Data Page
+"FM_Data_Details" = "Data Details";
+"FM_Summary" = "Summary";
+"FM_Status" = "Status";
+"FM_Start_Time" = "Start Time";
+"FM_Minimum_Temperature" = "Minimum Temperature";
+"FM_Maximum_Temperature" = "Maximum Temperature";
+"FM_Limited_Temperature_Range" = "Limited Temperature Range";
+"FM_Number_Of_Over_Low_Threshold" = "Number Of Over Low Threshold";
+"FM_Number_Of_Over_High_Threshold" = "Number Of Over High Threshold";
+"FM_Ongoing" = "Ongoing";
+"FM_Waiting" = "Waiting";
+"FM_Error_Status" = "Error Status";
+"FM_Finished" = "Finished";
+"FM_Send_Mail" = "Send Mail";

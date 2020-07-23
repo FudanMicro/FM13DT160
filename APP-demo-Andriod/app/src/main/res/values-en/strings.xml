@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">FM13DT160</string>
+    <string name="text_lab1">Measurement</string>
+    <string name="text_lab2">Logging</string>
+    <string name="text_result">Measurement Result</string>
+    <string name="text_type">Type</string>
+    <string name="text_loading">Loading</string>
+    <string name="text_state">State</string>
+    <string name="text_wake_up">Already Wakeup</string>
+    <string name="text_no_wake_up">No Wakeup</string>
+
+    <string name="text_error">Error</string>
+    <string name="text_success">Success</string>
+    <string name="text_fail">Fail</string>
+    <string name="text_init">Init Finished</string>
+    <string name="text_data">Temperature Data</string>
+
+    <string name="text_send_email">Send Mail</string>
+    <string name="text_main1">Temperature </string>
+    <string name="text_main2">Data Read </string>
+    <string name="text_main3">Logging Setting</string>
+    <string name="text_main4">Select Measurement Type</string>
+    <string name="text_main5">Pressure Sensor Measurement</string>
+    <string name="text_main6">Other Sensor Measurement</string>
+    <string name="text_main7">Voltage </string>
+    <string name="text_main8"> UHF Field Measure</string>
+    <string name="text_main9"> Continuous Measurement</string>
+    <string name="text_main10"> Field Strength </string>
+    <string name="text_end">End</string>
+    <string name="text_start">Start</string>
+    <string name="text_check">Check Measure State</string>
+    <string name="text_open">FM11NT0X1TT Detect</string>
+    <string name="text_instruct">Measurement\nCommand</string>
+    <string name="text_configuration">Measurement\nConfig</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_confirm">OK</string>
+    <string name="text_led_on">LED ON</string>
+    <string name="text_led_off">LED OFF </string>
+    <string name="text_hint">Hint</string>
+
+    <string name="config_text1">Wake up</string>
+    <string name="config_text2">Check Wake</string>
+    <string name="config_text3">Set Measurement  \nDelay</string>
+    <string name="config_text4">Check Measurement \nDelay</string>
+    <string name="config_text5"> Set  Measurement  \nStep</string>
+    <string name="config_text6">Check Measurement \nStep</string>
+    <string name="config_text7">Start Logging</string>
+    <string name="config_text8">Stop Logging</string>
+    <string name="config_text9">Check State</string>
+    <string name="config_text10">Temperature Data Read</string>
+    <string name="config_text11">Start Single \nMeasurement</string>
+    <string name="config_text12">Check Single Measurement</string>
+    <string name="config_text13">Set Measurement \nCount </string>
+    <string name="config_text14">Check Measurement\n Count </string>
+    <string name="config_text15">Sleep</string>
+    <string name="config_text16">Initialize UHF</string>
+    <string name="config_text17">Read Current Step</string>
+    <string name="config_text18">Read The Time In Current Step</string>
+
+
+    <string name="hint_text1">RTC ON Success</string>
+    <string name="hint_text2">RTC ON Fail</string>
+    <string name="hint_text3">RTC Reset Success</string>
+    <string name="hint_text4">RTC Reset Fail</string>
+    <string name="hint_text5">IN RTC Flow State</string>
+    <string name="hint_text6">Not RTC Flow State</string>
+    <string name="hint_text7">Battery Volt:</string>
+    <string name="hint_text8">Wakeup fail,retry</string>
+    <string name="hint_text9">Field Strength:</string>
+    <string name="hint_text10">Temperature:</string>
+    <string name="hint_text11">Temperature ERROR</string>
+    <string name="hint_text12">Config Fail</string>
+    <string name="hint_text13">Read Fail,PLS Retry!</string>
+
+    <string name="hint_text14">Logging Points</string>
+    <string name="hint_text15">Start Time</string>
+    <string name="hint_text16">Number of  Over Low Threshold</string>
+    <string name="hint_text17">Limited Temperature Range:</string>
+    <string name="hint_text18">Time Interval </string>
+    <string name="hint_text19">Number of  Over High Threshold</string>
+    <string name="hint_text20">Maximum Temperature</string>
+    <string name="hint_text21">Minimum Temperature</string>
+    <string name="hint_text22">Status</string>
+    <string name="hint_text23">In Temperature Measurement Flow</string>
+    <string name="hint_text24">Temperature Measurement Finished</string>
+    <string name="hint_text25">Measurement Stopped Abnormally</string>
+    <string name="hint_text26">Temperature Measurement in Delay Time!</string>
+
+    <string name="text_measure_delay">• Delay Time to Start:</string>
+    <string name="text_measure_interval">• Time Interval:</string>
+    <string name="text_measure_count">• Temperature Points:</string>
+    <string name="text_max_tp">• High Temperature Limit:</string>
+    <string name="text_min_tp">• Low Temperature Limit:</string>
+    <string name="seconds">seconds</string>
+    <string name="minutes">minutes</string>
+
+    <string name="applyConfig">Start Logging Process</string>
+
+
+    <string name="resetConfig">初始化标签状态</string>
+
+    <string name="liveStatus_label">Single Time Measurement</string>
+    <string name="text_connet"><Data><![CDATA[当前标签处于<font color="#0000ff"><b>连接</b></font>状态]]></Data></string>
+    <string name="text_disconnet"><Data><![CDATA[当前标签处于<font color="#ff0000"><b>断开</b></font>状态]]></Data></string>
+    <string name="celsius">°C</string>
+</resources>

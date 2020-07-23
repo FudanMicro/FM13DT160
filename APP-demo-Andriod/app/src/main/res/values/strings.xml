@@ -1,0 +1,103 @@
+<resources>
+    <string name="app_name">FM13DT160</string>
+
+    <string name="text_lab1">即时测量</string>
+    <string name="text_lab2">定时测量</string>
+    <string name="text_result">测量结果</string>
+    <string name="text_type">类型</string>
+    <string name="text_loading">正在加载</string>
+    <string name="text_state">状态</string>
+    <string name="text_wake_up">已唤醒</string>
+    <string name="text_no_wake_up">未唤醒</string>
+    <string name="text_error">错误</string>
+    <string name="text_success">成功</string>
+    <string name="text_fail">失败</string>
+    <string name="text_init">初始化完成</string>
+    <string name="text_data">温度数据</string>
+    <string name="text_send_email">发送邮件</string>
+
+    <string name="text_main1">温度</string>
+    <string name="text_main2">记录读取</string>
+    <string name="text_main3">系统设置</string>
+    <string name="text_main4">请选择测量类型</string>
+    <string name="text_main5">压力测量</string>
+    <string name="text_main6">外部sensor测量</string>
+    <string name="text_main7">电压</string>
+    <string name="text_main8">900M场强测量</string>
+    <string name="text_main9">RTC温度测量</string>
+    <string name="text_main10">场强</string>
+    <string name="text_end">结束</string>
+    <string name="text_start">开始</string>
+    <string name="text_check">查看测温状态</string>
+    <string name="text_open">FM11NT0X1TT开启检测</string>
+    <string name="text_instruct">测量指令</string>
+    <string name="text_configuration">测量配置</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_confirm">确定</string>
+    <string name="text_led_on">LED灯点亮</string>
+    <string name="text_led_off">LED灯熄灭</string>
+    <string name="text_hint">提示</string>
+    <string name="config_text1">唤醒</string>
+    <string name="config_text2">查看唤醒</string>
+    <string name="config_text3">测温延时</string>
+    <string name="config_text4">查看测温延时</string>
+    <string name="config_text5">测温间隔</string>
+    <string name="config_text6">查看测温间隔</string>
+    <string name="config_text7">开启测温</string>
+    <string name="config_text8">停止测温</string>
+    <string name="config_text9">查看测温状态</string>
+    <string name="config_text10">查看测温数据</string>
+    <string name="config_text11">开启实时测温</string>
+    <string name="config_text12">查看实时测温结果</string>
+    <string name="config_text13">设置测温次数</string>
+    <string name="config_text14">查看测温次数</string>
+    <string name="config_text15">休眠</string>
+    <string name="config_text16">超高频初始化</string>
+    <string name="config_text17">读C091寄存器</string>
+    <string name="config_text18">读C092寄存器</string>
+
+
+    <string name="hint_text1">开启RTC测温成功</string>
+    <string name="hint_text2">开启RTC测温失败</string>
+    <string name="hint_text3">结束RTC测温成功</string>
+    <string name="hint_text4">结束RTC测温失败</string>
+    <string name="hint_text5">当前处于RTC测温流程</string>
+    <string name="hint_text6">当前处于非测温流程</string>
+    <string name="hint_text7">当前电池电量为:</string>
+    <string name="hint_text8">唤醒失败,请重试</string>
+    <string name="hint_text9">当前场强为:</string>
+    <string name="hint_text10">当前温度为:</string>
+    <string name="hint_text11">测温错误</string>
+    <string name="hint_text12">配置失败</string>
+    <string name="hint_text13">读取失败,请重试!</string>
+
+    <string name="hint_text14">当前测温次数</string>
+    <string name="hint_text15">当前测温开始时间</string>
+    <string name="hint_text16">当前测温超过最低温度次数</string>
+    <string name="hint_text17">当前设置测温范围</string>
+    <string name="hint_text18">当前测温间隔时间</string>
+    <string name="hint_text19">当前测温超过最高温度次数:</string>
+    <string name="hint_text20">最高温度</string>
+    <string name="hint_text21">最低温度</string>
+    <string name="hint_text22">测温状态</string>
+    <string name="hint_text23">正在测温</string>
+    <string name="hint_text24">测温结束</string>
+    <string name="hint_text25">异常停止</string>
+    <string name="hint_text26">当前处于测温延时中,请稍等!</string>
+
+    <string name="text_measure_delay">• 延迟测温时间:</string>
+    <string name="text_measure_interval">• 测温间隔时间:</string>
+    <string name="text_measure_count">• 测温次数:</string>
+    <string name="text_max_tp">• 高温上限设置: </string>
+    <string name="text_min_tp">• 低温下限设置: </string>
+    <string name="seconds">seconds</string>
+    <string name="minutes">minutes</string>
+
+    <string name="applyConfig">发送配置指令并开启RTC测温</string>
+    <string name="resetConfig">初始化标签状态</string>
+
+    <string name="liveStatus_label">实时测温</string>
+    <string name="text_connet"><Data><![CDATA[当前标签处于<font color="#0000ff"><b>连接</b></font>状态]]></Data></string>
+    <string name="text_disconnet"><Data><![CDATA[当前标签处于<font color="#ff0000"><b>断开</b></font>状态]]></Data></string>
+    <string name="celsius">°C</string>
+</resources>

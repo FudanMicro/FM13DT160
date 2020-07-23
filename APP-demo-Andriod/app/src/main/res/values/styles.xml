@@ -1,0 +1,142 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
+        <!-- 配置Android提供的theme -->
+        <item name="android:textAppearanceListItemSmall">@style/QDTextAppearanceListItemSmall</item>
+        <item name="android:textAppearanceListItem">@style/QDtextAppearanceListItem</item>
+        <item name="android:listPreferredItemHeight">?attr/qmui_list_item_height_higher</item>
+        <item name="android:listPreferredItemHeightSmall">?attr/qmui_list_item_height</item>
+
+        <!-- 配置qmui提供的theme -->
+        <item name="qmui_config_color_blue">@color/app_color_blue</item>
+        <item name="qmui_round_btn_bg_color">@color/s_btn_blue_bg</item>
+        <item name="qmui_round_btn_border_color">@color/s_btn_blue_border</item>
+        <item name="qmui_round_btn_text_color">@color/s_btn_blue_text</item>
+        <item name="qmui_content_spacing_horizontal">20dp</item>
+        <item name="qmui_content_padding_horizontal">@dimen/qmui_content_spacing_horizontal</item>
+
+        <item name="QMUITopBarStyle">@style/QDTopBar</item>
+
+        <!-- 配置app自己的theme -->
+        <item name="app_primary_color">?attr/qmui_config_color_blue</item>
+        <item name="app_content_bg_color">@color/qmui_config_color_white</item>
+
+    </style>
+    <style name="QDTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_bg_color">?attr/app_primary_color</item>
+        <item name="qmui_topbar_title_color">@color/qmui_config_color_white</item>
+        <item name="qmui_topbar_subtitle_color">@color/qmui_config_color_white</item>
+        <item name="qmui_topbar_text_btn_color_state_list">@color/s_topbar_btn_color</item>
+        <item name="qmui_topbar_height">48dp</item>
+        <item name="qmui_topbar_image_btn_height">48dp</item>
+    </style>
+    <style name="QDTextAppearanceListItemSmall">
+        <item name="android:textColor">?attr/qmui_config_color_gray_4</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">?attr/qmui_s_list_item_bg_with_border_bottom_inset_left
+        </item>
+    </style>
+
+
+    <style name="QDtextAppearanceListItem">
+        <item name="android:textColor">?attr/qmui_config_color_black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">?attr/qmui_s_list_item_bg_with_border_bottom_inset_left
+        </item>
+    </style>
+    <style name="textStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="dialogAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <!-- //进入时的动画 -->
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+        <!-- //退出时的动画 -->
+    </style>
+
+
+
+    <style name="TransDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- <item name="android:background">@android:color/transparent</item> -->
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="WhiteDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- <item name="android:background">@android:color/transparent</item> -->
+        <item name="android:background">@android:color/transparent</item>
+        <!--    <item name="android:windowBackground">@drawable/popup_bg</item>-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <!-- my loading dialog -->
+    <style name="MyDialogStyle">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="WidgetTheme">
+        <item name="android:background">@android:drawable/btn_dropdown</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/app_color_blue</item>
+        <item name="android:backgroundTintMode">src_atop</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="ButtonTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/app_color_blue</item>
+        <item name="android:backgroundTintMode">src_over</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextTheme">
+        <item name="android:textColor">@color/nxp_deepBlueTransparent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--弹框-->
+    <style name="dialog" >
+        <item name="android:windowFrame">@null</item>
+        <!--边框-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item>
+        <!--半透明-->
+        <item name="android:windowNoTitle">true</item>
+        <!--无标题-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!--模糊-->
+    </style>
+</resources>

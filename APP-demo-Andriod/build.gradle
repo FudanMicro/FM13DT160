@@ -1,0 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.2'
+        
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+    def supportVersion = '28.0.0'
+    ext {
+        compileSdkVersion = 28
+        minSdkVersion  = 19
+        targetSdkVersion = 28
+        constraintLayoutVersion ='1.1.3'
+        versionName = '9.0'
+        versionCode = 9
+
+
+        libSupportAppcompat_v7 = "com.android.support:appcompat-v7:${supportVersion}"
+        libSupportAppcompat_v4 = "com.android.support:support-v4:${supportVersion}"
+        libSupportRecyclerView = "com.android.support:recyclerview-v7:${supportVersion}"
+        libSupportCardView = "com.android.support:cardview-v7:${supportVersion}"
+        libSupportDesign = "com.android.support:design:${supportVersion}"
+        libSupportButterknife = "com.jakewharton:butterknife:8.8.1"
+        libSupportButterknifeAnnotationProcessor = "com.jakewharton:butterknife-compiler:8.8.1"
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

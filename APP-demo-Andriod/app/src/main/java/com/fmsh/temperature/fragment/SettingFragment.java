@@ -4,18 +4,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.fmsh.temperature.R;
 import com.fmsh.temperature.activity.RecordActivity;
+import com.fmsh.temperature.util.HintDialog;
 import com.fmsh.temperature.util.MyConstant;
+import com.fmsh.temperature.util.NFCUtils;
 import com.fmsh.temperature.util.SpUtils;
 import com.fmsh.temperature.util.UIUtils;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -41,6 +48,8 @@ public class SettingFragment extends BaseFragment {
     Button applyConfigButton;
     @BindView(R.id.resultButton)
     Button resultButton;
+    @BindView(R.id.resultFiledButton)
+    Button resultFiledButton;
 
 
     @Override
@@ -70,7 +79,7 @@ public class SettingFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.tvDelay, R.id.tvInterval, R.id.tvCount, R.id.tvMinTp, R.id.tvMAxTp, R.id.applyConfigButton, R.id.resultButton,R.id.stopButton})
+    @OnClick({R.id.tvDelay, R.id.tvInterval, R.id.tvCount, R.id.tvMinTp, R.id.tvMAxTp, R.id.applyConfigButton, R.id.resultButton,R.id.stopButton,R.id.resultFiledButton})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvDelay:
@@ -122,16 +131,26 @@ public class SettingFragment extends BaseFragment {
                     String[] split4 = maxTp.split(":");
                     SpUtils.putIntValue(MyConstant.tpMax, Integer.parseInt(split4[1].replace("°C", "").trim()));
                     mContext.mImFragment.mStatu = 7;
-                MyConstant.FLAG = 0;
+                mContext.FLAG = 0;
+                mContext.nfcDialog();
                 break;
             case R.id.resultButton:
                 Intent intent = new Intent(mContext, RecordActivity.class);
                 startActivity(intent);
-                MyConstant.FLAG = 1;
+                mContext.FLAG = 1;
                 break;
             case R.id.stopButton:
-                mContext.mImFragment.mStatu = 9;
-                MyConstant.FLAG = 0;
+                mContext.mImFragment.mStatu = 8;
+                mContext.FLAG = 0;
+                mContext.nfcDialog();
+                break;
+            case R.id.resultFiledButton:
+                Intent intent1 = new Intent(mContext, RecordActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("filed",true);
+                intent1.putExtras(bundle);
+                startActivity(intent1);
+                mContext.FLAG = 1;
                 break;
             default:
                 break;
@@ -139,8 +158,8 @@ public class SettingFragment extends BaseFragment {
 
     }
 
-    private String[] delayTime = {"no delay", "1 minutes", "2 minutes", " 5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hour", "4 hour"};
-    final private String[] intervals = {"1s", "2s", "3s", "4s", "5s", "6s", "8s", "10s", "12s", "15s", "20s", "25s", "30s", "35s", "40s", "50s", "60s", "75s", "90s", "100s", "120s", "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour"};
+    private String[] delayTime = {"1 minutes", "2 minutes", " 5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hour", "4 hour"};
+    final private String[] intervals = {"5s", "6s", "8s", "10s", "12s", "15s", "20s", "25s", "30s", "35s", "40s", "50s", "60s", "75s", "90s", "100s", "120s", "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour"};
     final private String[] counts = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000", "4864"};
     final private static String[] thresholds = new String[]{"-40°C", "-30°C", "-20°C", "-18°C", "-15°C", "-10°C", "-8°C", "-5°C", "-4°C", "-3°C", "-2°C", "-1°C", "0°C", "1°C", "2°C", "3°C", "4°C", "5°C", "8°C", "10°C", "15°C", "18°C", "20°C", "23°C", "25°C", "30°C", "35°C", "40°C", "50°C", "60°C", "70°C", "80°C"}; /* Celsius */
     final private static int[] thresholdUnitIds = new int[]{R.string.celsius};
@@ -233,4 +252,7 @@ public class SettingFragment extends BaseFragment {
         });
         alert.show();
     }
+
+
+
 }

@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">FM13DT160</string>
+    <string name="app_name">DT160 TLogger</string>
+
     <string name="text_lab1">Measurement</string>
     <string name="text_lab2">Logging</string>
     <string name="text_result">Measurement Result</string>
     <string name="text_type">Type</string>
     <string name="text_loading">Loading</string>
-    <string name="text_state">State</string>
+    <string name="text_state">Status</string>
     <string name="text_wake_up">Already Wakeup</string>
     <string name="text_no_wake_up">No Wakeup</string>
 
@@ -14,8 +15,12 @@
     <string name="text_fail">Fail</string>
     <string name="text_init">Init Finished</string>
     <string name="text_data">Temperature Data</string>
-
     <string name="text_send_email">Send Mail</string>
+    <string name="text_nfc">Approach an NFC Tag</string>
+
+    <string name="text_about">About</string>
+    <string name="text_version">Version:</string>
+
     <string name="text_main1">Temperature </string>
     <string name="text_main2">Data Read </string>
     <string name="text_main3">Logging Setting</string>
@@ -28,7 +33,7 @@
     <string name="text_main10"> Field Strength </string>
     <string name="text_end">End</string>
     <string name="text_start">Start</string>
-    <string name="text_check">Check Measure State</string>
+    <string name="text_check">Check Measure Status</string>
     <string name="text_open">FM11NT0X1TT Detect</string>
     <string name="text_instruct">Measurement\nCommand</string>
     <string name="text_configuration">Measurement\nConfig</string>
@@ -46,8 +51,8 @@
     <string name="config_text6">Check Measurement \nStep</string>
     <string name="config_text7">Start Logging</string>
     <string name="config_text8">Stop Logging</string>
-    <string name="config_text9">Check State</string>
-    <string name="config_text10">Temperature Data Read</string>
+    <string name="config_text9">Check Status</string>
+    <string name="config_text10">Read Temperature Data </string>
     <string name="config_text11">Start Single \nMeasurement</string>
     <string name="config_text12">Check Single Measurement</string>
     <string name="config_text13">Set Measurement \nCount </string>
@@ -62,8 +67,8 @@
     <string name="hint_text2">RTC ON Fail</string>
     <string name="hint_text3">RTC Reset Success</string>
     <string name="hint_text4">RTC Reset Fail</string>
-    <string name="hint_text5">IN RTC Flow State</string>
-    <string name="hint_text6">Not RTC Flow State</string>
+    <string name="hint_text5">IN RTC Flow Status</string>
+    <string name="hint_text6">Not RTC Flow Status</string>
     <string name="hint_text7">Battery Volt:</string>
     <string name="hint_text8">Wakeup fail,retry</string>
     <string name="hint_text9">Field Strength:</string>
@@ -82,7 +87,7 @@
     <string name="hint_text21">Minimum Temperature</string>
     <string name="hint_text22">Status</string>
     <string name="hint_text23">In Temperature Measurement Flow</string>
-    <string name="hint_text24">Temperature Measurement Finished</string>
+    <string name="hint_text24">Logging Completed</string>
     <string name="hint_text25">Measurement Stopped Abnormally</string>
     <string name="hint_text26">Temperature Measurement in Delay Time!</string>
 
@@ -94,13 +99,37 @@
     <string name="seconds">seconds</string>
     <string name="minutes">minutes</string>
 
-    <string name="applyConfig">Start Logging Process</string>
+    <string name="applyConfig">Start Logging</string>
 
 
-    <string name="resetConfig">初始化标签状态</string>
+<!--    <string name="resetConfig">初始化标签状态</string>-->
 
     <string name="liveStatus_label">Single Time Measurement</string>
-    <string name="text_connet"><Data><![CDATA[当前标签处于<font color="#0000ff"><b>连接</b></font>状态]]></Data></string>
-    <string name="text_disconnet"><Data><![CDATA[当前标签处于<font color="#ff0000"><b>断开</b></font>状态]]></Data></string>
     <string name="celsius">°C</string>
+    <string name="configure1">Primitive pattern </string>
+    <string name="configure2">Standard mode </string>
+    <string name="nfc_instruct"> NFC commands</string>
+    <string name="input_command">Please enter the instruction</string>
+    <string name="send_command">Send command</string>
+    <string name="empty_command">The command is empty</string>
+    <string name="mode1">Model 1(2 decimal places)</string>
+    <string name="mode2">Model 2(3 decimal places)</string>
+
+
+    <string name="check_pwd">Input password</string>
+    <string name="setting_pwd">Setting password</string>
+    <string name="input_pwd">Please enter an 8-digit password</string>
+    <string name="hint_pwd">The password length is 8</string>
+
+    <string name="update_pwd">Update password</string>
+    <string name="lock">Lock</string>
+
+    <string name="old_pwd">Old password</string>
+    <string name="new_pwd">New password</string>
+    <string name="unlock">Unlock</string>
+    <string name="check_HF">Check HF field existence</string>
+    <string-array name="spinner">
+        <item>Stop RTC</item>
+        <item>Lock</item>
+    </string-array>
 </resources>

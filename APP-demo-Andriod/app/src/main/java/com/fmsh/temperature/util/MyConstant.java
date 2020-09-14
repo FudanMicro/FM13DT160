@@ -13,10 +13,7 @@ public class MyConstant {
 
     public static int MEASURETYPE = 0; //测量类型 默认是测温
 
-    /**
-     * 0 为即使测温页面,1 为RTC 测温页面
-     */
-    public static  int FLAG = 0 ;
+
 
 
 

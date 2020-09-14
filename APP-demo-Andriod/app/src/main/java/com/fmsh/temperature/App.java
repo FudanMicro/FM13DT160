@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
+import com.fmsh.nfcinstruct.GeneralNFC;
+import com.fmsh.temperature.util.LogUtil;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 
 
@@ -18,6 +20,7 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
         QMUISwipeBackActivityManager.init(this);
+        LogUtil.d("ApplicationonCreate");
     }
 
     public static Context getmContext() {
@@ -30,5 +33,11 @@ public class App extends Application {
 
     public static void setHandler(Handler handler) {
         App.handler = handler;
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        LogUtil.d("Application");
     }
 }

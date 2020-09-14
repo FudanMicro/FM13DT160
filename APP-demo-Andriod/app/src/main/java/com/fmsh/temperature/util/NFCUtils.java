@@ -124,7 +124,7 @@ public class NFCUtils {
                             String startTime = hexString2.substring(4, 12); //测温开始时间
                             String start = hexString2.substring(hexString2.length() - 2);
                             String end = hexString2.substring(hexString2.length() - 4, hexString2.length() - 2);
-                            int tpTime = Integer.parseInt(start + end, 16);
+                            int tpTime = Integer.parseInt(end + start, 16);
 
                             //获取最大最小温度值
                             String strTemp = TransUtil.byteToHex(nfcV.transceive(instructV(18, id))).substring(2);
@@ -389,7 +389,7 @@ public class NFCUtils {
                 bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x1e, 0x03, 0x00, (byte) SpUtils.getIntValue(MyConstant.tpMin, 0), 0x00, (byte) SpUtils.getIntValue(MyConstant.tpMax, 40)};
                 break;
             case 20: //写测温间隔
-                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x22, 0x01, (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 0))[1], (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 1))[0]};
+                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x22, 0x01, (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 0))[0], (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 1))[1]};
                 break;
             case 21: // 读取测温间隔
                 bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x18, 0x00, 0x0b};
@@ -752,36 +752,6 @@ public class NFCUtils {
 
     }
 
-    private static void addDataA(int count, int address, int p, NfcA nfcA, StringBuffer sb) throws IOException {
-        int x = address;
-        int y = 0x00;
-        int n = 0xf8;
-        for (int i = 0; i < count; i++) {
-            byte[] bytes = new byte[0];
-            if (i == 0) {
-                y = 0x00;
-            } else if (i == 1) {
-                y = y + 0xfc;
-            } else {
-                x = x + 0x01;
-                y = y - 0x04;
-            }
-            if (p != 0 && i == count - 1) {
-                n = p - 4;
-            }
-            bytes = new byte[]{0x40, (byte) 0xb1, (byte) x, (byte) y, (byte) 0x00, (byte) n, 0x00};
-            byte[] transceive = nfcA.transceive(bytes);
-            if (transceive != null) {
-                String hexString1 = getHexString(transceive, transceive.length);
-                LogUtil.d(hexString1);
-                sb.append(hexString1);
-
-
-            }
-
-
-        }
-    }
 
     public static void startV(Tag tag, int type) {
         NfcV nfcV = NfcV.get(tag);

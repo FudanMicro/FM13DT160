@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FM13DT160</string>
+    <string name="app_name">DT160 TLogger</string>
 
     <string name="text_lab1">即时测量</string>
     <string name="text_lab2">定时测量</string>
@@ -15,6 +15,12 @@
     <string name="text_init">初始化完成</string>
     <string name="text_data">温度数据</string>
     <string name="text_send_email">发送邮件</string>
+    <string name="text_nfc">请靠近NFC标签</string>
+
+    <string name="text_about">关于</string>
+    <string name="text_version">版本:</string>
+
+
 
     <string name="text_main1">温度</string>
     <string name="text_main2">记录读取</string>
@@ -94,10 +100,37 @@
     <string name="minutes">minutes</string>
 
     <string name="applyConfig">发送配置指令并开启RTC测温</string>
-    <string name="resetConfig">初始化标签状态</string>
+<!--    <string name="resetConfig">初始化标签状态</string>-->
 
     <string name="liveStatus_label">实时测温</string>
-    <string name="text_connet"><Data><![CDATA[当前标签处于<font color="#0000ff"><b>连接</b></font>状态]]></Data></string>
-    <string name="text_disconnet"><Data><![CDATA[当前标签处于<font color="#ff0000"><b>断开</b></font>状态]]></Data></string>
+
     <string name="celsius">°C</string>
+
+    <string name="configure1">原始模式配置</string>
+    <string name="configure2">标准模式配置</string>
+    <string name="nfc_instruct">NFC指令模式</string>
+    <string name="input_command">请输入指令</string>
+    <string name="send_command">发送指令</string>
+    <string name="empty_command">指令不能为空</string>
+
+    <string name="mode1">模式一(2位小数)</string>
+    <string name="mode2">模式二(3位小数)</string>
+
+
+    <string name="setting_pwd">设置密码</string>
+    <string name="update_pwd">更新密码</string>
+    <string name="lock">加锁</string>
+    <string name="unlock">解锁</string>
+    <string name="check_pwd">输入密码</string>
+
+    <string name="input_pwd">请输入8位数字密码</string>
+    <string name="hint_pwd">密码长度必须为8位</string>
+    <string name="old_pwd">旧密码</string>
+    <string name="new_pwd">新密码</string>
+    <string name="check_HF">查看入场记录</string>
+
+    <string-array name="spinner">
+        <item>Stop RTC</item>
+        <item>Lock</item>
+    </string-array>
 </resources>

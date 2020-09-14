@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.fmsh.temperature.R;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 
@@ -13,7 +15,6 @@ import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
  * @date 2019/9/12
  */
 public class HintDialog {
-
     /**
      * 显示加载框
      *
@@ -81,6 +82,17 @@ public class HintDialog {
                 }
             }
         }, 1500);
+    }
+
+    public static void NFCHintDialog(){
+        new QMUIDialog.CustomDialogBuilder(ActivityUtils.instance.getCurrentActivity())
+                .setLayout(R.layout.dialog_nfc_hint).addAction(UIUtils.getString(R.string.text_cancel), new QMUIDialogAction.ActionListener() {
+            @Override
+            public void onClick(QMUIDialog dialog, int index) {
+                dialog.dismiss();
+            }
+        }).create(R.style.DialogTheme2).show();
+
     }
 
 }

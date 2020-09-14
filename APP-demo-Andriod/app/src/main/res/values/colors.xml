@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="gray_1">#ECF1F5</color>
 
     <color name="nxp_blue">#7bb1db</color>
     <color name="nxp_deepBlue">#003883</color>

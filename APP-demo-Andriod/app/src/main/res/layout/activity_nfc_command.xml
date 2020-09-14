@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_container"
+        android:background="@color/gray_1"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:paddingLeft="15dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image"
+                android:layout_gravity="center_vertical"
+                ></ImageView>
+            <TextView
+                android:paddingLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:text="@string/input_command"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"
+                android:id="@+id/text"
+                ></TextView>
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:hint="30:1A..."
+            android:paddingLeft="5dp"
+            android:inputType="textVisiblePassword"
+            android:paddingRight="5dp"
+            android:id="@+id/et_input"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:background="@color/qmui_config_color_white"
+            ></EditText>
+
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content"
+        app:qmui_radius="5dp"
+        android:text="@string/send_command"
+        android:textSize="18dp"
+        android:textColor="@color/app_color_blue"
+        android:id="@+id/btn_send"
+        app:qmui_borderColor="@color/app_color_blue"
+        ></com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:scrollbars="none"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:id="@+id/tvContent"
+            android:textColor="@color/black"
+            ></TextView>
+
+    </ScrollView>
+
+</LinearLayout>

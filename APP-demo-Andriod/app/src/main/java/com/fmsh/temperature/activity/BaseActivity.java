@@ -14,6 +14,8 @@ import com.fmsh.temperature.tools.BroadcastManager;
 import com.fmsh.temperature.tools.CommThread;
 import com.fmsh.temperature.util.ActivityUtils;
 import com.fmsh.temperature.util.HintDialog;
+import com.fmsh.temperature.util.LogUtil;
+import com.fmsh.temperature.util.MyConstant;
 import com.fmsh.temperature.util.NFCUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
@@ -79,7 +81,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     public void dismiss(){
         if(mTipDialog != null){
-
             mTipDialog.dismiss();
         }
     }

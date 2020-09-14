@@ -18,6 +18,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
     def supportVersion = '28.0.0'
     ext {
@@ -25,8 +26,8 @@ allprojects {
         minSdkVersion  = 19
         targetSdkVersion = 28
         constraintLayoutVersion ='1.1.3'
-        versionName = '9.0'
-        versionCode = 9
+        versionName = '9.2.5'
+        versionCode = 17
 
 
         libSupportAppcompat_v7 = "com.android.support:appcompat-v7:${supportVersion}"

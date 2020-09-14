@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.qmuiteam:qmui:1.4.0'
     implementation 'com.qmuiteam:arch:0.6.1'
     annotationProcessor "com.qmuiteam:arch-compiler:0.6.1"
-    // use annotationProcessor if java
+    //写excel文件
     implementation files('libs/jxl.jar')
+    implementation project(path: ':nfcinstruct')
 }

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,12 +26,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.fmsh.temperature.R;
+import com.fmsh.temperature.listener.OnBitmapResultListener;
 import com.fmsh.temperature.tools.BroadcastManager;
 import com.fmsh.temperature.util.ActivityUtils;
 import com.fmsh.temperature.util.HintDialog;
+import com.fmsh.temperature.util.NFCUtils;
+import com.fmsh.temperature.util.PdfUtils;
 import com.fmsh.temperature.util.TimeUitls;
 import com.fmsh.temperature.util.ToastUtil;
+import com.fmsh.temperature.util.TransUtil;
 import com.fmsh.temperature.util.UIUtils;
+import com.itextpdf.text.Element;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.SecondScale;
@@ -53,18 +59,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import butterknife.BindView;
-import jxl.Workbook;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 
 /**
  * @author wuyajiang
@@ -73,8 +75,8 @@ import jxl.write.WritableWorkbook;
 public class RecordActivity extends BaseActivity {
     @BindView(R.id.graphView)
     GraphView graphView;
-    @BindView(R.id.realGraphView)
-    GraphView realGraphView;
+    @BindView(R.id.secondGraphView)
+    GraphView secondGraphView;
     @BindView(R.id.topbar)
     QMUITopBarLayout topbar;
 
@@ -84,6 +86,7 @@ public class RecordActivity extends BaseActivity {
     private AlertDialog mAlertDialog;
     private QMUIDialog mQmuiDialog;
     private boolean mFiled;
+    private String mUid;
 
     @Override
     protected int getLayoutId() {
@@ -95,6 +98,7 @@ public class RecordActivity extends BaseActivity {
     protected void initView() {
         mFiled = getIntent().getBooleanExtra("filed", false);
         initGraph(graphView, true);
+        initGraph(secondGraphView, true);
         isSendBroadCast = true;
         topbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +107,7 @@ public class RecordActivity extends BaseActivity {
             }
         });
         topbar.setTitle(R.string.text_data);
-
+        nfcDialog();
     }
 
     @Override
@@ -111,7 +115,7 @@ public class RecordActivity extends BaseActivity {
         BroadcastManager.getInstance(mContext).addAction("record", new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
+                mUid = NFCUtils.bytesToHexString(mTag.getId(),':').toUpperCase();
                 disNFCDialog();
                 Message message = new Message();
                 message.obj = mTag;
@@ -138,16 +142,12 @@ public class RecordActivity extends BaseActivity {
             mViewport.setMinX(0);
             mViewport.setMaxX(4);
         }
-
-        if(mFiled){
-            SecondScale secondScale = graphView.getSecondScale();
-            secondScale.setMinY(-40);
-            secondScale.setMaxY(80);
-            StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
-            staticLabelsFormatter.setVerticalLabels(new String[] {"", ""});
-            secondScale.setLabelFormatter(staticLabelsFormatter);
-        }
-
+        SecondScale secondScale = graphView.getSecondScale();
+        secondScale.setMinY(-40);
+        secondScale.setMaxY(80);
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
+        staticLabelsFormatter.setVerticalLabels(new String[] {"", ""});
+        secondScale.setLabelFormatter(staticLabelsFormatter);
 
         GridLabelRenderer gridLabelRenderer = graphView.getGridLabelRenderer();
         gridLabelRenderer.setLabelVerticalWidth(80);
@@ -166,10 +166,10 @@ public class RecordActivity extends BaseActivity {
         gridLabelRenderer.setHorizontalLabelsAngle(30);
         gridLabelRenderer.setHumanRounding(true, false);
         if (show) {
-
             gridLabelRenderer.setHorizontalLabelsVisible(false);
         }
         gridLabelRenderer.reloadStyles();
+
 
     }
 
@@ -177,7 +177,7 @@ public class RecordActivity extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        nfcDialog();
+
 
     }
 
@@ -262,7 +262,6 @@ public class RecordActivity extends BaseActivity {
                             int tpTime = Integer.parseInt(data[5]);
                             long startTime = Long.parseLong(data[1]);
                             int delayTime = 60 * Integer.parseInt(data[4]);
-
                             for (int i = 0; i < data.length - 12; i++) {
                                 recordActivity.mDateList.add(new Date(startTime + delayTime + tpTime * i));
                                 if(data[12+i].contains(":")){
@@ -284,6 +283,18 @@ public class RecordActivity extends BaseActivity {
                         } else {
                             HintDialog.messageDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text13));
                         }
+                        break;
+                    case 15:
+                        //pdf 创建成功
+                    case 16:
+                        // excel 创建成功
+                        recordActivity.dismiss();
+                        recordActivity.sendEmail((String)msg.obj);
+                        break;
+                    case 17:
+                        // 文件创建失败
+                        recordActivity.dismiss();
+                        HintDialog.messageDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.create_file));
                         break;
                     default:
                         recordActivity.dismiss();
@@ -307,6 +318,7 @@ public class RecordActivity extends BaseActivity {
             }
         }
         if (mTpList.size() > 1) {
+            addLimitLine(Double.parseDouble(data[9]),Double.parseDouble(data[8]));
             graphView.removeAllSeries();
             graphView.getSecondScale().removeAllSeries();
             LineGraphSeries lineGraphSeries = new LineGraphSeries(dataPoints);
@@ -316,8 +328,13 @@ public class RecordActivity extends BaseActivity {
             lineGraphSeries.setColor(0xFFFF0000);
             lineGraphSeries.setAnimated(true);
             graphView.addSeries(lineGraphSeries);
-            graphView.getViewport().setMinX(mDateList.get(0).getTime());
-            graphView.getViewport().setMaxX(mDateList.get(mDateList.size() - 1).getTime());
+            long time = mDateList.get(0).getTime();
+            long time1 = mDateList.get(mDateList.size() - 1).getTime();
+            if(time == time1){
+                time1 = System.currentTimeMillis();
+            }
+            graphView.getViewport().setMinX(time);
+            graphView.getViewport().setMaxX(time1);
             if(filedList.size() > 0 && mFiled){
                 LineGraphSeries lineGraphSeries1 = new LineGraphSeries(dataPointsFiled);
                 lineGraphSeries1.setDrawDataPoints(true);
@@ -329,9 +346,10 @@ public class RecordActivity extends BaseActivity {
                 @Override
                 public void onTap(Series series, DataPointInterface dataPoint) {
                     double y = dataPoint.getY();
-                    ToastUtil.sToastUtil.shortDuration(new BigDecimal(y).setScale(3,BigDecimal.ROUND_HALF_UP).floatValue() + "℃");
+                    ToastUtil.sToastUtil.shortDuration(new BigDecimal(y).setScale(3,BigDecimal.ROUND_HALF_UP).floatValue() + "\u00b0C");
                 }
             });
+
         }
 
         String hint = "";
@@ -355,46 +373,58 @@ public class RecordActivity extends BaseActivity {
         if (mTpList.size() > 0) {
 
             View inflate = LayoutInflater.from(mContext).inflate(R.layout.dialog_hint, null);
-            Button sendEmail = inflate.findViewById(R.id.sendMail);
+            Button sendPdf = inflate.findViewById(R.id.sendPdf);
+            Button sendExcel = inflate.findViewById(R.id.sendExcel);
             QMUIGroupListView groupListView = inflate.findViewById(R.id.groupListView);
             QMUICommonListItemView itemView = createItem(groupListView, UIUtils.getString(R.string.hint_text22), hint);
-            QMUICommonListItemView itemView1 = createItem(groupListView, UIUtils.getString(R.string.hint_text20), String.format("%s℃", data[7]));
-            QMUICommonListItemView itemView2 = createItem(groupListView, UIUtils.getString(R.string.hint_text21), String.format("%s℃", data[6]));
+            QMUICommonListItemView itemView1 = createItem(groupListView, UIUtils.getString(R.string.hint_text20), String.format("%s\u00B0C", data[7]));
+            QMUICommonListItemView itemView2 = createItem(groupListView, UIUtils.getString(R.string.hint_text21), String.format("%s\u00B0C", data[6]));
             QMUICommonListItemView itemView3 = createItem(groupListView, UIUtils.getString(R.string.hint_text14), String.format("%s / %s", data[3], data[2]));
-            QMUICommonListItemView itemView4 = createItem(groupListView, UIUtils.getString(R.string.hint_text17), String.format(" [%s℃,%s℃]", data[8], data[9]));
+            QMUICommonListItemView itemView4 = createItem(groupListView, UIUtils.getString(R.string.hint_text17), String.format(" [%s\u00B0C,%s\u00B0C]", data[8], data[9]));
             QMUICommonListItemView itemView5 = createItem(groupListView, UIUtils.getString(R.string.hint_text18), String.format("%ss", data[5]));
             QMUICommonListItemView itemView6 = createItem(groupListView, UIUtils.getString(R.string.hint_text15), String.format("%s", TimeUitls.formatDateTime(Long.parseLong(data[1]) * 1000)));
             QMUICommonListItemView itemView7 = createItem(groupListView, UIUtils.getString(R.string.hint_text16), String.format("%s", data[10]));
             QMUICommonListItemView itemView8 = createItem(groupListView, UIUtils.getString(R.string.hint_text19), String.format("%s", data[11]));
+            QMUICommonListItemView itemView9 = createItem(groupListView, UIUtils.getString(R.string.hint_text27), String.format("%sm", data[4]));
             QMUIGroupListView.newSection(mContext)
                     .addItemView(itemView, null)
                     .addItemView(itemView1, null)
                     .addItemView(itemView2, null)
                     .addItemView(itemView3, null)
                     .addItemView(itemView4, null)
+                    .addItemView(itemView9, null)
                     .addItemView(itemView5, null)
                     .addItemView(itemView6, null)
                     .addItemView(itemView7, null)
                     .addItemView(itemView8, null)
                     .addTo(groupListView);
             mItemList.clear();
+            mItemList.add(createItem(groupListView, "UID", String.format("%s", mUid)));
             mItemList.add(itemView);
             mItemList.add(itemView1);
             mItemList.add(itemView2);
             mItemList.add(itemView3);
             mItemList.add(itemView4);
+            mItemList.add(itemView9);
             mItemList.add(itemView5);
             mItemList.add(itemView6);
             mItemList.add(itemView7);
             mItemList.add(itemView8);
-            sendEmail.setOnClickListener(new View.OnClickListener() {
+            delayTime =data[4];
+
+            sendPdf.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    requestPermissions();
+                    requestPermissions(0);
+                }
+            });
+            sendExcel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    requestPermissions(1);
 
                 }
             });
-
 
             showDialog(inflate);
 
@@ -402,6 +432,36 @@ public class RecordActivity extends BaseActivity {
 
     }
 
+    private void addLimitLine(double height, double low){
+        secondGraphView.removeAllSeries();
+        secondGraphView.getSecondScale().removeAllSeries();
+        long time = mDateList.get(0).getTime();
+        long time1 = mDateList.get(mDateList.size() - 1).getTime();
+        if(time == time1){
+            time1 = System.currentTimeMillis();
+        }
+        DataPoint[] dataPoint = new DataPoint[2];
+        dataPoint[0] = new DataPoint(new Date(time),height);
+        dataPoint[1] = new DataPoint(new Date(time1),height);
+        LineGraphSeries lineGraphSeries = new LineGraphSeries(dataPoint);
+
+        lineGraphSeries.setColor(0xffFF0000);
+
+        lineGraphSeries.setDrawBackground(false);
+        secondGraphView.addSeries(lineGraphSeries);
+        secondGraphView.getViewport().setMinX(time);
+        secondGraphView.getViewport().setMaxX(time1);
+        dataPoint[0] = new DataPoint(new Date(time),low);
+        dataPoint[1] = new DataPoint(new Date(time1),low);
+        LineGraphSeries lineGraphSeries1 = new LineGraphSeries(dataPoint);
+        lineGraphSeries1.setColor(0xff0000ff);
+        lineGraphSeries1.setAnimated(true);
+        secondGraphView.getSecondScale().addSeries(lineGraphSeries1);
+
+
+    }
+
+    private String delayTime= "0";
     private void showDialog(View view) {
         if (mAlertDialog != null) {
             mBuilder = null;
@@ -419,7 +479,6 @@ public class RecordActivity extends BaseActivity {
         Display defaultDisplay = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams attributes = window.getAttributes();
         attributes.width = defaultDisplay.getWidth();
-        attributes.height = (int) (defaultDisplay.getHeight() * 0.55);
         window.setAttributes(attributes);
 
     }
@@ -433,13 +492,21 @@ public class RecordActivity extends BaseActivity {
         return itemView;
     }
 
-    private void requestPermissions() {
+    private void requestPermissions(int type) {
         if (Build.VERSION.SDK_INT >= 21) {
             if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
-                writeExcel();
+                if(type == 0){
+                    writePdf();
+                }else {
+                    writeExcel();
+                }
             } else {
-                ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+                if(type == 0){
+                    ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 100);
+                }else {
+                    ActivityCompat.requestPermissions(mContext, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+
+                }
 
             }
         }
@@ -450,6 +517,10 @@ public class RecordActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 100) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                writePdf();
+            }
+        }else if(requestCode == 101){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 writeExcel();
             }
         }
@@ -458,50 +529,21 @@ public class RecordActivity extends BaseActivity {
     private List<QMUICommonListItemView> mItemList = new ArrayList<>();
 
     private void writeExcel() {
-        boolean sdcardReady = QMUIDisplayHelper.isSdcardReady();
-        if (sdcardReady) {
-            String path = mContext.getExternalFilesDir(null).getPath();
-            File file = new File(path, "TemperatureData.xls");
-            if (!file.exists()) {
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            WritableWorkbook wwb;
-            OutputStream os = null;
-            try {
-                os = new FileOutputStream(file);
-                wwb = Workbook.createWorkbook(os);
-                WritableSheet sheet = wwb.createSheet(UIUtils.getString(R.string.text_data), 0);
-                Label label;
-                for (int i = 0; i < mItemList.size(); i++) {
-                    label = new Label(0, i, mItemList.get(i).getText().toString());
-                    sheet.addCell(label);
-                    label = new Label(1, i, mItemList.get(i).getDetailText().toString());
-                    sheet.addCell(label);
-                }
-                for (int i = 0; i < mDateList.size(); i++) {
-                    label = new Label(0, mItemList.size() + 1 + i, TimeUitls.formatDateTime(mDateList.get(i).getTime() * 1000));
-                    sheet.addCell(label);
-                    label = new Label(1, mItemList.size() + 1 + i, mTpList.get(i) + "℃");
-                    sheet.addCell(label);
-                }
-                wwb.write();
-                wwb.close();
-
-                sendEmail();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        }
+        loading();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("item", (Serializable) mItemList);
+        bundle.putSerializable("date", (Serializable) mDateList);
+        bundle.putSerializable("float", (Serializable) mTpList);
+        UIUtils.setHandler(mHandler);
+        Message message = new Message();
+        message.what = 16;
+        message.setData(bundle);
+        mCommThread.getWorkerThreadHan().sendMessage(message);
     }
 
-    public void sendEmail() {
+    public void sendEmail(String address) {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        File file = new File(mContext.getExternalFilesDir(null).getPath(), "TemperatureData.xls");
+        File file = new File(mContext.getExternalFilesDir(null).getPath(), address);
 
         intent.putExtra(android.content.Intent.EXTRA_SUBJECT, "TemperatureData");
         intent.setType("application/octet-stream");
@@ -512,6 +554,26 @@ public class RecordActivity extends BaseActivity {
         startActivity(Intent.createChooser(intent,
                 "Select email application."));
 
+    }
+    public void writePdf(){
+        final List<String> info = new ArrayList<>();
+        for (int i = 0; i < mItemList.size(); i++) {
+            info.add(mItemList.get(i).getDetailText().toString());
+        }
+        loading();
+        UIUtils.getBitmapFromView(RecordActivity.this, graphView, new OnBitmapResultListener() {
+            @Override
+            public void onResult(Bitmap bitmap) {
+                List<Element> pdfData = PdfUtils.createPdfData(info,bitmap,mDateList,mTpList);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("pdf", (Serializable) pdfData);
+                UIUtils.setHandler(mHandler);
+                Message message = new Message();
+                message.what = 15;
+                message.setData(bundle);
+                mCommThread.getWorkerThreadHan().sendMessage(message);
+            }
+        });
     }
 
 

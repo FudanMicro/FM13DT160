@@ -8,10 +8,19 @@ import java.io.IOException;
  */
 public abstract class BaseNfc {
 
-//    public abstract byte[] transceive(byte[] bytes) throws IOException;
+    //    public abstract byte[] transceive(byte[] bytes) throws IOException;
 
     public abstract String transceive(byte[] bytes) throws IOException;
 
     public abstract byte[] sendCommand(byte[] bytes) throws IOException;
+
+    public abstract byte[] readMemory(byte[] address,int length) throws IOException;
+
+    public abstract byte[] writeMemory(byte[] address,byte[] data) throws IOException;
+
+    public abstract byte[] readReg(byte[] address) throws IOException;
+
+    public abstract byte[] writeReg(byte[] address,byte[] data) throws IOException;
+
 
 }

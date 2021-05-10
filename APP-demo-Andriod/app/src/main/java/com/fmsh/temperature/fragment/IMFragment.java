@@ -340,15 +340,15 @@ public class IMFragment extends BaseFragment {
                         break;
                     case 7:
                         if(status){
-                            HintDialog.messageDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text1));
+                            HintDialog.successDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text1));
                         }else {
 //                            imFragment.inputPasswordDialoag(7,UIUtils.getString(R.string.check_pwd));
-                            HintDialog.messageDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text2));
+                            HintDialog.faileDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text2));
                         }
                         break;
                     case 8:
                         if(status){
-                            HintDialog.messageDialog(imFragment.mContext,UIUtils.getString(R.string.hint_text3));
+                            HintDialog.successDialog(imFragment.mContext,UIUtils.getString(R.string.hint_text3));
                         }else {
                             imFragment.inputPasswordDialoag(8,UIUtils.getString(R.string.check_pwd));
 //                            HintDialog.messageDialog(imFragment.mContext,UIUtils.getString(R.string.hint_text4));

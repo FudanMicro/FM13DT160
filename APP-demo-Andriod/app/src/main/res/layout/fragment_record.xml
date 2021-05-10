@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_height="match_parent">
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
         android:id="@+id/topbar"
@@ -11,17 +10,19 @@
         android:fitsSystemWindows="true"/>
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graphView"
+        android:layout_below="@id/topbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
         />
     <com.jjoe64.graphview.GraphView
-        android:id="@+id/realGraphView"
-        android:visibility="gone"
+        android:id="@+id/secondGraphView"
+        android:visibility="visible"
+        android:layout_below="@id/topbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
 
 
-</LinearLayout>
+</RelativeLayout>

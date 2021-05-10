@@ -1,16 +1,27 @@
 package com.fmsh.temperature.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
+import android.os.LocaleList;
 import android.os.Looper;
 import android.os.StatFs;
 import android.view.LayoutInflater;
+import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.fmsh.temperature.App;
+import com.fmsh.temperature.listener.OnBitmapResultListener;
+
+import java.util.Locale;
 
 
 /**
@@ -146,6 +157,47 @@ public class UIUtils {
         return availableSize;
     }
 
+
+    /**
+     * View转换成Bitmap
+     * @param activity activity
+     * @param targetView targetView
+     * @param bitmapResultListener 转换成功回调接口
+     */
+    public static void getBitmapFromView( Activity activity, View targetView, final OnBitmapResultListener bitmapResultListener) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //准备一个bitmap对象，用来将copy出来的区域绘制到此对象中
+            final Bitmap bitmap = Bitmap.createBitmap(400, 450, Bitmap.Config.ARGB_8888);
+            //获取layout的left-top顶点位置
+            final int[] location = new int[2];
+            targetView.getLocationInWindow(location);
+            //请求转换
+            PixelCopy.request(activity.getWindow(),
+                    new Rect(location[0], location[1],
+                            location[0] + targetView.getWidth(), location[1] + targetView.getHeight()),
+                    bitmap, new PixelCopy.OnPixelCopyFinishedListener() {
+                        @Override
+                        public void onPixelCopyFinished(int copyResult) {
+                            //如果成功
+                            if (copyResult == PixelCopy.SUCCESS) {
+                                //方法回调
+                                bitmapResultListener.onResult(bitmap);
+                            }
+                        }
+                    }, new Handler(Looper.getMainLooper()));
+        }
+    }
+
+
+    /**
+     * 获取当前系统语言
+     * @return
+     */
+    public static  String getCurrentLanguage(){
+        Locale locale = getResources().getConfiguration().locale;
+        String language = locale.getLanguage();
+        return language;
+    }
 
 
 }

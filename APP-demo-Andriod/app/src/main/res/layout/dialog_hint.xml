@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView
@@ -11,10 +11,16 @@
         android:layout_height="wrap_content"></com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView>
 
     <Button
-        android:id="@+id/sendMail"
+        android:id="@+id/sendPdf"
         style="@style/ButtonTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_send_email"/>
+        android:text="@string/text_send_pdf"/>
+    <Button
+        android:id="@+id/sendExcel"
+        style="@style/ButtonTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_send_excel"/>
 
 </LinearLayout>

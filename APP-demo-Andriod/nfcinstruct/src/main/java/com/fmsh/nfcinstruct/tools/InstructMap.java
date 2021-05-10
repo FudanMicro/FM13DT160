@@ -1,6 +1,5 @@
 package com.fmsh.nfcinstruct.tools;
 
-import com.fmsh.nfcinstruct.utils.MyConstant;
 import com.fmsh.nfcinstruct.utils.TransUtil;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class InstructMap {
                 bytes = new byte[]{0x40, (byte) 0xc4, (byte) 0x80, 0x00, 0x00, 0x00, 0x00};
                 break;
             case 3://配置延时测温时间 m
-                bytes = new byte[]{0x40, (byte) 0xc5, (byte) 0xc0, (byte) 0x84, 0x00, (byte) value, 0x00};
+                bytes = new byte[]{0x40, (byte) 0xc5, (byte) 0xc0, (byte) 0x84, (byte) 0, (byte) value, 0x00};
                 break;
             case 4://查看延时测温时间
                 bytes = new byte[]{0x40, (byte) 0xc6, (byte) 0xc0, (byte) 0x84, 0x00, 0x00, 0x00};
@@ -94,23 +93,23 @@ public class InstructMap {
             case 18: //获取最大最小温度值
                 bytes = new byte[]{0x40, (byte) 0xb1, (byte) 0xb0, (byte) 0x80, 0x00, 0x03, 0x00};
                 break;
-            case 19: //写到block9温度大小值
-                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x00, (byte) 0x24, 0x03, 0x00, 0x00, 0x00, (byte) value, 0x00, (byte) value1};
+            case 19: // 延时测温时间
+                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x01, (byte) 0x10, 0x01, 0x00, 0x00, 0x00,(byte) value};
                 break;
-            case 20: //写测温block10间隔
-                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x00, (byte) 0x28, 0x03, 0x00, 0x00, (byte) (value >> 8 & 0xff), (byte) (value & 0xff), 0x12, 0x03};
+            case 20: // 写测温间隔
+                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x01, (byte) 0x14, 0x01, 0x00, 0x00, (byte) (value >> 8 & 0xff), (byte) (value & 0xff)};
                 break;
-            case 21: //读取测温间隔
-                bytes = new byte[]{0x40, (byte) 0xb1, 0x00, 0x20, 0x00, 0x0b, 0x00};
+            case 21: //读取测温间隔 和延时测温时间
+                bytes = new byte[]{0x40, (byte) 0xb1, 0x01, (byte) 0x10, 0x00, 0x0b, 0x00};
                 break;
             case 22: //写时间
                 long time = System.currentTimeMillis() / 1000;
                 String format = String.format("%08x", time);
                 byte[] timeByte = TransUtil.hexToByte(format);
-                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x00, (byte) 0x20, 0x03, 0x00, 0x00, (byte) timeByte[0], (byte) timeByte[1], (byte) timeByte[2], (byte) timeByte[3]};
+                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x01, (byte) 0x40, 0x03, 0x00, 0x00, (byte) timeByte[0], (byte) timeByte[1], (byte) timeByte[2], (byte) timeByte[3]};
                 break;
             case 23: //读测温时间
-                bytes = new byte[]{0x40, (byte) 0xb1, 0x00, 0x20, 0x00, 0x03, 0x00};
+                bytes = new byte[]{0x40, (byte) 0xb1, 0x01, (byte) 0x40, 0x00, 0x03, 0x00};
                 break;
             case 24: //休眠
                 bytes = new byte[]{0x40, (byte) 0xc3, 0x01, 0x00, 0x00, 0x00, 0x00};
@@ -311,23 +310,23 @@ public class InstructMap {
             case 18://获取温度值
                 bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0xb0, (byte) 0x80, 0x00, 0x03};
                 break;
-            case 19: //写温度大小值
-                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x1e, 0x03, 0x00, (byte) value, 0x00, (byte) value1};
+            case 19: //写延迟时间
+                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x01, (byte) 0x10, 0x01, 0x00, (byte) value,};
                 break;
             case 20: //写测温间隔
-                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x22, 0x01, (byte) (value >> 8 & 0xff), (byte) (value & 0xff)};
+                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x01, (byte) 0x14, 0x01, (byte) (value >> 8 & 0xff), (byte) (value & 0xff)};
                 break;
-            case 21: // 读取测温间隔
-                bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x18, 0x00, 0x0b};
+            case 21: // 读取测温间隔 和延迟时间
+                bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x01, (byte) 0x10, 0x00, 0x0b};
                 break;
             case 22://写时间
                 long time = System.currentTimeMillis() / 1000;
                 String format = String.format("%08x", time);
                 byte[] timeByte = TransUtil.hexToByte(format);
-                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x1a, 0x03, (byte) timeByte[0], (byte) timeByte[1], (byte) timeByte[2], (byte) timeByte[3]};
+                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, (byte) 0x40, 0x03, (byte) timeByte[0], (byte) timeByte[1], (byte) timeByte[2], (byte) timeByte[3]};
                 break;
             case 23: //读取时间
-                bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x00, (byte) 0x18, 0x00, 0x07};
+                bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, (byte) 0x40, 0x00, 0x03};
                 break;
             case 24: //休眠
                 bytes = new byte[]{0x22, (byte) 0xc3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x01};
@@ -494,7 +493,7 @@ public class InstructMap {
             byteList.add(instructA(41));
             byteList.add(instructA(16, parameterArr[3]));
             byteList.add(instructA(17, parameterArr[4]));
-            byteList.add(instructA(19, parameterArr[3], parameterArr[4]));
+            byteList.add(instructA(19, parameterArr[0]));
             byteList.add(instructA(20, parameterArr[1]));
             byteList.add(instructA(22));
             byteList.add(instructA(7));
@@ -509,7 +508,7 @@ public class InstructMap {
             byteList.add(instructV(41));
             byteList.add(instructV(16, parameterArr[3]));
             byteList.add(instructV(17, parameterArr[4]));
-            byteList.add(instructV(19, parameterArr[3], parameterArr[4]));
+            byteList.add(instructV(19, parameterArr[0]));
             byteList.add(instructV(20, parameterArr[1]));
             byteList.add(instructV(22));
             byteList.add(instructV(7));
@@ -538,6 +537,7 @@ public class InstructMap {
             byteList.add(instructA(46));
             byteList.add(instructA(14));
             byteList.add(instructA(21));
+            byteList.add(instructA(23));
             byteList.add(instructA(18));
             byteList.add(instructA(36));
             byteList.add(instructA(37));
@@ -554,6 +554,7 @@ public class InstructMap {
             byteList.add(instructV(46));
             byteList.add(instructV(14));
             byteList.add(instructV(21));
+            byteList.add(instructV(23));
             byteList.add(instructV(18));
             byteList.add(instructV(36));
             byteList.add(instructV(37));
@@ -613,7 +614,4 @@ public class InstructMap {
         parameterArr[4] = maxTemperature;
     }
 
-    public static int[] getParameterArr() {
-        return parameterArr;
-    }
 }

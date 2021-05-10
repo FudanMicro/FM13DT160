@@ -15,7 +15,8 @@
     <string name="text_fail">Fail</string>
     <string name="text_init">Init Finished</string>
     <string name="text_data">Temperature Data</string>
-    <string name="text_send_email">Send Mail</string>
+    <string name="text_send_pdf">Send PDF file</string>
+    <string name="text_send_excel">Send EXCEL file</string>
     <string name="text_nfc">Approach an NFC Tag</string>
 
     <string name="text_about">About</string>
@@ -77,20 +78,20 @@
     <string name="hint_text12">Config Fail</string>
     <string name="hint_text13">Read Fail,PLS Retry!</string>
 
-    <string name="hint_text14">Logging Points</string>
-    <string name="hint_text15">Start Time</string>
-    <string name="hint_text16">Number of  Over Low Threshold</string>
+    <string name="hint_text14">Logging Points:</string>
+    <string name="hint_text15">Start Time:</string>
+    <string name="hint_text16">Number of  Over Low Threshold:</string>
     <string name="hint_text17">Limited Temperature Range:</string>
-    <string name="hint_text18">Time Interval </string>
-    <string name="hint_text19">Number of  Over High Threshold</string>
-    <string name="hint_text20">Maximum Temperature</string>
-    <string name="hint_text21">Minimum Temperature</string>
-    <string name="hint_text22">Status</string>
+    <string name="hint_text18">Time Interval:</string>
+    <string name="hint_text19">Number of  Over High Threshold:</string>
+    <string name="hint_text20">Maximum Temperature:</string>
+    <string name="hint_text21">Minimum Temperature:</string>
+    <string name="hint_text22">Status:</string>
     <string name="hint_text23">In Temperature Measurement Flow</string>
     <string name="hint_text24">Logging Completed</string>
     <string name="hint_text25">Measurement Stopped Abnormally</string>
     <string name="hint_text26">Temperature Measurement in Delay Time!</string>
-
+    <string name="hint_text27">Delay Time:</string>
     <string name="text_measure_delay">• Delay Time to Start:</string>
     <string name="text_measure_interval">• Time Interval:</string>
     <string name="text_measure_count">• Temperature Points:</string>
@@ -98,7 +99,7 @@
     <string name="text_min_tp">• Low Temperature Limit:</string>
     <string name="seconds">seconds</string>
     <string name="minutes">minutes</string>
-
+    <string name="text_min_max">The lower limit of low temperature is higher than that of high temperature</string>
     <string name="applyConfig">Start Logging</string>
 
 
@@ -132,4 +133,15 @@
         <item>Stop RTC</item>
         <item>Lock</item>
     </string-array>
+    <string name="text_send_email">Send Mail</string>
+    <string name="create_file">File creation failed. Please try again</string>
+<!--  pdf  -->
+    <string name="temperature_tag_report">Temperature Tag Report</string>
+    <string name="temperature_curve">Temperature Curve:</string>
+    <string name="status_normal">Status</string>
+    <string name="tag_info">Tag Info</string>
+    <string name="detail_datas">Detail Datas:</string>
+    <string name="time">Time</string>
+    <string name="value">Value</string>
+    <string name="delay_time">Delay time:</string>
 </resources>

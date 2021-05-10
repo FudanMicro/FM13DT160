@@ -14,7 +14,8 @@
     <string name="text_fail">失败</string>
     <string name="text_init">初始化完成</string>
     <string name="text_data">温度数据</string>
-    <string name="text_send_email">发送邮件</string>
+    <string name="text_send_pdf">发送PDF格式文件</string>
+    <string name="text_send_excel">发送EXCEL格式文件</string>
     <string name="text_nfc">请靠近NFC标签</string>
 
     <string name="text_about">关于</string>
@@ -77,19 +78,20 @@
     <string name="hint_text12">配置失败</string>
     <string name="hint_text13">读取失败,请重试!</string>
 
-    <string name="hint_text14">当前测温次数</string>
-    <string name="hint_text15">当前测温开始时间</string>
-    <string name="hint_text16">当前测温超过最低温度次数</string>
-    <string name="hint_text17">当前设置测温范围</string>
-    <string name="hint_text18">当前测温间隔时间</string>
-    <string name="hint_text19">当前测温超过最高温度次数:</string>
-    <string name="hint_text20">最高温度</string>
-    <string name="hint_text21">最低温度</string>
-    <string name="hint_text22">测温状态</string>
-    <string name="hint_text23">正在测温</string>
-    <string name="hint_text24">测温结束</string>
+    <string name="hint_text14">测量次数:</string>
+    <string name="hint_text15">测量开始时间:</string>
+    <string name="hint_text16">测量超过最低温度次数:</string>
+    <string name="hint_text17">设置测量范围:</string>
+    <string name="hint_text18">测量间隔时间:</string>
+    <string name="hint_text19">测量超过最高温度次数:</string>
+    <string name="hint_text20">最高温度:</string>
+    <string name="hint_text21">最低温度:</string>
+    <string name="hint_text22">测温状态:</string>
+    <string name="hint_text23">正在测量</string>
+    <string name="hint_text24">测量结束</string>
     <string name="hint_text25">异常停止</string>
     <string name="hint_text26">当前处于测温延时中,请稍等!</string>
+    <string name="hint_text27">测量延迟时间:</string>
 
     <string name="text_measure_delay">• 延迟测温时间:</string>
     <string name="text_measure_interval">• 测温间隔时间:</string>
@@ -98,6 +100,8 @@
     <string name="text_min_tp">• 低温下限设置: </string>
     <string name="seconds">seconds</string>
     <string name="minutes">minutes</string>
+    <string name="text_min_max">低温下限不能大于高温</string>
+
 
     <string name="applyConfig">发送配置指令并开启RTC测温</string>
 <!--    <string name="resetConfig">初始化标签状态</string>-->
@@ -133,4 +137,15 @@
         <item>Stop RTC</item>
         <item>Lock</item>
     </string-array>
+    <string name="text_send_email">发送邮件</string>
+    <string name="create_file">文件创建失败,请重试</string>
+<!--pdf-->
+    <string name="temperature_tag_report">温度标签报告</string>
+    <string name="temperature_curve">温度曲线:</string>
+    <string name="status_normal">报告状态</string>
+    <string name="tag_info">记录概要信息</string>
+    <string name="detail_datas">详细数据:</string>
+    <string name="time">时间</string>
+    <string name="value">温度</string>
+    <string name="delay_time">测温延迟时间:</string>
 </resources>

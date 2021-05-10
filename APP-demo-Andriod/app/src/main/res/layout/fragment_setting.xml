@@ -58,6 +58,7 @@
     <Button
         android:id="@+id/resultFiledButton"
         style="@style/ButtonTheme"
+        android:visibility="visible"
         android:text="@string/check_HF"/>
 
     <Button

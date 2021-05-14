@@ -133,7 +133,7 @@
     xPos = spaceWidth;
     leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos,0,contentWidth-2*spaceWidth,contentHeight)];
     leftLabel.textAlignment = NSTextAlignmentLeft;
-    leftLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"FM_Start_Time", nil), [CommonUtils timestampSwitchTime:_nfcMsg.startTime andFormatter:@"YYYY-MM-dd HH:mm:ss"]];
+    leftLabel.text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"FM_Start_Time", nil), [Commons timestampSwitchTime:_nfcMsg.startTime andFormatter:@"YYYY-MM-dd HH:mm:ss"]];
     leftLabel.font = normalFont;
     leftLabel.textColor = labelColor;
     [contentView addSubview:leftLabel];
@@ -172,7 +172,7 @@
     xPos = spaceWidth;
     leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos,0,contentWidth-2*spaceWidth,contentHeight)];
     leftLabel.textAlignment = NSTextAlignmentLeft;
-    leftLabel.text = [NSString stringWithFormat:@"%@: %.2f°C", NSLocalizedString(@"FM_Minimum_Temperature",nil),_nfcMsg.recordedMinimum];
+    leftLabel.text = [NSString stringWithFormat:@"%@: %.3f°C", NSLocalizedString(@"FM_Minimum_Temperature",nil),_nfcMsg.recordedMinimum];
     leftLabel.font = normalFont;
     leftLabel.textColor = labelColor;
     [contentView addSubview:leftLabel];
@@ -185,7 +185,7 @@
     xPos = spaceWidth;
     leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos,0,contentWidth-2*spaceWidth,contentHeight)];
     leftLabel.textAlignment = NSTextAlignmentLeft;
-    leftLabel.text = [NSString stringWithFormat:@"%@: %.2f°C", NSLocalizedString(@"FM_Maximum_Temperature",nil),_nfcMsg.recordedMaximum];
+    leftLabel.text = [NSString stringWithFormat:@"%@: %.3f°C", NSLocalizedString(@"FM_Maximum_Temperature",nil),_nfcMsg.recordedMaximum];
     leftLabel.font = normalFont;
     leftLabel.textColor = labelColor;
     [contentView addSubview:leftLabel];
@@ -260,13 +260,13 @@
             [mailContent appendFormat:@"isLogging=%@\r\n",tmpStr];
             [mailContent appendFormat:@"recordedCount=%ld\r\n",_nfcMsg.recordedCount];
             [mailContent appendFormat:@"totalCount=%ld\r\n",_nfcMsg.totalCount];
-            tmpStr = [CommonUtils timestampSwitchTime:_nfcMsg.startTime andFormatter:@"YYYY-MM-dd HH:mm:ss"];
+            tmpStr = [Commons timestampSwitchTime:_nfcMsg.startTime andFormatter:@"YYYY-MM-dd HH:mm:ss"];
             [mailContent appendFormat:@"startTime=%@\r\n",tmpStr];
             [mailContent appendFormat:@"intervalSeconds=%ld\r\n",_nfcMsg.intervalSeconds];
-            [mailContent appendFormat:@"recordedMinimum=%.2f\r\n",_nfcMsg.recordedMinimum];
-            [mailContent appendFormat:@"recordedMaximum=%.2f\r\n",_nfcMsg.recordedMaximum];
-            [mailContent appendFormat:@"validMinimum=%.2f\r\n",_nfcMsg.validMinimum];
-            [mailContent appendFormat:@"validMaximum=%.2f\r\n",_nfcMsg.validMaximum];
+            [mailContent appendFormat:@"recordedMinimum=%.3f\r\n",_nfcMsg.recordedMinimum];
+            [mailContent appendFormat:@"recordedMaximum=%.3f\r\n",_nfcMsg.recordedMaximum];
+            [mailContent appendFormat:@"validMinimum=%.3f\r\n",_nfcMsg.validMinimum];
+            [mailContent appendFormat:@"validMaximum=%.3f\r\n",_nfcMsg.validMaximum];
             [mailContent appendFormat:@"Number_Of_Over_Low_Threshold=%ld\r\n",_nfcMsg.overLowCount];
             [mailContent appendFormat:@"Number_Of_Over_High_Threshold=%ld\r\n",_nfcMsg.overHighCount];
             
@@ -328,7 +328,7 @@
     }
     NSLog(@"%@",msg);
     if(result==MFMailComposeResultFailed){
-        [CommonUtils showError:@"邮件发送失败" controller:self onClick:nil];
+        [Commons showError:@"邮件发送失败" controller:self onClick:nil];
     }
 }
 

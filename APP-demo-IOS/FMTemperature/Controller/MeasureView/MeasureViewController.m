@@ -8,7 +8,7 @@
 #import "ModelButton.h"
 #import "NFCTagHelper.h"
 
-@interface MeasureViewController ()<NFCTagHelperDelegate>
+@interface MeasureViewController ()
 
 //用于绘制界面的时候记录view底部
 @property(nonatomic, assign) CGFloat viewBottom;
@@ -26,6 +26,8 @@
 @property(nonatomic, strong) UILabel *uidLabel;
 //操作结果
 @property(nonatomic, strong) UILabel *resultLabel;
+//指令输入
+@property(nonatomic, strong) UITextField *cmdField;
 @end
 
 @implementation MeasureViewController
@@ -49,12 +51,17 @@
     [self initResultView];
     //初始化按钮视图
     [self initButtonView];
-    //启动基础测量功能
-    [NFCTagHelper shareInstance].delegate = self;
-    NSString *response = [[NFCTagHelper shareInstance] startReadTag:BasicType];
-    if(response.length>0){
-        [CommonUtils showError:response controller:self onClick:nil];
-    }
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    tap1.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tap1];
+    
+    NSLog(@"sdk版本: %@",[NFCTagHelper getLibVersion]);
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tap1
+{
+    [self.view endEditing:YES];
 }
 
 //初始化读取结果视图
@@ -75,7 +82,7 @@
     CGFloat contentWidth = DSScreenWidth;
     CGFloat contentHeight = 36*DSAdaptCoefficient;
     //标题宽度
-    CGFloat titleWidth = 150*DSAdaptCoefficient;
+    CGFloat titleWidth = 100*DSAdaptCoefficient;
 //    CGFloat arrowWidth = 7*DSAdaptCoefficient;
 //    CGFloat arrowHeight = 14*DSAdaptCoefficient;
 //    CGFloat arrowYPos = (contentHeight-arrowHeight)/2;
@@ -198,7 +205,7 @@
     contentView = [[UIView alloc] initWithFrame:CGRectMake(0,_viewBottom,contentWidth,contentHeight)];
     contentView.backgroundColor = DSCommonColor;
     [_bgView addSubview:contentView];
-    _viewBottom = CGRectGetMaxY(contentView.frame)+1*DSAdaptCoefficient;
+    _viewBottom = CGRectGetMaxY(contentView.frame)+10*DSAdaptCoefficient;
     
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos,0,titleWidth,contentHeight)];
     titleLabel.textAlignment = NSTextAlignmentLeft;
@@ -214,6 +221,16 @@
     _resultLabel.font = normalFont;
     _resultLabel.textColor = labelColor;
     [contentView addSubview:_resultLabel];
+    
+    _cmdField = [[UITextField alloc]initWithFrame:CGRectMake(spaceWidth, _viewBottom, DSScreenWidth-2*spaceWidth, contentHeight)];
+    _cmdField.placeholder = NSLocalizedString(@"FM_Input_Instruction", nil);
+    _cmdField.layer.borderWidth = 1*DSAdaptCoefficient;
+    _cmdField.layer.borderColor = DSColor(223, 223, 223).CGColor;
+    _cmdField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _cmdField.autocapitalizationType = UITextAutocapitalizationTypeNone; //首字母是否大写
+    _cmdField.font = normalFont;
+    [_bgView addSubview:_cmdField];
+    _viewBottom = CGRectGetMaxY(_cmdField.frame)+10*DSAdaptCoefficient;
 }
 
 //初始化按钮视图
@@ -231,21 +248,21 @@
     [titleArray addObject:NSLocalizedString(@"FM_Sleep", nil)];
     [iconArray addObject:@"4"];
     
-    [titleArray addObject:NSLocalizedString(@"FM_UHF_Initialization", nil)];
-    [iconArray addObject:@"3"];
-
-    [titleArray addObject:NSLocalizedString(@"FM_LED_Control", nil)];
+    [titleArray addObject:NSLocalizedString(@"FM_Wakeup", nil)];
     [iconArray addObject:@"2"];
     
-//    [titleArray addObject:@"LED开"];
-//    [iconArray addObject:@"2"];
+    [titleArray addObject:NSLocalizedString(@"FM_UHF_Initialization", nil)];
+    [iconArray addObject:@"3"];
     
-    UILabel *btnTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(12*DSAdaptCoefficient, _viewBottom, 100*DSAdaptCoefficient, 20*DSAdaptCoefficient)];
-    btnTitleLabel.text = @"";
-    btnTitleLabel.textColor = DSColor(51, 51, 51);
-    btnTitleLabel.font = normalFont;
-    btnTitleLabel.textAlignment = NSTextAlignmentLeft;
-    [_bgView addSubview:btnTitleLabel];
+    [titleArray addObject:NSLocalizedString(@"FM_Cuscom_Send", nil)];
+    [iconArray addObject:@"1"];
+    
+//    UILabel *btnTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(12*DSAdaptCoefficient, _viewBottom, 100*DSAdaptCoefficient, 20*DSAdaptCoefficient)];
+//    btnTitleLabel.text = @"";
+//    btnTitleLabel.textColor = DSColor(51, 51, 51);
+//    btnTitleLabel.font = normalFont;
+//    btnTitleLabel.textAlignment = NSTextAlignmentLeft;
+//    [_bgView addSubview:btnTitleLabel];
     
     //列数
     NSInteger columnNum = 3;
@@ -256,7 +273,7 @@
     //按钮高度
     CGFloat applyButtonHeight = DSScreenWidth/columnNum;
 
-    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(btnTitleLabel.frame), DSScreenWidth, applyButtonHeight * rowNum)];
+    UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, _viewBottom, DSScreenWidth, applyButtonHeight * rowNum)];
     buttonView.backgroundColor = DSCommonColor;
     [_bgView addSubview:buttonView];
     
@@ -293,55 +310,104 @@
 }
 
 - (void)applyButtonClick:(ModelButton *)button {
+    _typeLabel.text = @"";
+    _uidLabel.text = @"";
+    _fieldLabel.text = @"";
+    _temperatureLabel.text = @"";
+    _voltageLabel.text = @"";
+    _resultLabel.text = @"";
+    
+    __block typeof(self) blockSelf = self;
     NSString *btnText = button.buttonLabel.text;
-    [NFCTagHelper shareInstance].delegate = self;
     //基础测量
     if ([btnText isEqualToString:NSLocalizedString(@"FM_CMD_Measurement", nil)]) {
-        NSString *response = [[NFCTagHelper shareInstance] startReadTag:BasicType];
-        if(response.length>0){
-            [CommonUtils showError:response controller:self onClick:nil];
-        }
+        [[NFCTagHelper shareInstance] getBasicData:^(MeasureMsg *resultData){
+            blockSelf.typeLabel.text = resultData.tagType;
+            blockSelf.uidLabel.text = resultData.uid;
+            if(resultData.isSuccess){
+                blockSelf.fieldLabel.text = resultData.fieldValue;
+                blockSelf.temperatureLabel.text = resultData.tempValue;
+                blockSelf.voltageLabel.text = resultData.voltageValue;
+                
+                blockSelf.resultLabel.text = NSLocalizedString(@"FM_Success", nil);
+            }
+            else{
+                blockSelf.resultLabel.text = resultData.message;
+            }
+        }];
         return;
     }
     //检测是否唤醒
-    if ([btnText isEqualToString:NSLocalizedString(@"FM_Check_Status", nil)]) {
-        NSString *response = [[NFCTagHelper shareInstance] startReadTag:IfWakeupType];
-        if(response.length>0){
-            [CommonUtils showError:response controller:self onClick:nil];
-        }
-        return;
+    else if ([btnText isEqualToString:NSLocalizedString(@"FM_Check_Status", nil)]) {
+        [[NFCTagHelper shareInstance] checkWakeUp:^(MeasureMsg *resultData){
+            blockSelf.typeLabel.text = resultData.tagType;
+            blockSelf.uidLabel.text = resultData.uid;
+            if(resultData.isSuccess){
+                if(resultData.isWakeup){
+                    blockSelf.resultLabel.text = NSLocalizedString(@"FM_Wakeup", nil);
+                }
+                else{
+                    blockSelf.resultLabel.text = NSLocalizedString(@"FM_Sleep", nil);
+                }
+            }
+            else{
+                blockSelf.resultLabel.text = resultData.message;
+            }
+        }];
     }
     //休眠
-    if ([btnText isEqualToString:NSLocalizedString(@"FM_Sleep", nil)]) {
-        NSString *response = [[NFCTagHelper shareInstance] startReadTag:SleepType];
-        if(response.length>0){
-            [CommonUtils showError:response controller:self onClick:nil];
-        }
-        return;
+    else if ([btnText isEqualToString:NSLocalizedString(@"FM_Sleep", nil)]) {
+        [[NFCTagHelper shareInstance] doSleep:^(MeasureMsg *resultData){
+            blockSelf.typeLabel.text = resultData.tagType;
+            blockSelf.uidLabel.text = resultData.uid;
+            if(resultData.isSuccess){
+                blockSelf.resultLabel.text = NSLocalizedString(@"FM_Success", nil);
+            }
+            else{
+                blockSelf.resultLabel.text = resultData.message;
+            }
+        }];
     }
     //高频初始化
-    if ([btnText isEqualToString:NSLocalizedString(@"FM_UHF_Initialization", nil)]) {
-        NSString *response = [[NFCTagHelper shareInstance] startReadTag:UHFInitType];
-        if(response.length>0){
-            [CommonUtils showError:response controller:self onClick:nil];
-        }
-        return;
+    else if ([btnText isEqualToString:NSLocalizedString(@"FM_UHF_Initialization", nil)]) {
+        [[NFCTagHelper shareInstance] initUHF:^(MeasureMsg *resultData){
+            blockSelf.typeLabel.text = resultData.tagType;
+            blockSelf.uidLabel.text = resultData.uid;
+            if(resultData.isSuccess){
+                blockSelf.resultLabel.text = NSLocalizedString(@"FM_Success", nil);
+            }
+            else{
+                blockSelf.resultLabel.text = resultData.message;
+            }
+        }];
     }
-    //LED控制
-    if ([btnText isEqualToString:NSLocalizedString(@"FM_LED_Control", nil)]) {
-        NSString *response = [[NFCTagHelper shareInstance] startReadTag:LEDType];
-        if(response.length>0){
-            [CommonUtils showError:response controller:self onClick:nil];
-        }
-        return;
+    //唤醒
+    else if ([btnText isEqualToString:NSLocalizedString(@"FM_Wakeup", nil)]) {
+        [[NFCTagHelper shareInstance] doWakeup:^(MeasureMsg *resultData){
+            blockSelf.typeLabel.text = resultData.tagType;
+            blockSelf.uidLabel.text = resultData.uid;
+            if(resultData.isSuccess){
+                blockSelf.resultLabel.text = NSLocalizedString(@"FM_Success", nil);
+            }
+            else{
+                blockSelf.resultLabel.text = resultData.message;
+            }
+        }];
     }
-    //LED开
-    if ([btnText isEqualToString:@"LED开"]) {
-        NSString *response = [[NFCTagHelper shareInstance] startReadTag:LEDOnType];
-        if(response.length>0){
-            [CommonUtils showError:response controller:self onClick:nil];
+    //40B3B040030000DC2329D6
+    //自定义指令
+    else if ([btnText isEqualToString:NSLocalizedString(@"FM_Cuscom_Send", nil)]) {
+        NSString *cmdStr = [_cmdField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        if(cmdStr&&cmdStr.length>0){
+           [[NFCTagHelper shareInstance] sendInstruct:cmdStr onComplete:^(MeasureMsg *resultData){
+               blockSelf.typeLabel.text = resultData.tagType;
+               blockSelf.uidLabel.text = resultData.uid;
+               blockSelf.resultLabel.text = resultData.message;
+           }];
         }
-        return;
+        else{
+           [Commons showError:NSLocalizedString(@"FM_Input_Instruction", nil) controller:self onClick:nil];
+        }
     }
 }
 
@@ -354,69 +420,8 @@
     [super viewDidDisappear:animated];
 }
 
-//NFCTagHelperDelegate
-- (void)NfcMeasureComplete:(MeasureMsg *)nfcMsg{
-    if(!nfcMsg){
-        return;
-    }
-    _typeLabel.text = @"";
-    _uidLabel.text = @"";
-    _fieldLabel.text = @"";
-    _temperatureLabel.text = @"";
-    _voltageLabel.text = @"";
+- (void)getUIDComplete:(MeasureMsg *)resultMsg{
     
-    _typeLabel.text = nfcMsg.tagType;
-    _uidLabel.text = nfcMsg.uid;
-    NSString *opType = @"";
-    switch (nfcMsg.opType) {
-        case BasicType:
-            opType = NSLocalizedString(@"FM_CMD_Measurement", nil);
-            if(nfcMsg.isSuccess){
-                _fieldLabel.text = nfcMsg.fieldValue;
-                _temperatureLabel.text = nfcMsg.tempValue;
-                _voltageLabel.text = nfcMsg.voltageValue;
-            }
-            break;
-        case IfWakeupType:
-            if(nfcMsg.isSuccess&&nfcMsg.isWakeup){
-                opType = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"FM_Check_Result", nil), NSLocalizedString(@"FM_Wakeup", nil)];
-            }
-            else{
-                opType = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"FM_Check_Result", nil), NSLocalizedString(@"FM_Sleep", nil)];
-            }
-            break;
-        case SleepType:
-            opType = NSLocalizedString(@"FM_Sleep", nil);
-            break;
-        case UHFInitType:
-            opType = NSLocalizedString(@"FM_UHF_Initialization", nil);
-            break;
-        case LEDType:
-            opType = NSLocalizedString(@"FM_LED_Control", nil);
-            break;
-        case LEDOnType:
-            opType = @"LED开";
-            break;
-        default:
-            opType = @"";
-            break;
-    }
-    if(nfcMsg.isSuccess){
-        if(nfcMsg.opType == IfWakeupType){
-            _resultLabel.text = opType;
-        }
-        else{
-            _resultLabel.text = [NSString stringWithFormat:@"%@ %@", opType, NSLocalizedString(@"FM_Success", nil)];
-        }
-    }
-    else{
-        if(nfcMsg.opType == IfWakeupType){
-            _resultLabel.text = opType;
-        }
-        else{
-            _resultLabel.text = [NSString stringWithFormat:@"%@ %@", opType, NSLocalizedString(@"FM_Fail", nil)];
-        }
-    }
 }
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright © 2018年 复旦微电子集团股份科技有限公司. All rights reserved.
 
 #import <UIKit/UIKit.h>
+#import "NFCTagHelper.h"
 
 @interface GraphicViewController : UIViewController
 

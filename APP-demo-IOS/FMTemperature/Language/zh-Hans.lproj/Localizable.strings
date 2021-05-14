@@ -42,16 +42,20 @@
 "FM_Temperature" = "温度";
 "FM_Voltage" = "电压";
 "FM_Type" = "类型";
-"FM_Response" = "指令响应";
+"FM_Response" = "响应";
 "FM_CMD_Measurement" = "基础测量";
 "FM_Wakeup" = "唤醒";
 "FM_Check_Status" = "检测唤醒";
 "FM_Check_Result" = "检测结果";
 "FM_Sleep" = "休眠";
 "FM_UHF_Initialization" = "超高频初始化";
-"FM_LED_Control" = "LED控制";
+"FM_LED_On" = "打开LED";
+"FM_LED_Off" = "关闭LED";
+"FM_Get_UID" = "获取UID";
 "FM_Success" = "成功";
 "FM_Fail" = "失败";
+"FM_Cuscom_Send" = "自定义指令";
+"FM_Input_Instruction" = "请输入指令";
 
 //Logging Page
 "FM_Logging_Config" = "测量配置";

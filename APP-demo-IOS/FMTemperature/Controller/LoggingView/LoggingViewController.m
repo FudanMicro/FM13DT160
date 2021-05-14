@@ -8,7 +8,7 @@
 #import "NFCTagHelper.h"
 #import "GraphicViewController.h"
 
-@interface LoggingViewController ()<NFCTagHelperDelegate>
+@interface LoggingViewController ()
 
 //用于绘制界面的时候记录view底部
 @property(nonatomic, assign) CGFloat viewBottom;
@@ -75,8 +75,8 @@
     _intervalTextArr = @[@"1 s",@"2 s",@"3 s",@"4 s",@"5 s",@"6 s",@"7 s",@"8 s",@"9 s",@"10 s",@"15 s",@"20 s",@"25 s",@"30 s",@"35 s",@"40 s",@"45 s",@"50 s",@"55 s",@"1 minute",@"2 minutes",@"5 minutes",@"10 minutes",@"15 minutes",@"30 minutes",@"1 hour"];
     _intervalValueArr = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"15",@"20",@"25",@"30",@"35",@"40",@"45",@"50",@"55",@"60",@"120",@"300",@"600",@"900",@"1800",@"3600"];
     
-    _tempCountTextArr = @[@"2",@"3",@"5",@"8",@"10",@"20",@"30",@"50",@"80",@"100",@"200",@"300",@"500",@"800",@"1000",@"2000",@"3000",@"4000",@"4864"];
-    _tempCountValueArr = @[@"2",@"3",@"5",@"8",@"10",@"20",@"30",@"50",@"80",@"100",@"200",@"300",@"500",@"800",@"1000",@"2000",@"3000",@"4000",@"4864"];
+    _tempCountTextArr = @[@"3",@"5",@"8",@"10",@"20",@"30",@"50",@"80",@"100",@"200",@"300",@"500",@"800",@"1000",@"2000",@"3000",@"4000",@"4864"];
+    _tempCountValueArr = @[@"3",@"5",@"8",@"10",@"20",@"30",@"50",@"80",@"100",@"200",@"300",@"500",@"800",@"1000",@"2000",@"3000",@"4000",@"4864"];
     
     _tempMinTextArr = @[@"-40 °C",@"-30 °C",@"-20 °C",@"-18 °C",@"-15 °C",@"-10 °C",@"-8 °C",@"-5 °C",@"-4 °C",@"-3 °C",@"-2 °C",@"-1 °C",@"0 °C",@"1 °C",@"2 °C",@"3 °C",@"4 °C",@"5 °C",@"8 °C",@"10 °C",@"15 °C",@"18 °C",@"20 °C",@"23 °C",@"25 °C",@"28 °C",@"29 °C",@"30 °C",@"35 °C",@"40 °C",@"50 °C",@"60 °C",@"70 °C",@"80 °C"];
     _tempMinValueArr = @[@"-40",@"-30",@"-20",@"-18",@"-15",@"-10",@"-8",@"-5",@"-4",@"-3",@"-2",@"-1",@"0",@"1",@"2",@"3",@"4",@"5",@"8",@"10",@"15",@"18",@"20",@"23",@"25",@"28",@"29",@"30",@"35",@"40",@"50",@"60",@"70",@"80"];
@@ -84,13 +84,13 @@
     _tempMaxTextArr = @[@"-40 °C",@"-30 °C",@"-20 °C",@"-18 °C",@"-15 °C",@"-10 °C",@"-8 °C",@"-5 °C",@"-4 °C",@"-3 °C",@"-2 °C",@"-1 °C",@"0 °C",@"1 °C",@"2 °C",@"3 °C",@"4 °C",@"5 °C",@"8 °C",@"10 °C",@"15 °C",@"18 °C",@"20 °C",@"23 °C",@"25 °C",@"28 °C",@"29 °C",@"30 °C",@"35 °C",@"40 °C",@"50 °C",@"60 °C",@"70 °C",@"80 °C"];
     _tempMaxValueArr = @[@"-40",@"-30",@"-20",@"-18",@"-15",@"-10",@"-8",@"-5",@"-4",@"-3",@"-2",@"-1",@"0",@"1",@"2",@"3",@"4",@"5",@"8",@"10",@"15",@"18",@"20",@"23",@"25",@"28",@"29",@"30",@"35",@"40",@"50",@"60",@"70",@"80"];
     
-    _myLoggingInfo = [CommonUtils getLoggingInfo];
+    _myLoggingInfo = [Commons getLoggingInfo];
     
-    _delayIndex = [CommonUtils getIndexFromArray:_delayValueArr text:_myLoggingInfo.delayMinutes];
-    _intervalIndex = [CommonUtils getIndexFromArray:_intervalValueArr text:_myLoggingInfo.intervalSeconds];
-    _tempCountIndex = [CommonUtils getIndexFromArray:_tempCountValueArr text:_myLoggingInfo.loggingCount];
-    _tempMinIndex = [CommonUtils getIndexFromArray:_tempMinValueArr text:_myLoggingInfo.minTemperature];
-    _tempMaxIndex = [CommonUtils getIndexFromArray:_tempMaxValueArr text:_myLoggingInfo.maxTemperature];
+    _delayIndex = [Commons getIndexFromArray:_delayValueArr text:_myLoggingInfo.delayMinutes];
+    _intervalIndex = [Commons getIndexFromArray:_intervalValueArr text:_myLoggingInfo.intervalSeconds];
+    _tempCountIndex = [Commons getIndexFromArray:_tempCountValueArr text:_myLoggingInfo.loggingCount];
+    _tempMinIndex = [Commons getIndexFromArray:_tempMinValueArr text:_myLoggingInfo.minTemperature];
+    _tempMaxIndex = [Commons getIndexFromArray:_tempMaxValueArr text:_myLoggingInfo.maxTemperature];
     
     //初始化测温条件视图
     [self initConditionView];
@@ -325,41 +325,57 @@
 //启动测温
 -(void)startLogging:(UIButton *)button{
     //保存条件设置
-    [CommonUtils saveLoggingInfo:_myLoggingInfo];
+    [Commons saveLoggingInfo:_myLoggingInfo];
     
-    NFCTagHelper *tagInstance = [NFCTagHelper shareInstance];
-    tagInstance.delegate = self;
-    
-    [tagInstance setHexDelayMinutes:_myLoggingInfo.delayMinutes];
-    [tagInstance setHexIntervalSeconds:_myLoggingInfo.intervalSeconds];
-    [tagInstance setHexLoggingCount:_myLoggingInfo.loggingCount];
-    [tagInstance setHexMinTemperature:_myLoggingInfo.minTemperature];
-    [tagInstance setHexMaxTemperature:_myLoggingInfo.maxTemperature];
-    
-    NSString *response = [tagInstance startReadTag:LoggingStartType];
-    if(response.length>0){
-        [CommonUtils showError:response controller:self onClick:nil];
-    }
+//    NFCTagHelper *tagInstance = [NFCTagHelper shareInstance];
+//    tagInstance.delegate = self;
+//
+//    [tagInstance setHexDelayMinutes:_myLoggingInfo.delayMinutes];
+//    [tagInstance setHexIntervalSeconds:_myLoggingInfo.intervalSeconds];
+//    [tagInstance setHexLoggingCount:_myLoggingInfo.loggingCount];
+//    [tagInstance setHexMinTemperature:_myLoggingInfo.minTemperature];
+//    [tagInstance setHexMaxTemperature:_myLoggingInfo.maxTemperature];
+//
+    [[NFCTagHelper shareInstance] startLogging:[_myLoggingInfo.delayMinutes integerValue] intervalSeconds:[_myLoggingInfo.intervalSeconds integerValue] loggingCount:[_myLoggingInfo.loggingCount integerValue] minTemperature:[_myLoggingInfo.minTemperature integerValue] maxTemperature:[_myLoggingInfo.maxTemperature integerValue] onComplete:^(MeasureMsg *resultData){
+        if(resultData.isSuccess){
+            NSLog(@"tag type:%@ uid:%@ stop success", resultData.tagType, resultData.uid);
+        }
+        else{
+            NSLog(@"stop failed");
+        }
+    }];
 }
 
 //停止测温
 -(void)stopLogging:(UIButton *)button{
-    NFCTagHelper *tagInstance = [NFCTagHelper shareInstance];
-    tagInstance.delegate = self;
-    NSString *response = [tagInstance startReadTag:LoggingStopType];
-    if(response.length>0){
-        [CommonUtils showError:response controller:self onClick:nil];
-    }
+    [[NFCTagHelper shareInstance] stopLogging:^(MeasureMsg *resultData){
+        if(resultData.isSuccess){
+            NSLog(@"tag type:%@ uid:%@ stop success", resultData.tagType, resultData.uid);
+        }
+        else{
+            NSLog(@"stop failed");
+        }
+    }];
 }
 
 //读取测温结果
 -(void)getLoggingResult:(UIButton *)button{
-    NFCTagHelper *tagInstance = [NFCTagHelper shareInstance];
-    tagInstance.delegate = self;
-    NSString *response = [tagInstance startReadTag:LoggingResultType];
-    if(response.length>0){
-        [CommonUtils showError:response controller:self onClick:nil];
-    }
+    __block typeof(self) blockSelf = self;
+    [[NFCTagHelper shareInstance] getLoggingResult:^(LoggingMsg *resultData){
+        if(resultData.isSuccess){
+            UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
+            backItem.title = NSLocalizedString(@"FM_Back", nil);
+            blockSelf.navigationItem.backBarButtonItem=backItem;
+            
+            GraphicViewController *childController = [[GraphicViewController alloc] init];
+            childController.nfcMsg = resultData;
+            childController.hidesBottomBarWhenPushed = YES;  //隐藏tabbar
+            [blockSelf.navigationController pushViewController:childController animated:YES];
+        }
+        else{
+            NSLog(@"operation failed");
+        }
+    }];
 }
 
 -(void)onDelayClick:(UIGestureRecognizer*)recognizer
@@ -423,14 +439,14 @@
 }
 
 //NFCTagHelperDelegate
-- (void)NfcLoggingComplete:(LoggingMsg *)nfcMsg{
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
-    backItem.title = NSLocalizedString(@"FM_Back", nil);
-    self.navigationItem.backBarButtonItem=backItem;
-    
-    GraphicViewController *childController = [[GraphicViewController alloc] init];
-    childController.nfcMsg = nfcMsg;
-    childController.hidesBottomBarWhenPushed = YES;  //隐藏tabbar
-    [self.navigationController pushViewController:childController animated:YES];
-}
+//- (void)NfcLoggingComplete:(LoggingMsg *)nfcMsg{
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
+//    backItem.title = NSLocalizedString(@"FM_Back", nil);
+//    self.navigationItem.backBarButtonItem=backItem;
+//
+//    GraphicViewController *childController = [[GraphicViewController alloc] init];
+//    childController.nfcMsg = nfcMsg;
+//    childController.hidesBottomBarWhenPushed = YES;  //隐藏tabbar
+//    [self.navigationController pushViewController:childController animated:YES];
+//}
 @end

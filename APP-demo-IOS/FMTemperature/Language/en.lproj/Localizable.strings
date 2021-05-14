@@ -52,9 +52,13 @@
 "FM_Check_Result" = "Result";
 "FM_Sleep" = "Sleep";
 "FM_UHF_Initialization" = "UHF Initialization";
-"FM_LED_Control" = "LED Control";
+"FM_LED_On" = "Turn On LED";
+"FM_LED_Off" = "Turn Off LED";
+"FM_Get_UID" = "Get UID";
 "FM_Success" = "Success";
 "FM_Fail" = "Fail";
+"FM_Cuscom_Send" = "Custom Instruction";
+"FM_Input_Instruction" = "Please input instruction";
 
 //Logging Page
 "FM_Logging_Config" = "Logging Configuration";

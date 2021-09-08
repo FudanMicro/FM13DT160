@@ -605,6 +605,19 @@ public class InstructMap {
             return instructV(type);
         }
     }
+    public static List<byte[]> getConfig(boolean isNfcA){
+        List<byte[]> byteList = new ArrayList<>();
+        if (isNfcA) {
+            byteList.add(instructA(48));
+            byteList.add(instructA(50));
+           ;
+        } else {
+            byteList.add(instructV(48));
+            byteList.add(instructV(50));
+
+        }
+        return byteList;
+    }
 
     public static void setParameter(int delayMinutes, int intervalSeconds, int loggingCount, int minTemperature, int maxTemperature) {
         parameterArr[0] = delayMinutes;

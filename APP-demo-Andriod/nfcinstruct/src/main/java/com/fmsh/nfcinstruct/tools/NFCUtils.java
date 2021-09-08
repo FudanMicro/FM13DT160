@@ -109,7 +109,7 @@ public class NFCUtils {
                             break;
                         case 11:
                             //配置原始模式
-                            singleInstruct(iNfcA, InstructMap.getInstruct(true, 50), callback);
+                            setConfig(iNfcA, InstructMap.getConfig(true), callback);
                             break;
                         case 12:
                             //配置标准模式
@@ -206,7 +206,7 @@ public class NFCUtils {
                             break;
                         case 11:
                             //配置原始模式
-                            singleInstruct(iNfcV, InstructMap.getInstruct(false, 50), callback);
+                            setConfig(iNfcV, InstructMap.getConfig(false), callback);
                             break;
                         case 12:
                             //配置标准模式
@@ -332,6 +332,35 @@ public class NFCUtils {
         }
     }
 
+    private static void setConfig(BaseNfc baseNfc, List<byte[]> byteList, OnResultCallback callback) throws IOException {
+        byte[] config = baseNfc.sendCommand(byteList.get(0));
+        byte value = (byte) (config[config.length - 4] | 0x1C);
+        byte[] send = byteList.get(1);
+        if (send.length > 11) {
+            send[send.length - 4] = value;
+            send[send.length - 3] = (byte) ~value;
+            send[send.length - 2] = config[config.length - 2];
+            send[send.length - 1] = config[config.length - 1];
+
+        } else {
+            send[7] = value;
+            send[8] = (byte) ~value;
+            send[9] = config[config.length - 2];
+            send[10] = config[config.length - 1];
+        }
+        String transceive = baseNfc.transceive(send);
+
+        if ("000000".equals(transceive)) {
+            // 成功
+            callback.onResult(true);
+        } else {
+            //失败
+            callback.onResult(false, TransUtil.byteToHex(send), transceive);
+        }
+
+
+    }
+
     /**
      * 查看测温状态
      *
@@ -382,10 +411,10 @@ public class NFCUtils {
                     }
                     if (i == 3 || i == 4) {
                         //查看延时时间配置
-                       if(!check(baseNfc, byteList.get(i))){
-                           callback.onResult(false, TransUtil.byteToHex(byteList.get(i)), data);
-                           return;
-                       }
+                        if (!check(baseNfc, byteList.get(i))) {
+                            callback.onResult(false, TransUtil.byteToHex(byteList.get(i)), data);
+                            return;
+                        }
                     }
                 }
                 callback.onResult(true);
@@ -398,6 +427,7 @@ public class NFCUtils {
 
     /**
      * 检测延迟时间和时间间隔是否写入
+     *
      * @param baseNfc
      * @param data
      * @return
@@ -443,6 +473,8 @@ public class NFCUtils {
      * @throws IOException
      */
     private static void stopLogging(BaseNfc baseNfc, byte[] pwd, List<byte[]> byteList, OnResultCallback callback) throws Exception {
+//        baseNfc.transceive(new byte[]{0x22, (byte) 0xc5, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0xc0, 0x0a, 0x00, 0x07});
+
         byte[] bytes1 = encryptionPwd(baseNfc, pwd, byteList);
         boolean authPwd = authPwd(baseNfc, bytes1, byteList);
         if (authPwd) {
@@ -772,7 +804,7 @@ public class NFCUtils {
         userCfg[userCfg.length - 3] = (byte) ~flag;
         userCfg[userCfg.length - 1] = (byte) ~userCfg[userCfg.length - 2];
         byte[] instruct = byteList.get(1);
-//        userCfg = new byte[]{0x4c, (byte) 0xb3,0x29, (byte) 0xd6};
+        //        userCfg = new byte[]{0x4c, (byte) 0xb3,0x29, (byte) 0xd6};
         System.arraycopy(userCfg, 0, instruct, instruct.length - 4, 4);
         LogUtil.d(TransUtil.byteToHex(instruct));
         String transceive = baseNfc.transceive(instruct);

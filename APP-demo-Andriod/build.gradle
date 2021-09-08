@@ -26,8 +26,8 @@ allprojects {
         minSdkVersion  = 19
         targetSdkVersion = 29
         constraintLayoutVersion ='1.1.3'
-        versionName = '9.2.9'
-        versionCode = 20
+        versionName = '9.2.10'
+        versionCode = 21
 
 
         libSupportAppcompat_v7 = "com.android.support:appcompat-v7:${supportVersion}"

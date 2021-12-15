@@ -561,19 +561,19 @@ public class RecordActivity extends BaseActivity {
             info.add(mItemList.get(i).getDetailText().toString());
         }
         loading();
-        UIUtils.getBitmapFromView(RecordActivity.this, graphView, new OnBitmapResultListener() {
-            @Override
-            public void onResult(Bitmap bitmap) {
-                List<Element> pdfData = PdfUtils.createPdfData(info,bitmap,mDateList,mTpList);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("pdf", (Serializable) pdfData);
-                UIUtils.setHandler(mHandler);
-                Message message = new Message();
-                message.what = 15;
-                message.setData(bundle);
-                mCommThread.getWorkerThreadHan().sendMessage(message);
-            }
-        });
+//        UIUtils.getBitmapFromView(RecordActivity.this, graphView, new OnBitmapResultListener() {
+//            @Override
+//            public void onResult(Bitmap bitmap) {
+//                List<Element> pdfData = PdfUtils.createPdfData(info,bitmap,mDateList,mTpList);
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("pdf", (Serializable) pdfData);
+//                UIUtils.setHandler(mHandler);
+//                Message message = new Message();
+//                message.what = 15;
+//                message.setData(bundle);
+//                mCommThread.getWorkerThreadHan().sendMessage(message);
+//            }
+//        });
     }
 
 

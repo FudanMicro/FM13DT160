@@ -21,9 +21,12 @@
 
     <string name="text_about">About</string>
     <string name="text_version">Version:</string>
+    <string name="tips">Tips</string>
+    <string name="open_nfc">This application can only be used when the NFC is turned on. Please click settings to turn on the NFC </string>
+    <string name="setting">Setting</string>
 
-    <string name="text_main1">Temperature </string>
-    <string name="text_main2">Data Read </string>
+    <string name="text_main1">Temperature</string>
+    <string name="text_main2">Data Read</string>
     <string name="text_main3">Logging Setting</string>
     <string name="text_main4">Select Measurement Type</string>
     <string name="text_main5">Pressure Sensor Measurement</string>
@@ -94,6 +97,9 @@
     <string name="hint_text27">Delay Time:</string>
     <string name="text_measure_delay">• Delay Time to Start:</string>
     <string name="text_measure_interval">• Time Interval:</string>
+    <string name="text_measure_mode">Storage mode</string>
+    <string name="text_measure_normal_mode">Raw data</string>
+    <string name="text_measure_compression_mode">Compressed data 1</string>
     <string name="text_measure_count">• Temperature Points:</string>
     <string name="text_max_tp">• High Temperature Limit:</string>
     <string name="text_min_tp">• Low Temperature Limit:</string>
@@ -144,4 +150,10 @@
     <string name="time">Time</string>
     <string name="value">Value</string>
     <string name="delay_time">Delay time:</string>
+
+    <string name="report"> Measurement report</string>
+    <string name="record"> Measurement record</string>
+    <string name="m_time"> Measurement time</string>
+
+    <string name="mode_error">Too many times, please modify the temperature measurement mode</string>
 </resources>

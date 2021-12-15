@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.nfc.tech.Ndef;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -94,7 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             // 延迟对卡片的检测
             option.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 1000);
             if (mDefaultAdapter != null) {
-                mDefaultAdapter.enableReaderMode(this, new MyReaderCallback(), READER_FLAGS, option);
+                mDefaultAdapter.enableReaderMode(this, new MyReaderCallback(),READER_FLAGS, option);
             }
 
         }

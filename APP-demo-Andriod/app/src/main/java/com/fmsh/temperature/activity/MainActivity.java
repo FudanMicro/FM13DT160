@@ -1,9 +1,17 @@
 package com.fmsh.temperature.activity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -16,7 +24,9 @@ import com.fmsh.temperature.fragment.IMFragment;
 import com.fmsh.temperature.fragment.SettingFragment;
 import com.fmsh.temperature.tools.BroadcastManager;
 import com.fmsh.temperature.util.ActivityUtils;
+import com.fmsh.temperature.util.ExcelUtils;
 import com.fmsh.temperature.util.LogUtil;
+import com.fmsh.temperature.util.TimeUitls;
 import com.fmsh.temperature.util.UIUtils;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -50,6 +60,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+       if (!hasNfc(this)){
+           startAppSettings();
+       }
+
+        TimeUitls.getTimeZone();
 
     }
 
@@ -65,7 +80,7 @@ public class MainActivity extends BaseActivity {
 
 
         }
-
+//
         topbar.setTitle(UIUtils.getString(R.string.text_lab1));
         topbar.addLeftTextButton(UIUtils.getString(R.string.text_version)+version,0x124);
 
@@ -108,11 +123,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-        //不保留activity状态
-    }
 
     @Override
     protected void onStart() {
@@ -200,4 +210,62 @@ public class MainActivity extends BaseActivity {
             mQmuiDialog.dismiss();
         }
     }
+
+    public  boolean hasNfc(Activity context){
+
+        NfcManager manager = (NfcManager) context.getSystemService(Context.NFC_SERVICE);
+        NfcAdapter adapter = manager.getDefaultAdapter();
+        if (adapter != null && adapter.isEnabled()) {
+            // adapter存在，能启用
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * 启动应用的设置
+     */
+    private void startAppSettings() {
+        try {
+            Intent intent = new Intent(
+                    Settings.ACTION_NFC_SETTINGS);
+            startActivityForResult(intent, 100);
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        LogUtil.d(requestCode+ "---"+resultCode);
+        if(requestCode == 100){
+            if(!hasNfc(this)){
+                showDialog();
+            }
+        }
+    }
+
+    private void showDialog(){
+        QMUIDialog qmuiDialog = new QMUIDialog.MessageDialogBuilder(mContext)
+                .setTitle(UIUtils.getString(R.string.tips))
+                .setMessage(UIUtils.getString(R.string.open_nfc))
+                .addAction(UIUtils.getString(R.string.text_cancel), new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                }).addAction(UIUtils.getString(R.string.setting), new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        startAppSettings();
+
+                    }
+                }).create();
+        qmuiDialog.show();
+    }
+
 }

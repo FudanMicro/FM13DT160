@@ -20,7 +20,9 @@
 
     <string name="text_about">关于</string>
     <string name="text_version">版本:</string>
-
+    <string name="tips">提示</string>
+    <string name="open_nfc">本应用需要打开NFC功能才能使用,请点击设置去开启NFC功能</string>
+    <string name="setting">设置</string>
 
 
     <string name="text_main1">温度</string>
@@ -95,6 +97,9 @@
 
     <string name="text_measure_delay">• 延迟测温时间:</string>
     <string name="text_measure_interval">• 测温间隔时间:</string>
+    <string name="text_measure_mode">存储模式</string>
+    <string name="text_measure_normal_mode">原始数据存储模式</string>
+    <string name="text_measure_compression_mode">压缩数据存储模式1</string>
     <string name="text_measure_count">• 测温次数:</string>
     <string name="text_max_tp">• 高温上限设置: </string>
     <string name="text_min_tp">• 低温下限设置: </string>
@@ -148,4 +153,14 @@
     <string name="time">时间</string>
     <string name="value">温度</string>
     <string name="delay_time">测温延迟时间:</string>
+
+    <string name="report">测温报告</string>
+    <string name="record">测温记录</string>
+    <string name="m_time">测温时间</string>
+
+
+    <string name="mode_error">标签当前是正常模式,测温次数过大,请修改测温模式</string>
+
+
+
 </resources>

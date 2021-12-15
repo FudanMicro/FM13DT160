@@ -323,7 +323,7 @@ public class InstructMap {
                 long time = System.currentTimeMillis() / 1000;
                 String format = String.format("%08x", time);
                 byte[] timeByte = TransUtil.hexToByte(format);
-                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, (byte) 0x40, 0x03, (byte) timeByte[0], (byte) timeByte[1], (byte) timeByte[2], (byte) timeByte[3]};
+                bytes = new byte[]{0x02, (byte) 0xb3, 0x1d,  0x01, (byte) 0x40, 0x03, (byte) timeByte[0], (byte) timeByte[1], (byte) timeByte[2], (byte) timeByte[3]};
                 break;
             case 23: //读取时间
                 bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, (byte) 0x40, 0x00, 0x03};
@@ -550,6 +550,7 @@ public class InstructMap {
             byteList.add(instructA(32));
             byteList.add(instructA(44));
             byteList.add(instructA(47));
+            byteList.add(instructA(48));
         } else {
             byteList.add(instructV(46));
             byteList.add(instructV(14));
@@ -567,6 +568,7 @@ public class InstructMap {
             byteList.add(instructV(32));
             byteList.add(instructV(44));
             byteList.add(instructV(47));
+            byteList.add(instructV(48));
         }
         return byteList;
     }
@@ -625,6 +627,9 @@ public class InstructMap {
         parameterArr[2] = loggingCount;
         parameterArr[3] = minTemperature;
         parameterArr[4] = maxTemperature;
+    }
+    public static int[] getParameterArr(){
+        return parameterArr;
     }
 
 }

@@ -196,6 +196,7 @@ public class UIUtils {
     public static  String getCurrentLanguage(){
         Locale locale = getResources().getConfiguration().locale;
         String language = locale.getLanguage();
+        LogUtil.d(language);
         return language;
     }
 

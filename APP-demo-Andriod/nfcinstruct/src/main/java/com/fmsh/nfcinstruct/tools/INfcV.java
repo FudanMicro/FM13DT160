@@ -24,7 +24,9 @@ public class INfcV extends BaseNfc {
 
     @Override
     public String transceive(byte[] bytes) throws IOException {
-        System.arraycopy(mId, 0, bytes, 3, mId.length);
+        if(bytes[0] == (byte) 0x22){
+            System.arraycopy(mId, 0, bytes, 3, mId.length);
+        }
         LogUtil.d(TransUtil.byteToHex(bytes));
         byte[] transceive = mNfcV.transceive(bytes);
         String byteToHex = TransUtil.byteToHex(transceive);
@@ -34,7 +36,9 @@ public class INfcV extends BaseNfc {
 
     @Override
     public byte[] sendCommand(byte[] bytes) throws IOException {
-        System.arraycopy(mId, 0, bytes, 3, mId.length);
+        if(bytes[0] == (byte) 0x22){
+            System.arraycopy(mId, 0, bytes, 3, mId.length);
+        }
         LogUtil.d(TransUtil.byteToHex(bytes));
         byte[] transceive = mNfcV.transceive(bytes);
         LogUtil.d(TransUtil.byteToHex(transceive));

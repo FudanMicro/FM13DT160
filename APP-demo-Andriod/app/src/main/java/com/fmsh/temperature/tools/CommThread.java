@@ -1,6 +1,7 @@
 package com.fmsh.temperature.tools;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.nfc.Tag;
 import android.nfc.tech.NfcV;
 import android.os.Bundle;
@@ -110,7 +111,8 @@ public class CommThread extends Thread {
                                     SpUtils.getIntValue(MyConstant.intervalTime, 1),
                                     SpUtils.getIntValue(MyConstant.tpCount, 10),
                                     SpUtils.getIntValue(MyConstant.tpMin, 0),
-                                    SpUtils.getIntValue(MyConstant.tpMax, 40)
+                                    SpUtils.getIntValue(MyConstant.tpMax, 40),
+                                    SpUtils.getIntValue(MyConstant.tpMode, 0)
                                     , mOnResultCallback);
                             break;
                         case 8:
@@ -120,7 +122,7 @@ public class CommThread extends Thread {
                         case 9:
                             Bundle data2 = msg.getData();
                             boolean filed = data2.getBoolean("filed");
-                            GeneralNFC.getInstance().getLoggingResult(filed, mOnResultCallback);
+                            GeneralNFC.getInstance().getLoggingResult(true, mOnResultCallback);
                             break;
                         case 10:
                             Bundle data = msg.getData();
@@ -150,6 +152,9 @@ public class CommThread extends Thread {
                             Bundle bundle1 = msg.getData();
                             GeneralNFC.getInstance().updatePassword(bundle1.getString("oldPwd"), bundle1.getString("newPwd"), bundle1.getByteArray("address"), mOnResultCallback);
                             break;
+                        case 15:
+                            GeneralNFC.getInstance().switchStorageMode(msg.getData().getInt("mode"), mOnResultCallback);
+                            break;
                         default:
                             break;
                     }
@@ -158,14 +163,16 @@ public class CommThread extends Thread {
                     switch (msg.what) {
                         case 15:
                             Bundle bundle2 = msg.getData();
-                            PdfUtils.createPdfFile((List<com.itextpdf.text.Element>) bundle2.getSerializable("pdf"));
+                            List<IncomeBean> pdf = bundle2.getParcelableArrayList("pdf");
+                            List<String> info = bundle2.getStringArrayList("info");
+                            Bitmap img = bundle2.getParcelable("img");
+                            PdfUtils.createPdfFile(PdfUtils.createPdfData(info,img,pdf));
                             break;
                         case 16:
                             Bundle data = msg.getData();
                             ArrayList<QMUICommonListItemView> item = (ArrayList<QMUICommonListItemView>) data.getSerializable("item");
-                            ArrayList<Date> date = (ArrayList<Date>) data.getSerializable("date");
-                            ArrayList<Float> floats = (ArrayList<Float>) data.getSerializable("float");
-                            ExcelUtils.writeExcel(item,date,floats);
+                            ArrayList<IncomeBean> result = data.getParcelableArrayList("result");
+                            ExcelUtils.writeExcel(item,result);
                             break;
                         default:
                             break;

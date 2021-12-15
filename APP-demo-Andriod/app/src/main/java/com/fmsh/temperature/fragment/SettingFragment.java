@@ -17,10 +17,13 @@ import android.widget.TextView;
 import com.fmsh.temperature.R;
 import com.fmsh.temperature.activity.RecordActivity;
 import com.fmsh.temperature.util.HintDialog;
+import com.fmsh.temperature.util.LogUtil;
 import com.fmsh.temperature.util.MyConstant;
 import com.fmsh.temperature.util.NFCUtils;
 import com.fmsh.temperature.util.SpUtils;
+import com.fmsh.temperature.util.TransUtil;
 import com.fmsh.temperature.util.UIUtils;
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
@@ -42,6 +45,8 @@ public class SettingFragment extends BaseFragment {
     TextView tvMinTp;
     @BindView(R.id.tvMAxTp)
     TextView tvMAxTp;
+    @BindView(R.id.tvMode)
+    TextView tvMode;
     @BindView(R.id.tvCount)
     TextView tvCount;
     @BindView(R.id.applyConfigButton)
@@ -62,14 +67,48 @@ public class SettingFragment extends BaseFragment {
 
         tvDelay.setText(UIUtils.getString(R.string.text_measure_delay) + "   " + delayTime[SpUtils.getIntValue("delay", 1)]);
         tvInterval.setText(UIUtils.getString(R.string.text_measure_interval) + "   " + intervals[SpUtils.getIntValue("interval", 2)]);
-        tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts[SpUtils.getIntValue("count", 0)]);
+
         tvMinTp.setText(UIUtils.getString(R.string.text_min_tp) + "   " + thresholds[SpUtils.getIntValue("min", 12)]);
         tvMAxTp.setText(UIUtils.getString(R.string.text_max_tp) + "   " + thresholds[SpUtils.getIntValue("max", 27)]);
+
+        setCount();
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        LogUtil.d(hidden+"onHiddenChanged");
+
+        if(!hidden){
+            setCount();
+        }
+    }
+
+
+    private void setCount() {
+        int intValue = SpUtils.getIntValue(MyConstant.tpMode, 0);
+        if (intValue == 0) {
+            int count = SpUtils.getIntValue("count", 0);
+            LogUtil.d("count"+count);
+            if(count >= counts.length){
+                count = counts.length-1;
+                SpUtils.putIntValue("count",counts.length-1);
+            }
+
+            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts[count]);
+
+            tvMode.setText(UIUtils.getString(R.string.text_measure_mode) + "   " + UIUtils.getString(R.string.text_measure_normal_mode));
+        } else {
+            tvMode.setText(UIUtils.getString(R.string.text_measure_mode) + "   " + UIUtils.getString(R.string.text_measure_compression_mode));
+            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts1[SpUtils.getIntValue("count", 0)]);
+        }
+    }
+
 
     @Override
     public void onResume() {
         super.onResume();
+        LogUtil.d("onResume");
         if (resultButton != null) {
             resultButton.setEnabled(true);
         }
@@ -84,8 +123,27 @@ public class SettingFragment extends BaseFragment {
 
     }
 
+    private void showSingleChoiceDialog() {
+        final String[] items = new String[]{UIUtils.getString(R.string.text_measure_normal_mode), UIUtils.getString(R.string.text_measure_compression_mode)};
+        final QMUIDialog.CheckableDialogBuilder dialogBuilder = new QMUIDialog.CheckableDialogBuilder(getActivity())
+                .addItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SpUtils.putIntValue(MyConstant.tpMode, which);
+                        if (which == 0) {
+                            tvMode.setText(UIUtils.getString(R.string.text_measure_mode) + "   " + UIUtils.getString(R.string.text_measure_normal_mode));
+                        } else {
+                            tvMode.setText(UIUtils.getString(R.string.text_measure_mode) + "   " + UIUtils.getString(R.string.text_measure_compression_mode));
+                        }
+                        dialog.dismiss();
 
-    @OnClick({R.id.tvDelay, R.id.tvInterval, R.id.tvCount, R.id.tvMinTp, R.id.tvMAxTp, R.id.applyConfigButton, R.id.resultButton, R.id.stopButton, R.id.resultFiledButton})
+                    }
+                });
+
+        dialogBuilder.create(R.style.DialogTheme2).show();
+    }
+
+    @OnClick({R.id.tvDelay, R.id.tvInterval, R.id.tvMode, R.id.tvCount, R.id.tvMinTp, R.id.tvMAxTp, R.id.applyConfigButton, R.id.resultButton, R.id.stopButton, R.id.resultFiledButton})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvDelay:
@@ -94,8 +152,15 @@ public class SettingFragment extends BaseFragment {
             case R.id.tvInterval:
                 showNumpicker(intervals, SpUtils.getIntValue("interval", 2), 2);
                 break;
+            case R.id.tvMode:
+                showSingleChoiceDialog();
+                break;
             case R.id.tvCount:
-                showNumpicker(counts, SpUtils.getIntValue("count", 0), 3);
+                if (SpUtils.getIntValue(MyConstant.tpMode, 0) == 0) {
+                    showNumpicker(counts, SpUtils.getIntValue("count", 0), 3);
+                } else {
+                    showNumpicker(counts1, SpUtils.getIntValue("count", 0), 3);
+                }
                 break;
             case R.id.tvMinTp:
                 showNumpicker(thresholds, SpUtils.getIntValue("min", 12), 4);
@@ -148,24 +213,33 @@ public class SettingFragment extends BaseFragment {
                 mContext.nfcDialog();
                 break;
             case R.id.resultButton:
-                resultButton.setEnabled(false);
-                Intent intent = new Intent(mContext, RecordActivity.class);
-                startActivity(intent);
-                mContext.FLAG = 1;
+                //                resultButton.setEnabled(false);
+                //                Intent intent = new Intent(mContext, RecordActivity.class);
+                //                startActivity(intent);
+                //                mContext.FLAG = 1;
+                mContext.nfcDialog();
+                mContext.mImFragment.mStatu = 9;
+                mContext.mImFragment.isShowFiled = false;
+                mContext.FLAG = 0;
                 break;
             case R.id.stopButton:
                 mContext.mImFragment.mStatu = 8;
                 mContext.FLAG = 0;
+
                 mContext.nfcDialog();
                 break;
             case R.id.resultFiledButton:
-                resultFiledButton.setEnabled(false);
-                Intent intent1 = new Intent(mContext, RecordActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("filed", true);
-                intent1.putExtras(bundle);
-                startActivity(intent1);
-                mContext.FLAG = 1;
+                //                resultFiledButton.setEnabled(false);
+                //                Intent intent1 = new Intent(mContext, RecordActivity.class);
+                //                Bundle bundle = new Bundle();
+                //                bundle.putBoolean("filed", true);
+                //                intent1.putExtras(bundle);
+                //                startActivity(intent1);
+                //                mContext.FLAG = 1;
+                mContext.nfcDialog();
+                mContext.mImFragment.mStatu = 9;
+                mContext.mImFragment.isShowFiled = true;
+                mContext.FLAG = 0;
                 break;
             default:
                 break;
@@ -176,6 +250,7 @@ public class SettingFragment extends BaseFragment {
     private String[] delayTime = {"0 minutes", "1 minutes", "2 minutes", " 5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hour", "4 hour"};
     final private String[] intervals = {"1s", "2s", "5s", "6s", "8s", "10s", "12s", "15s", "20s", "25s", "30s", "35s", "40s", "50s", "60s", "75s", "90s", "100s", "120s", "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour"};
     final private String[] counts = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000", "4864"};
+    final private String[] counts1 = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000","4864", "5000", "8000", "10000", "13000", "14592"};
     final private static String[] thresholds = new String[]{"-40°C", "-30°C", "-20°C", "-18°C", "-15°C", "-10°C", "-8°C", "-5°C", "-4°C", "-3°C", "-2°C", "-1°C", "0°C", "1°C", "2°C", "3°C", "4°C", "5°C", "8°C", "10°C", "15°C", "18°C", "20°C", "23°C", "25°C", "30°C", "35°C", "40°C", "50°C", "60°C", "70°C", "80°C"}; /* Celsius */
     final private static int[] thresholdUnitIds = new int[]{R.string.celsius};
 
@@ -239,7 +314,12 @@ public class SettingFragment extends BaseFragment {
                         SpUtils.putIntValue("count", value);
                         SpUtils.putIntValue(MyConstant.tpCount, Integer.parseInt(timeValue));
                         //                        MyConstant.TPCOUNT = Integer.parseInt(timeValue);
-                        tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts[value]);
+                        int intValue = SpUtils.getIntValue(MyConstant.tpMode, 0);
+                        if (intValue == 0) {
+                            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts[value]);
+                        } else {
+                            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts1[value]);
+                        }
                         break;
                     case 4:
                         SpUtils.putIntValue("min", value);

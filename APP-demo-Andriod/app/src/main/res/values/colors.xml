@@ -41,4 +41,8 @@
     <color name="bar_divider">#D4D6D8</color>
     <color name="tab_panel_bg">#ffffff</color>
     <color name="tab_panel_divider">@color/bar_divider</color>
+
+    <color name="blue">#0000FF</color>
+    <color name="excel_background">#1f497D</color>
+
 </resources>

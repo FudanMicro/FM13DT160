@@ -1,5 +1,8 @@
 package com.fmsh.temperature.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fmsh.nfcinstruct.GeneralNFC;
 import com.fmsh.temperature.R;
+import com.fmsh.temperature.tools.BroadcastManager;
 import com.fmsh.temperature.util.ActivityUtils;
 import com.fmsh.temperature.util.HintDialog;
 import com.fmsh.temperature.util.NFCUtils;

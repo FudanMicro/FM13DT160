@@ -1,13 +1,11 @@
 package com.fmsh.temperature.util;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.os.Environment;
 import android.os.Message;
 
 import com.fmsh.temperature.R;
-
+import com.fmsh.temperature.tools.IncomeBean;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -25,7 +23,6 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -139,7 +136,7 @@ public class PdfUtils {
 	}
 
 
-	public static List<Element> createPdfData(List<String> baseInfo,Bitmap bitmap,List<Date> dateList,List<Float> tpList){
+	public static List<Element> createPdfData(List<String> baseInfo, Bitmap bitmap, List<IncomeBean> beanList){
 		List<Element> elementList = new ArrayList<>();
 		try {
 			BaseFont bfChinese;
@@ -154,8 +151,8 @@ public class PdfUtils {
 			Font font30 = new Font(bfChinese, 30, Font.BOLD);
 			Font font50 = new Font(bfChinese, 50, Font.BOLD);
 			Font noBoldFont = new Font(bfChinese, 12);
-			Font redNoBoldFont = new Font(bfChinese, 12,Font.NORMAL, BaseColor.RED);
-			Font blueNoBoldFont = new Font(bfChinese, 12,Font.NORMAL, BaseColor.BLUE);
+			Font redNoBoldFont = new Font(bfChinese, 12, Font.NORMAL, BaseColor.RED);
+			Font blueNoBoldFont = new Font(bfChinese, 12, Font.NORMAL, BaseColor.BLUE);
 			Paragraph p1 = new Paragraph(UIUtils.getString(R.string.temperature_tag_report), font30);
 			p1.setAlignment(1);
 			elementList.add(p1);
@@ -163,22 +160,22 @@ public class PdfUtils {
 			p2.add(new com.itextpdf.text.Chunk(new LineSeparator(font50)));
 			p2.setLeading(0);
 			elementList.add(p2);
-			Paragraph p3 = new Paragraph(String.format("%s    %s",UIUtils.getString(R.string.status_normal),baseInfo.get(1)), font20);
+			Paragraph p3 = new Paragraph(String.format("%s    %s", UIUtils.getString(R.string.status_normal),baseInfo.get(1)), font20);
 			p3.setSpacingBefore(15f);
 			elementList.add(p3);
 			elementList.add(p2);
 			PdfPTable table = createTable(2, 5);
-			table.addCell(createCell(UIUtils.getString(R.string.tag_info),font20,Element.ALIGN_LEFT,2,false));
-			table.addCell(createCell(String.format("UID: %s",baseInfo.get(0)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text14),baseInfo.get(4)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text21),baseInfo.get(3)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text20),baseInfo.get(2)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text17),baseInfo.get(5)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.delay_time),baseInfo.get(6)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text18),baseInfo.get(7)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text15),baseInfo.get(8)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text16),baseInfo.get(9)),noBoldFont,Element.ALIGN_LEFT,false));
-			table.addCell(createCell(String.format("%s %s",UIUtils.getString(R.string.hint_text19),baseInfo.get(10)),noBoldFont,Element.ALIGN_LEFT,false));
+			table.addCell(createCell(UIUtils.getString(R.string.tag_info),font20, Element.ALIGN_LEFT,2,false));
+			table.addCell(createCell(String.format("UID: %s",baseInfo.get(0)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text14),baseInfo.get(4)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text21),baseInfo.get(3)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text20),baseInfo.get(2)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text17),baseInfo.get(5)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.delay_time),baseInfo.get(6)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text18),baseInfo.get(7)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text15),baseInfo.get(8)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text16),baseInfo.get(9)),noBoldFont, Element.ALIGN_LEFT,false));
+			table.addCell(createCell(String.format("%s %s", UIUtils.getString(R.string.hint_text19),baseInfo.get(10)),noBoldFont, Element.ALIGN_LEFT,false));
 			table.setSpacingBefore(15f);
 			elementList.add(table);
 			elementList.add(p2);
@@ -188,12 +185,12 @@ public class PdfUtils {
 
 			if(bitmap != null){
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.PNG, 100 , stream);
+				bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , stream);
 				Image myImg = Image.getInstance(stream.toByteArray());
 				myImg.setAlignment(Image.MIDDLE);
 				elementList.add(myImg);
 			}
-			int size = dateList.size();
+			int size = beanList.size();
 			int count = size /120;
 			if(size % 120 != 0){
 				count++;
@@ -214,77 +211,80 @@ public class PdfUtils {
 				elementList.add(p2);
 				PdfPTable tableFather = createTable(3, 1);
 				tableFather.setSpacingBefore(15f);
-				tableFather.addCell(createCell(UIUtils.getString(R.string.detail_datas),font20,Element.ALIGN_LEFT,3,false));
+				tableFather.addCell(createCell(UIUtils.getString(R.string.detail_datas),font20, Element.ALIGN_LEFT,3,false));
 				PdfPTable table1 = createTable(new float[]{120,50});
 				table1.setWidthPercentage(30);
-				table1.addCell(createCell(UIUtils.getString(R.string.time),noBoldFont,Element.ALIGN_LEFT,false));
-				table1.addCell(createCell(UIUtils.getString(R.string.value),noBoldFont,Element.ALIGN_LEFT,false));
+				table1.addCell(createCell(UIUtils.getString(R.string.time),noBoldFont, Element.ALIGN_LEFT,false));
+				table1.addCell(createCell(UIUtils.getString(R.string.value),noBoldFont, Element.ALIGN_LEFT,false));
 				int counts = j+40;
-				if(dateList.size() < counts){
-					counts = dateList.size();
+				if(beanList.size() < counts){
+					counts = beanList.size();
 				}
 				for ( ; j < counts; j++) {
-					Float aFloat = tpList.get(j);
+					IncomeBean incomeBean = beanList.get(j);
+					double aFloat = incomeBean.getValue();
 					if(aFloat > height ){
-						table1.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),redNoBoldFont,Element.ALIGN_LEFT,BaseColor.RED,false));
-						table1.addCell(createCell(String.format("%.2f\u00B0C",aFloat),redNoBoldFont,Element.ALIGN_LEFT,BaseColor.RED,false));
+						table1.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),redNoBoldFont, Element.ALIGN_LEFT, BaseColor.RED,false));
+						table1.addCell(createCell(String.format("%.2f\u00B0C",aFloat),redNoBoldFont, Element.ALIGN_LEFT, BaseColor.RED,false));
 
 					}
 					if(aFloat < low){
-						table1.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),blueNoBoldFont,Element.ALIGN_LEFT,BaseColor.BLUE,false));
-						table1.addCell(createCell(String.format("%.2f\u00B0C",aFloat),blueNoBoldFont,Element.ALIGN_LEFT,BaseColor.BLUE,false));
+						table1.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),blueNoBoldFont, Element.ALIGN_LEFT, BaseColor.BLUE,false));
+						table1.addCell(createCell(String.format("%.2f\u00B0C",aFloat),blueNoBoldFont, Element.ALIGN_LEFT, BaseColor.BLUE,false));
 					}
 					if(aFloat <= height && aFloat >= low){
-						table1.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),noBoldFont,Element.ALIGN_LEFT,false));
-						table1.addCell(createCell(String.format("%.2f\u00B0C",aFloat),noBoldFont,Element.ALIGN_LEFT,false));
+						table1.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),noBoldFont, Element.ALIGN_LEFT,false));
+						table1.addCell(createCell(String.format("%.2f\u00B0C",aFloat),noBoldFont, Element.ALIGN_LEFT,false));
 					}
 				}
 				PdfPTable table2 = createTable(new float[]{120,50});
 				table2.setWidthPercentage(30);
-				table2.addCell(createCell(UIUtils.getString(R.string.time),noBoldFont,Element.ALIGN_LEFT,false));
-				table2.addCell(createCell(UIUtils.getString(R.string.value),noBoldFont,Element.ALIGN_LEFT,false));
+				table2.addCell(createCell(UIUtils.getString(R.string.time),noBoldFont, Element.ALIGN_LEFT,false));
+				table2.addCell(createCell(UIUtils.getString(R.string.value),noBoldFont, Element.ALIGN_LEFT,false));
 				counts = j+40;
-				if(dateList.size() < counts){
-					counts = dateList.size();
+				if(beanList.size() < counts){
+					counts = beanList.size();
 				}
 				for (; j < counts; j++) {
-					Float aFloat = tpList.get(j);
+					IncomeBean incomeBean = beanList.get(j);
+					double aFloat = incomeBean.getValue();
 					if(aFloat > height ){
-						table2.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),redNoBoldFont,Element.ALIGN_LEFT,BaseColor.RED,false));
-						table2.addCell(createCell(String.format("%.2f\u00B0C",aFloat),redNoBoldFont,Element.ALIGN_LEFT,BaseColor.RED,false));
+						table2.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),redNoBoldFont, Element.ALIGN_LEFT, BaseColor.RED,false));
+						table2.addCell(createCell(String.format("%.2f\u00B0C",aFloat),redNoBoldFont, Element.ALIGN_LEFT, BaseColor.RED,false));
 
 					}
 					if(aFloat < low){
-						table2.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),blueNoBoldFont,Element.ALIGN_LEFT,BaseColor.BLUE,false));
-						table2.addCell(createCell(String.format("%.2f\u00B0C",aFloat),blueNoBoldFont,Element.ALIGN_LEFT,BaseColor.BLUE,false));
+						table2.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),blueNoBoldFont, Element.ALIGN_LEFT, BaseColor.BLUE,false));
+						table2.addCell(createCell(String.format("%.2f\u00B0C",aFloat),blueNoBoldFont, Element.ALIGN_LEFT, BaseColor.BLUE,false));
 					}
 					if(aFloat <= height && aFloat >= low){
-						table2.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),noBoldFont,Element.ALIGN_LEFT,false));
-						table2.addCell(createCell(String.format("%.2f\u00B0C",aFloat),noBoldFont,Element.ALIGN_LEFT,false));
+						table2.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),noBoldFont, Element.ALIGN_LEFT,false));
+						table2.addCell(createCell(String.format("%.2f\u00B0C",aFloat),noBoldFont, Element.ALIGN_LEFT,false));
 					}
 				}
 				PdfPTable table3 = createTable(new float[]{120,50});
 				table3.setWidthPercentage(30);
-				table3.addCell(createCell(UIUtils.getString(R.string.time),noBoldFont,Element.ALIGN_LEFT,false));
-				table3.addCell(createCell(UIUtils.getString(R.string.value),noBoldFont,Element.ALIGN_LEFT,false));
+				table3.addCell(createCell(UIUtils.getString(R.string.time),noBoldFont, Element.ALIGN_LEFT,false));
+				table3.addCell(createCell(UIUtils.getString(R.string.value),noBoldFont, Element.ALIGN_LEFT,false));
 				counts = j+40;
-				if(dateList.size() < counts){
-					counts = dateList.size();
+				if(beanList.size() < counts){
+					counts = beanList.size();
 				}
 				for (; j < counts; j++) {
-					Float aFloat = tpList.get(j);
+					IncomeBean incomeBean = beanList.get(j);
+					double aFloat = incomeBean.getValue();
 					if(aFloat > height ){
-						table3.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),redNoBoldFont,Element.ALIGN_LEFT,BaseColor.RED,false));
-						table3.addCell(createCell(String.format("%.2f\u00B0C",aFloat),redNoBoldFont,Element.ALIGN_LEFT,BaseColor.RED,false));
+						table3.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),redNoBoldFont, Element.ALIGN_LEFT, BaseColor.RED,false));
+						table3.addCell(createCell(String.format("%.2f\u00B0C",aFloat),redNoBoldFont, Element.ALIGN_LEFT, BaseColor.RED,false));
 
 					}
 					if(aFloat < low){
-						table3.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),blueNoBoldFont,Element.ALIGN_LEFT,BaseColor.BLUE,false));
-						table3.addCell(createCell(String.format("%.2f\u00B0C",aFloat),blueNoBoldFont,Element.ALIGN_LEFT,BaseColor.BLUE,false));
+						table3.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),blueNoBoldFont, Element.ALIGN_LEFT, BaseColor.BLUE,false));
+						table3.addCell(createCell(String.format("%.2f\u00B0C",aFloat),blueNoBoldFont, Element.ALIGN_LEFT, BaseColor.BLUE,false));
 					}
 					if(aFloat <= height && aFloat >= low){
-						table3.addCell(createCell(TimeUitls.formatDateTime(dateList.get(j).getTime() * 1000),noBoldFont,Element.ALIGN_LEFT,false));
-						table3.addCell(createCell(String.format("%.2f\u00B0C",aFloat),noBoldFont,Element.ALIGN_LEFT,false));
+						table3.addCell(createCell(TimeUitls.formatDateTime(incomeBean.getTradeDate() * 1000),noBoldFont, Element.ALIGN_LEFT,false));
+						table3.addCell(createCell(String.format("%.2f\u00B0C",aFloat),noBoldFont, Element.ALIGN_LEFT,false));
 					}
 				}
 				tableFather.addCell(new PdfPCell(table1));
@@ -324,7 +324,7 @@ public class PdfUtils {
 	}
 
 
-	public static PdfPCell createCell(String value, Font font, int align,boolean isBorder) throws IOException, DocumentException {
+	public static PdfPCell createCell(String value, Font font, int align, boolean isBorder) throws IOException, DocumentException {
 		PdfPCell cell = new PdfPCell();
 		cell.setVerticalAlignment(Element.ALIGN_TOP);
 		cell.setHorizontalAlignment(align);
@@ -337,12 +337,12 @@ public class PdfUtils {
 		}
 		return cell;
 	}
-	public static PdfPCell createCell(String value, Font font, int align,BaseColor color,boolean isBorder) throws IOException, DocumentException {
+	public static PdfPCell createCell(String value, Font font, int align, BaseColor color, boolean isBorder) throws IOException, DocumentException {
 		PdfPCell cell = new PdfPCell();
 		cell.setVerticalAlignment(Element.ALIGN_TOP);
 		cell.setHorizontalAlignment(align);
 		FontSelector selector = new FontSelector();
-		selector.addFont(new Font(BaseFont.createFont(), 12,Font.NORMAL,color));
+		selector.addFont(new Font(BaseFont.createFont(), 12, Font.NORMAL,color));
 		selector.addFont(font);
 		cell.setPhrase(selector.process(value));
 		if(!isBorder){
@@ -368,7 +368,7 @@ public class PdfUtils {
 		}
 		return cell;
 	}
-	public static PdfPCell createCell(String value, Font font,boolean isBorder) {
+	public static PdfPCell createCell(String value, Font font, boolean isBorder) {
 		PdfPCell cell = new PdfPCell();
 		cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 		cell.setHorizontalAlignment(Element.ALIGN_LEFT);

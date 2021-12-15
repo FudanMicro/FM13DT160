@@ -35,6 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter {
             R.mipmap.icon_grid_radius_image_view,
             R.mipmap.setting1,
             R.mipmap.setting2,
+            R.mipmap.storage_mode,
             R.mipmap.nfc_instruct,
 
     };

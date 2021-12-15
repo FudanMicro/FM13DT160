@@ -20,6 +20,14 @@
 
         />
     <TextView
+        android:id="@+id/tvMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:visibility="gone"
+        android:text="@string/text_measure_mode"
+        />
+    <TextView
         android:id="@+id/tvCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

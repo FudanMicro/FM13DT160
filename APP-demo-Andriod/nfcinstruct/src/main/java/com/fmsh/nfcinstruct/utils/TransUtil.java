@@ -731,4 +731,14 @@ public class TransUtil
         }
         return byteToHex(newBytes);
     }
+    public static String reversalData(String data){
+        byte[] bytes = hexToByte(data);
+        for (int i = 0; i < bytes.length / 2; i++) {
+            byte value = bytes[i];
+            byte value1 = bytes[bytes.length-1-i];
+            bytes[i] = value1;
+            bytes[bytes.length-1-i] = value;
+        }
+        return byteToHex(bytes);
+    }
 }

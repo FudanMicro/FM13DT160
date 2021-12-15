@@ -10,10 +10,38 @@ android {
         versionName parent.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+        }
+        release  {
+            storeFile file('keystore/DT160.jks')
+            keyAlias 'DT160'
+            storePassword '123456'
+            keyPassword '123456'
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (variant.buildType.name.equalsIgnoreCase("release") && outputFile != null && outputFile.name.endsWith('.apk')) {
+                        def fileName = "DT160_v${versionName}.apk"
+                        outputFileName  = fileName
+                    } else {
+                        def fileName = "DT160_v${versionName}_debug.apk"
+                        outputFileName  = fileName
+                    }
+                }
+            }
+            lintOptions {
+                checkReleaseBuilds false
+                abortOnError false
+
+            }
         }
     }
 
@@ -43,5 +71,7 @@ dependencies {
     implementation project(path: ':nfcinstruct')
 
     implementation 'com.itextpdf:itext-asian:5.2.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

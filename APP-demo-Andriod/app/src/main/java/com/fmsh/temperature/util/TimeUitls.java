@@ -1,6 +1,9 @@
 package com.fmsh.temperature.util;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+
+import com.fmsh.temperature.R;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,6 +11,8 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by pc on 2018/1/26.
@@ -20,6 +25,7 @@ public class TimeUitls {
      * 日期格式：yyyy-MM-dd HH:mm:ss
      **/
     public static final String DF_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public static final String DF_YYYY_MM_DD_HH_MM_SS_EN = "dd.MM.yyyy HH:mm:ss";
 
     /**
      * 日期格式：yyyy-MM-dd HH:mm
@@ -95,7 +101,12 @@ public class TimeUitls {
      */
     @SuppressLint("SimpleDateFormat")
     public static String formatDateTime(long dateL) {
-        SimpleDateFormat sdf = new SimpleDateFormat(DF_YYYY_MM_DD_HH_MM_SS);
+        SimpleDateFormat sdf;
+        if(UIUtils.getCurrentLanguage().equals("zh")){
+            sdf= new SimpleDateFormat(DF_YYYY_MM_DD_HH_MM_SS);
+        }else {
+            sdf= new SimpleDateFormat(DF_YYYY_MM_DD_HH_MM_SS_EN);
+        }
         Date date = new Date(dateL);
         return sdf.format(date);
     }
@@ -711,4 +722,18 @@ public class TimeUitls {
 
         return dateStr;
     }
+
+    public static void getTimeZone(){
+        Date date = new Date();
+        String s = date.toString();
+        LogUtil.d(s);
+        TimeZone aDefault = TimeZone.getDefault();
+        String id = aDefault.getID();
+        String displayName = aDefault.getDisplayName();
+        String displayName1 = aDefault.getDisplayName(false, TimeZone.SHORT);
+        LogUtil.d(id+"----"+displayName+"---"+displayName1);
+    }
+
+
+
 }

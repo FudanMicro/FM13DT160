@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, LoggingStatus) {
 @property (nonatomic, copy) NSString *decimalTemp;
 //测温时间
 @property (nonatomic, copy) NSString *opTime;
+//是否入场标志, 0无场 1入场 2非标准数据模式 该标志只在标准数据模式下生效
+@property (nonatomic, assign) NSInteger fieldFlag;
 @end
 
 //定时测温结果

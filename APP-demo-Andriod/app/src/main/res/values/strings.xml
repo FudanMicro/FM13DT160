@@ -98,8 +98,11 @@
     <string name="text_measure_delay">• 延迟测温时间:</string>
     <string name="text_measure_interval">• 测温间隔时间:</string>
     <string name="text_measure_mode">存储模式</string>
-    <string name="text_measure_normal_mode">原始数据存储模式</string>
+    <string name="text_measure_normal_mode">正常数据存储模式</string>
     <string name="text_measure_compression_mode">压缩数据存储模式1</string>
+    <string name="configure1">原始数据存储模式</string>
+    <string name="configure2">标准模式配置</string>
+    <string name="limit_mode_2">limit2模式</string>
     <string name="text_measure_count">• 测温次数:</string>
     <string name="text_max_tp">• 高温上限设置: </string>
     <string name="text_min_tp">• 低温下限设置: </string>
@@ -115,8 +118,8 @@
 
     <string name="celsius">°C</string>
 
-    <string name="configure1">原始模式配置</string>
-    <string name="configure2">标准模式配置</string>
+
+
     <string name="nfc_instruct">NFC指令模式</string>
     <string name="input_command">请输入指令</string>
     <string name="send_command">发送指令</string>
@@ -159,7 +162,10 @@
     <string name="m_time">测温时间</string>
 
 
-    <string name="mode_error">标签当前是正常模式,测温次数过大,请修改测温模式</string>
+    <string name="mode_error">测温次数过大,请修改测温模式</string>
+
+    <string name="notes_hint">请按照注释进行设置</string>
+    <string name="notes">注释:</string>
 
 
 

@@ -13,6 +13,8 @@ import com.fmsh.nfcinstruct.tools.NFCUtils;
 import com.fmsh.nfcinstruct.utils.MyConstant;
 import com.fmsh.nfcinstruct.utils.TransUtil;
 
+import java.util.ArrayList;
+
 /**
  * @author wuyajiang
  * @date 2020/8/10
@@ -295,10 +297,13 @@ public class GeneralNFC {
         NFCUtils.parseTag(mTag, bundle, callback);
     }
 
-    public void switchStorageMode(int mode, OnResultCallback callback) {
+    public void switchStorageMode(int mode, ArrayList<Integer> limitList, OnResultCallback callback) {
         Bundle bundle = new Bundle();
         bundle.putInt("position", 15);
         bundle.putInt("mode", mode);
+        if(mode == 3){
+            bundle.putIntegerArrayList("limit", limitList);
+        }
         NFCUtils.parseTag(mTag, bundle, callback);
     }
 

@@ -13,6 +13,7 @@ import android.os.SystemClock;
 
 import com.fmsh.nfcinstruct.GeneralNFC;
 import com.fmsh.nfcinstruct.callback.OnResultCallback;
+import com.fmsh.temperature.R;
 import com.fmsh.temperature.util.ExcelUtils;
 import com.fmsh.temperature.util.LogUtil;
 import com.fmsh.temperature.util.MyConstant;
@@ -110,8 +111,8 @@ public class CommThread extends Thread {
                             GeneralNFC.getInstance().startLogging(SpUtils.getIntValue(MyConstant.delayTime, 0),
                                     SpUtils.getIntValue(MyConstant.intervalTime, 1),
                                     SpUtils.getIntValue(MyConstant.tpCount, 10),
-                                    SpUtils.getIntValue(MyConstant.tpMin, 0),
-                                    SpUtils.getIntValue(MyConstant.tpMax, 40),
+                                    SpUtils.getIntValue(MyConstant.min_limit0, 0),
+                                    SpUtils.getIntValue(MyConstant.max_limit0, 20),
                                     SpUtils.getIntValue(MyConstant.tpMode, 0)
                                     , mOnResultCallback);
                             break;
@@ -153,7 +154,8 @@ public class CommThread extends Thread {
                             GeneralNFC.getInstance().updatePassword(bundle1.getString("oldPwd"), bundle1.getString("newPwd"), bundle1.getByteArray("address"), mOnResultCallback);
                             break;
                         case 15:
-                            GeneralNFC.getInstance().switchStorageMode(msg.getData().getInt("mode"), mOnResultCallback);
+                            Bundle bundleData = msg.getData();
+                            GeneralNFC.getInstance().switchStorageMode(bundleData.getInt("mode"),setDataToBundle(), mOnResultCallback);
                             break;
                         default:
                             break;
@@ -166,13 +168,13 @@ public class CommThread extends Thread {
                             List<IncomeBean> pdf = bundle2.getParcelableArrayList("pdf");
                             List<String> info = bundle2.getStringArrayList("info");
                             Bitmap img = bundle2.getParcelable("img");
-                            PdfUtils.createPdfFile(PdfUtils.createPdfData(info,img,pdf));
+                            PdfUtils.createPdfFile(PdfUtils.createPdfData(info, img, pdf));
                             break;
                         case 16:
                             Bundle data = msg.getData();
                             ArrayList<QMUICommonListItemView> item = (ArrayList<QMUICommonListItemView>) data.getSerializable("item");
                             ArrayList<IncomeBean> result = data.getParcelableArrayList("result");
-                            ExcelUtils.writeExcel(item,result);
+                            ExcelUtils.writeExcel(item, result);
                             break;
                         default:
                             break;
@@ -192,6 +194,17 @@ public class CommThread extends Thread {
             if (UIUtils.getHandler() != null) {
                 UIUtils.getHandler().sendMessage(message);
             }
+        }
+
+        private ArrayList<Integer> setDataToBundle() {
+            ArrayList<Integer> limitArray = new ArrayList<>();
+            limitArray.add(SpUtils.getIntValue(MyConstant.min_limit0, 0));
+            limitArray.add(SpUtils.getIntValue(MyConstant.max_limit0, 20));
+            limitArray.add(SpUtils.getIntValue(MyConstant.min_limit1, -10));
+            limitArray.add(SpUtils.getIntValue(MyConstant.max_limit1, 30));
+            limitArray.add(SpUtils.getIntValue(MyConstant.min_limit2, -20));
+            limitArray.add(SpUtils.getIntValue(MyConstant.max_limit2, 40));
+            return limitArray;
         }
     }
 

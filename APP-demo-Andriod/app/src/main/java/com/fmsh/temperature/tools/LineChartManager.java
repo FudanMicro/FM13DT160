@@ -283,6 +283,7 @@ public class LineChartManager {
             name = "高限制线";
         }
         LimitLine lowLimit = new LimitLine(low, name);
+        LimitLine lowLimit1 = new LimitLine(10, name);
         lowLimit.setLineWidth(1f);
         lowLimit.setTextSize(10f);
         lowLimit.setLineColor(color);

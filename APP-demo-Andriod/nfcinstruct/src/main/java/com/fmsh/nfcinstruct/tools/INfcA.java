@@ -62,6 +62,13 @@ public class INfcA extends BaseNfc {
         byte[] bytes = new byte[]{0x40, (byte) 0xc5, address[0], address[1], data[0], data[1], 0x00};
         return sendCommand(bytes);
     }
-
+    @Override
+    public byte[] send(byte address, byte[] data) throws IOException {
+        byte[] command = new byte[2+ data.length];
+        command [0] = 0x40;
+        command [1] = address;
+        System.arraycopy(data,0,command,2,data.length);
+        return sendCommand(command);
+    }
 
 }

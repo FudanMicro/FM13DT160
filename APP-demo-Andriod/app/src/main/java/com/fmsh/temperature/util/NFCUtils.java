@@ -1,35 +1,22 @@
 package com.fmsh.temperature.util;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.nfc.FormatException;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
 import android.nfc.Tag;
-import android.nfc.tech.MifareClassic;
-import android.nfc.tech.Ndef;
-import android.nfc.tech.NdefFormatable;
 import android.nfc.tech.NfcA;
 import android.nfc.tech.NfcV;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
-import android.text.Html;
-import android.util.Log;
-import android.util.Size;
 
 import com.fmsh.temperature.R;
-import com.fmsh.temperature.listener.OnItemClickListener;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 /**
  * Created by wyj on 2018/7/6.
  */
 public class NFCUtils {
 
-    private static CommomDialog commomDialog;
+    private static CommonDialog commomDialog;
 
     public static String getRfid(Tag tag) {
         byte[] id = null;
@@ -363,7 +350,7 @@ public class NFCUtils {
                 bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0x00, 0x26, 0x00, 0x07};
                 break;
             case 16://设置最小温度值
-                int min = SpUtils.getIntValue(MyConstant.tpMin, 0);
+                int min = SpUtils.getIntValue(MyConstant.min_limit0, 0);
                 if (min < 0) {
                     bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0xb0, (byte) 0x80, 0x01, (byte) getCount(min * 4 + 0x400)[1], (byte) getCount(min * 4 + 0x400)[0]};
 
@@ -373,7 +360,7 @@ public class NFCUtils {
                 }
                 break;
             case 17: // 设置最大温度值
-                int max = SpUtils.getIntValue(MyConstant.tpMax, 40);
+                int max = SpUtils.getIntValue(MyConstant.max_limit0, 40);
                 if (max < 0) {
                     bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0xb0, (byte) 0x82, 0x01, (byte) getCount(max * 4 + 0x400)[1], (byte) getCount(max * 4 + 0x400)[0]};
 
@@ -386,7 +373,7 @@ public class NFCUtils {
                 bytes = new byte[]{0x22, (byte) 0xb1, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0xb0, (byte) 0x80, 0x00, 0x03};
                 break;
             case 19: //写温度大小值
-                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x1e, 0x03, 0x00, (byte) SpUtils.getIntValue(MyConstant.tpMin, 0), 0x00, (byte) SpUtils.getIntValue(MyConstant.tpMax, 40)};
+                bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x1e, 0x03, 0x00, (byte) SpUtils.getIntValue(MyConstant.min_limit0, 0), 0x00, (byte) SpUtils.getIntValue(MyConstant.max_limit0, 40)};
                 break;
             case 20: //写测温间隔
                 bytes = new byte[]{0x22, (byte) 0xb3, 0x1d, 0, 0, 0, 0, 0, 0, 0, 0, (byte) 0x00, (byte) 0x22, 0x01, (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 0))[0], (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 1))[1]};
@@ -985,19 +972,19 @@ public class NFCUtils {
                 bytes = new byte[]{0x40, (byte) 0xb1, 0x00, 0x26, 0x00, 0x07, 0x00};
                 break;
             case 16: // 设置最小温度值
-                int min = SpUtils.getIntValue(MyConstant.tpMin, 0);
+                int min = SpUtils.getIntValue(MyConstant.min_limit0, 0);
                 if (min < 0) {
 
                     bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0xb0, (byte) 0x80, 0x01, 0x00, 0x00, (byte) getCount(min * 4 + 0x400)[1], (byte) getCount(min * 4 + 0x400)[0]};
 
                 } else {
 
-                    bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0xb0, (byte) 0x80, 0x01, 0x00, 0x00, (byte) getCount(min * 4)[1], (byte) getCount(SpUtils.getIntValue(MyConstant.tpMin, 0) * 4)[0]};
+                    bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0xb0, (byte) 0x80, 0x01, 0x00, 0x00, (byte) getCount(min * 4)[1], (byte) getCount(SpUtils.getIntValue(MyConstant.min_limit0, 0) * 4)[0]};
 
                 }
                 break;
             case 17: // 设置最大温度值
-                int max = SpUtils.getIntValue(MyConstant.tpMax, 40);
+                int max = SpUtils.getIntValue(MyConstant.max_limit0, 40);
                 if (max < 0) {
                     bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0xb0, (byte) 0x82, 0x01, 0x00, 0x00, (byte) getCount(max * 4 + 0x400)[1], (byte) getCount(max * 4 + 0x400)[0]};
 
@@ -1011,7 +998,7 @@ public class NFCUtils {
                 bytes = new byte[]{0x40, (byte) 0xb1, (byte) 0xb0, (byte) 0x80, 0x00, 0x03, 0x00};
                 break;
             case 19: //写到block9温度大小值
-                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x00, (byte) 0x24, 0x03, 0x00, 0x00, 0x00, (byte) SpUtils.getIntValue(MyConstant.tpMin, 0), 0x00, (byte) SpUtils.getIntValue(MyConstant.tpMax, 40)};
+                bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x00, (byte) 0x24, 0x03, 0x00, 0x00, 0x00, (byte) SpUtils.getIntValue(MyConstant.max_limit0, 0), 0x00, (byte) SpUtils.getIntValue(MyConstant.max_limit0, 40)};
                 break;
             case 20: //写测温block10间隔
                 bytes = new byte[]{0x40, (byte) 0xb3, (byte) 0x00, (byte) 0x28, 0x03, 0x00, 0x00, (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 0))[0], (byte) getCount(SpUtils.getIntValue(MyConstant.intervalTime, 1))[1], 0x12, 0x03};

@@ -45,6 +45,7 @@ android {
         }
     }
 
+
     packagingOptions { exclude 'com/itextpdf/text/pdf/fonts/cmap_info.txt' }
 }
 

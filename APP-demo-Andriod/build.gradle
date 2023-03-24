@@ -22,12 +22,12 @@ allprojects {
     }
     def supportVersion = '28.0.0'
     ext {
-        compileSdkVersion = 30
+        compileSdkVersion = 31
         minSdkVersion  = 21
-        targetSdkVersion = 30
+        targetSdkVersion = 31
         constraintLayoutVersion ='1.1.3'
-        versionName = '9.3.4'
-        versionCode = 30
+        versionName = getVersionName()
+        versionCode = getVersionCode()
 
 
         libSupportAppcompat_v7 = "com.android.support:appcompat-v7:${supportVersion}"
@@ -43,4 +43,24 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+def  getVersionName() {
+    return "9.3.7"
+}
+def getVersionCode() {
+    String[] split = getVersionName().split("\\.");
+    String result = "";
+    for (int i = 0; i <split.length ; i++) {
+        int parseInt = Integer.parseInt(split[i]);
+        String hex = Integer.toHexString(parseInt);
+        if (hex.length()!= 2){
+            hex= "0"+hex;
+        }
+        result = result+hex;
+    }
+    return Integer.parseInt(result,16);
+
+
 }

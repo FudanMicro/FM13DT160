@@ -98,7 +98,7 @@
     <string name="text_measure_delay">• Delay Time to Start:</string>
     <string name="text_measure_interval">• Time Interval:</string>
     <string name="text_measure_mode">Storage mode</string>
-    <string name="text_measure_normal_mode">Raw data</string>
+    <string name="text_measure_normal_mode">Normal data</string>
     <string name="text_measure_compression_mode">Compressed data 1</string>
     <string name="text_measure_count">• Temperature Points:</string>
     <string name="text_max_tp">• High Temperature Limit:</string>
@@ -113,7 +113,7 @@
 
     <string name="liveStatus_label">Single Time Measurement</string>
     <string name="celsius">°C</string>
-    <string name="configure1">Primitive pattern </string>
+    <string name="configure1">Raw data </string>
     <string name="configure2">Standard mode </string>
     <string name="nfc_instruct"> NFC commands</string>
     <string name="input_command">Please enter the instruction</string>
@@ -156,4 +156,9 @@
     <string name="m_time"> Measurement time</string>
 
     <string name="mode_error">Too many times, please modify the temperature measurement mode</string>
+
+    <string name="limit_mode_2">limit2 mode</string>
+
+    <string name="notes_hint">Please set according to the notes</string>
+    <string name="notes">Notes:</string>
 </resources>

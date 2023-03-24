@@ -25,6 +25,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputFilter;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ import com.fmsh.temperature.R;
 import com.fmsh.temperature.activity.NfcCommandActivity;
 import com.fmsh.temperature.adapter.RecyclerAdapter;
 import com.fmsh.temperature.decorator.GridDividerItemDecoration;
+import com.fmsh.temperature.dialog.Limit2ModeDialog;
 import com.fmsh.temperature.listener.OnItemClickListener;
 import com.fmsh.temperature.tools.BroadcastManager;
 import com.fmsh.temperature.tools.FullScreenDialog;
@@ -46,9 +48,11 @@ import com.fmsh.temperature.tools.IncomeBean;
 import com.fmsh.temperature.tools.LineChartManager;
 import com.fmsh.temperature.util.ActivityUtils;
 import com.fmsh.temperature.util.BitmapUtils;
+import com.fmsh.temperature.util.CommonDialog;
 import com.fmsh.temperature.util.HintDialog;
 import com.fmsh.temperature.util.LogUtil;
 import com.fmsh.temperature.util.MyConstant;
+import com.fmsh.temperature.util.NFCUtils;
 import com.fmsh.temperature.util.SpUtils;
 import com.fmsh.temperature.util.TimeUitls;
 import com.fmsh.temperature.util.TransUtil;
@@ -70,6 +74,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 
@@ -93,7 +98,6 @@ public class IMFragment extends BaseFragment {
             UIUtils.getString(R.string.text_led_on),
             UIUtils.getString(R.string.text_led_off),
             UIUtils.getString(R.string.config_text9),
-            UIUtils.getString(R.string.configure1),
             UIUtils.getString(R.string.configure2),
             UIUtils.getString(R.string.text_measure_mode),
             UIUtils.getString(R.string.nfc_instruct),
@@ -103,9 +107,10 @@ public class IMFragment extends BaseFragment {
     private RecyclerAdapter mRecyclerAdapter;
     public int mStatu = 0;
 
-    private int mMode = 0;
+
     private Bundle mPasswordBundle;
     private boolean isVisibleToUser;
+    private Limit2ModeDialog mLimit2ModeDialog;
 
 
     @Override
@@ -257,22 +262,18 @@ public class IMFragment extends BaseFragment {
                         mStatu = 6;
                         break;
                     case 6:
-                        mStatu = 11;
+                        selectModel();
                         break;
                     case 7:
-                        selectModel();
-                        mStatu = 12;
-                        break;
-                    case 8:
                         showSingleChoiceDialog();
                         break;
-                    case 9:
+                    case 8:
                         startActivity(new Intent(mContext, NfcCommandActivity.class));
                         break;
                     default:
                         break;
                 }
-                if (position != 8 && position != 7 && position != 9) {
+                if (position != 6 && position != 7) {
                     mContext.nfcDialog();
                 }
 
@@ -280,24 +281,42 @@ public class IMFragment extends BaseFragment {
         });
     }
 
-    int mWhich = 0;
+    private int mWhich = 0; //选择的数据存储模式
+
     private void showSingleChoiceDialog() {
-        final String[] items = new String[]{UIUtils.getString(R.string.text_measure_normal_mode), UIUtils.getString(R.string.text_measure_compression_mode)};
+        final String[] items = new String[]{UIUtils.getString(R.string.text_measure_normal_mode), UIUtils.getString(R.string.text_measure_compression_mode), UIUtils.getString(R.string.configure1),
+                UIUtils.getString(R.string.limit_mode_2)};
         final QMUIDialog.CheckableDialogBuilder dialogBuilder = new QMUIDialog.CheckableDialogBuilder(getActivity())
                 .addItems(items, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         mWhich = which;
-                        mStatu = 15;
-                        mContext.nfcDialog();
+                        switch (which) {
+                            case 0:
+                            case 1:
+                            case 2:
+                                mStatu = 15;
+                                mContext.nfcDialog();
+                                break;
+                            case 3:
+                                selectLimit2Model();
+                                break;
+                            default:
+                                break;
+
+                        }
+
                     }
                 });
 
-        dialogBuilder.create(R.style.DialogTheme2).show();
+        QMUIDialog qmuiDialog = dialogBuilder.create(R.style.DialogTheme2);
+        qmuiDialog.show();
+
     }
 
     private String[] items = {UIUtils.getString(R.string.mode1), UIUtils.getString(R.string.mode2)};
+    private int mMode = 0;
 
     private void selectModel() {
         QMUIDialog.MenuDialogBuilder menuDialogBuilder = new QMUIDialog.MenuDialogBuilder(mContext);
@@ -306,10 +325,48 @@ public class IMFragment extends BaseFragment {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 mMode = which;
+                mStatu = 12;
                 mContext.nfcDialog();
             }
         });
         menuDialogBuilder.show();
+    }
+
+    private void selectLimit2Model() {
+        //      AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+        //        View inflate = LayoutInflater.from(mContext).inflate(R.layout.limit2_mode_dialog, null);
+        //        alert.setView(inflate);
+        //        alert.setPositiveButton(UIUtils.getString(R.string.text_confirm), new DialogInterface.OnClickListener() {
+        //            @Override
+        //            public void onClick(DialogInterface dialog, int which) {
+        //                dialog.dismiss();
+        //                mContext.nfcDialog();
+        //            }
+        //        });
+        //
+        //        alert.setNegativeButton(UIUtils.getString(R.string.text_cancel), new DialogInterface.OnClickListener() {
+        //            @Override
+        //            public void onClick(DialogInterface dialog, int which) {
+        //                dialog.dismiss();
+        //            }
+        //        });
+        //        alert.show();
+        if (mLimit2ModeDialog == null) {
+            mLimit2ModeDialog = new Limit2ModeDialog(mContext);
+        }
+        mLimit2ModeDialog.limit2Model();
+        mLimit2ModeDialog.setOnConfirmClick(new Limit2ModeDialog.OnConfirmClick() {
+            @Override
+            public void onClick(DialogInterface dialog) {
+                if(mLimit2ModeDialog.checkLimitData()){
+                    dialog.dismiss();
+                    mStatu = 15;
+                    mContext.nfcDialog();
+                }
+
+            }
+        });
+
     }
 
     private static class UiHandler extends Handler {
@@ -326,7 +383,7 @@ public class IMFragment extends BaseFragment {
             IMFragment imFragment = mImFragmentWeakReference.get();
             imFragment.mContext.dismiss();
             if (imFragment != null) {
-                if(msg.what == -1){
+                if (msg.what == -1) {
                     HintDialog.faileDialog(imFragment.mContext, UIUtils.getString(R.string.text_error));
                     return;
                 }
@@ -374,11 +431,12 @@ public class IMFragment extends BaseFragment {
                             }
                             break;
                         case 15:
-                            if(status){
+                            if (status) {
                                 SpUtils.putIntValue(MyConstant.tpMode, imFragment.mWhich);
                                 imFragment.mItemView5.setDetailText(UIUtils.getString(R.string.text_success));
-                                HintDialog.successDialog(imFragment.mContext, UIUtils.getString(R.string.text_success));;
-                            }else {
+                                HintDialog.successDialog(imFragment.mContext, UIUtils.getString(R.string.text_success));
+                                ;
+                            } else {
                                 imFragment.mItemView5.setDetailText(UIUtils.getString(R.string.text_fail));
                                 HintDialog.faileDialog(imFragment.mContext, UIUtils.getString(R.string.text_fail));
                             }
@@ -416,9 +474,9 @@ public class IMFragment extends BaseFragment {
                                 HintDialog.successDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text1));
                             } else {
                                 //                            imFragment.inputPasswordDialoag(7,UIUtils.getString(R.string.check_pwd));
-                                if(data != null && data[0].equals("0")){
+                                if (data != null && "0".equals(data[0])) {
                                     HintDialog.faileDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.mode_error));
-                                }else {
+                                } else {
                                     HintDialog.faileDialog(ActivityUtils.instance.getCurrentActivity(), UIUtils.getString(R.string.hint_text2));
                                 }
                             }
@@ -706,7 +764,7 @@ public class IMFragment extends BaseFragment {
         if (status) {
             if ("0".equals(data[0])) {
                 HintDialog.messageDialog(mContext, UIUtils.getString(R.string.hint_text26));
-            } else{
+            } else {
                 showRecord(bundle);
             }
         } else {
@@ -730,36 +788,44 @@ public class IMFragment extends BaseFragment {
         QMUITopBarLayout topbar = inflate.findViewById(R.id.topbar);
         mLineChart = inflate.findViewById(R.id.lineChart);
 
-
         topbar.setTitle(R.string.text_data);
         String[] data = bundle.getStringArray("data");
-        int tpTime = Integer.parseInt(data[5]);
-        long startTime = Long.parseLong(data[1]);
-        int delayTime = 60 * Integer.parseInt(data[4]);
-        //计算平均时间,当正在测温中时,根据开始时间和当前时间计算每次测温间隔
-        long currentTimeMillis = System.currentTimeMillis() / 1000;
-        long countTime = currentTimeMillis - startTime;
-        long value = countTime / (data.length - 12);
-        if (!data[0].equals("1")) {
-            value = tpTime;
-        }
-        for (int i = 0; i < data.length - 12; i++) {
-            IncomeBean incomeBean = new IncomeBean();
-            incomeBean.setTradeDate(startTime + delayTime + value * i);
-            if (data[12 + i].contains(":")) {
-                String[] split = data[12 + i].split(":");
-                float v = Float.parseFloat(split[0]);
-                float filed = Float.parseFloat(split[1]);
-                LogUtil.d(filed + "");
-                incomeBean.setValue(v);
-                incomeBean.setFiled(filed * 10);
-            } else {
-                incomeBean.setValue(Float.parseFloat(data[12 + i]));
+        if ("limit2".equals(data[1])) {
+            limit2ModeChart(data);
+        } else {
+            int tpTime = Integer.parseInt(data[5]);
+            long startTime = Long.parseLong(data[1]);
+            int delayTime = 60 * Integer.parseInt(data[4]);
+            //计算平均时间,当正在测温中时,根据开始时间和当前时间计算每次测温间隔
+            long currentTimeMillis = System.currentTimeMillis() / 1000;
+            long countTime = currentTimeMillis - startTime;
+            float value = (float) countTime / (data.length - 12);
+            if (!data[0].equals("1")) {
+                value = tpTime;
             }
-            mResult.add(incomeBean);
+            for (int i = 0; i < data.length - 12; i++) {
+                IncomeBean incomeBean = new IncomeBean();
+                int t = Math.round( value * i);
+                Log.d("wwww",t+"");
+                incomeBean.setTradeDate(startTime + delayTime +t);
+//                if(i == data.length -1){
+//                }else {
+//                    incomeBean.setTradeDate(startTime + delayTime + aAvaue * i);
+//                }
+                if (data[12 + i].contains(":")) {
+                    String[] split = data[12 + i].split(":");
+                    float v = Float.parseFloat(split[0]);
+                    float filed = Float.parseFloat(split[1]);
+                    LogUtil.d(filed + "");
+                    incomeBean.setValue(v);
+                    incomeBean.setFiled(filed * 10);
+                } else {
+                    incomeBean.setValue(Float.parseFloat(data[12 + i]));
+                }
+                mResult.add(incomeBean);
+            }
+            addSeriesData(data, mResult, mLineChart);
         }
-        addSeriesData(data, mResult, mLineChart);
-
 
         final Dialog dialog = new FullScreenDialog(mContext,
                 android.R.style.Theme_DeviceDefault_Light_NoActionBar, inflate);
@@ -774,6 +840,133 @@ public class IMFragment extends BaseFragment {
         });
 
         dialog.show();
+
+    }
+
+    private void limit2ModeChart(String[] data) {
+
+        int delayTime = 60 * Integer.parseInt(data[4]);
+        int intervalTime = Integer.parseInt(data[5]);
+        long startTime = Long.parseLong(data[6]);
+        String[] split = data[3].split(";");
+        float minLimit0 = Float.parseFloat(split[0]);
+        float minLimit1 = Float.parseFloat(split[2]);
+        float minLimit2 = Float.parseFloat(split[4]);
+        float maxLimit0 = Float.parseFloat(split[1]);
+        float maxLimit1 = Float.parseFloat(split[3]);
+        float maxLimit2 = Float.parseFloat(split[5]);
+        Random random = new Random();
+
+        for (int i = 0; i < data.length - 7; i++) {
+            IncomeBean incomeBean = new IncomeBean();
+            incomeBean.setTradeDate(startTime + delayTime + intervalTime * i);
+            float value = 0;
+            int rangeValue = 0;
+            switch (Integer.parseInt(data[7 + i])) {
+                case 0:
+                    value = maxLimit2 + random.nextInt(5);
+                    break;
+                case 1:
+                    rangeValue = (int) (maxLimit2 - maxLimit1);
+                    if(rangeValue < 0){
+                        rangeValue = 0;
+                    }
+                    value = maxLimit1 + random.nextInt(rangeValue);
+                    break;
+                case 2:
+                    rangeValue = (int) (maxLimit1 - maxLimit0);
+                    if(rangeValue < 0){
+                        rangeValue = 0;
+                    }
+                    value = maxLimit0 + random.nextInt(rangeValue);
+                    break;
+                case 3:
+                    rangeValue = (int) (maxLimit0 - minLimit0);
+                    if(rangeValue < 0){
+                        rangeValue = 0;
+                    }
+                    value = minLimit0 + random.nextInt(rangeValue);
+                    break;
+                case 4:
+                    rangeValue = (int) (minLimit0 - minLimit1);
+                    if(rangeValue < 0){
+                        rangeValue = 0;
+                    }
+                    value = minLimit1 + random.nextInt(rangeValue);
+                    break;
+                case 5:
+                    rangeValue = (int) (minLimit1 - minLimit2);
+                    if(rangeValue < 0){
+                        rangeValue = 0;
+                    }
+                    value = minLimit2 + random.nextInt((int) (maxLimit1 - minLimit2));
+                    break;
+                case 6:
+                    value = minLimit2 - random.nextInt(5);
+                    break;
+            }
+            incomeBean.setValue(value);
+            mResult.add(incomeBean);
+        }
+
+        LineChartManager lineChartManager = new LineChartManager(mLineChart);
+        lineChartManager.setLowLimitLine(minLimit0, "minLimit0", UIUtils.getColor(R.color.blue));
+        lineChartManager.setLowLimitLine(minLimit1, "minLimit1", UIUtils.getColor(R.color.blue));
+        lineChartManager.setLowLimitLine(minLimit2, "minLimit2", UIUtils.getColor(R.color.blue));;
+        lineChartManager.setHighLimitLine(maxLimit0, "maxLimit0", UIUtils.getColor(R.color.red));
+        lineChartManager.setHighLimitLine(maxLimit1, "maxLimit1", UIUtils.getColor(R.color.red));
+        lineChartManager.setHighLimitLine(maxLimit2, "maxLimit2", UIUtils.getColor(R.color.red));
+
+
+        List<String> xAxisStr = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+
+            xAxisStr.add(i + "");
+        }
+
+        lineChartManager.showLineChart(mResult, "", UIUtils.getColor(R.color.app_color_blue), isShowFiled);
+        lineChartManager.setYAxisData(maxLimit2+10, minLimit2 - 10, 6);
+
+
+        String hint = "";
+        switch (data[0]) {
+            case "0":
+                hint = UIUtils.getString(R.string.hint_text26);
+                break;
+            case "1":
+                hint = UIUtils.getString(R.string.hint_text23);
+                break;
+            case "2":
+                hint = UIUtils.getString(R.string.hint_text25);
+                break;
+            case "3":
+                hint = UIUtils.getString(R.string.hint_text24);
+                break;
+            default:
+                break;
+        }
+
+        View inflate = LayoutInflater.from(mContext).inflate(R.layout.dialog_hint, null);
+        Button sendPdf = inflate.findViewById(R.id.sendPdf);
+        Button sendExcel = inflate.findViewById(R.id.sendExcel);
+        sendPdf.setVisibility(View.GONE);
+        sendExcel.setVisibility(View.GONE);
+        QMUIGroupListView groupListView = inflate.findViewById(R.id.groupListView);
+        QMUICommonListItemView itemView = createItem(groupListView, UIUtils.getString(R.string.hint_text22), hint);
+        QMUICommonListItemView itemView3 = createItem(groupListView, UIUtils.getString(R.string.hint_text14), String.format("%s", data[2]));
+        QMUICommonListItemView itemView9 = createItem(groupListView, UIUtils.getString(R.string.hint_text27), String.format("%sm", delayTime));
+
+        QMUICommonListItemView itemView5 = createItem(groupListView, UIUtils.getString(R.string.hint_text18), String.format("%ss", intervalTime));
+        QMUICommonListItemView itemView6 = createItem(groupListView, UIUtils.getString(R.string.hint_text15), String.format("%s", TimeUitls.formatDateTime(startTime * 1000)));
+        QMUIGroupListView.newSection(mContext)
+                .addItemView(itemView, null)
+                .addItemView(itemView3, null)
+                .addItemView(itemView9, null)
+                .addItemView(itemView5, null)
+                .addItemView(itemView6, null)
+                .addTo(groupListView);
+
+        showDialog(inflate);
 
     }
 

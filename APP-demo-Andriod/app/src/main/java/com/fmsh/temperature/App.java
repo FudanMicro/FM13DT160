@@ -3,6 +3,7 @@ package com.fmsh.temperature;
 import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.fmsh.nfcinstruct.GeneralNFC;
 import com.fmsh.temperature.util.LogUtil;
@@ -21,6 +22,7 @@ public class App extends Application {
         mContext = this;
         QMUISwipeBackActivityManager.init(this);
         LogUtil.d("ApplicationonCreate");
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public static Context getmContext() {

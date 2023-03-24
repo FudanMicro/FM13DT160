@@ -23,4 +23,7 @@ public abstract class BaseNfc {
     public abstract byte[] writeReg(byte[] address,byte[] data) throws IOException;
 
 
+    public abstract byte[] send(byte address,byte[] data) throws IOException;
+
+
 }

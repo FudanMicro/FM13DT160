@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/maxLimit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:visibility="visible"
+        android:text="max_limit2:"
+        />
+    <TextView
+        android:id="@+id/maxLimit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:visibility="visible"
+        android:text="max_limit1:"
+        />
+    <TextView
+        android:id="@+id/maxLimit0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:visibility="visible"
+        android:text="max_limit0:"
+        />
+    <TextView
+        android:id="@+id/minLimit0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:text="min_limit0:"
+        />
+    <TextView
+        android:id="@+id/minLimit1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:text="min_limit1:"
+        />
+
+    <TextView
+        android:id="@+id/minLimit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:text="min_limit2:"
+        />
+
+    <TextView
+        android:id="@+id/notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/WidgetTheme"
+        android:textSize="13dp"
+        android:visibility="visible"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/text_cancel"
+            android:id="@+id/tv_cancel"
+            android:gravity="center"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/text_confirm"
+            android:id="@+id/tv_confirm"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</LinearLayout>

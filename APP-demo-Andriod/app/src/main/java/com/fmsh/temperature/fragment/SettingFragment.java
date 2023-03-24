@@ -68,19 +68,17 @@ public class SettingFragment extends BaseFragment {
         tvDelay.setText(UIUtils.getString(R.string.text_measure_delay) + "   " + delayTime[SpUtils.getIntValue("delay", 1)]);
         tvInterval.setText(UIUtils.getString(R.string.text_measure_interval) + "   " + intervals[SpUtils.getIntValue("interval", 2)]);
 
-        tvMinTp.setText(UIUtils.getString(R.string.text_min_tp) + "   " + thresholds[SpUtils.getIntValue("min", 12)]);
-        tvMAxTp.setText(UIUtils.getString(R.string.text_max_tp) + "   " + thresholds[SpUtils.getIntValue("max", 27)]);
-
         setCount();
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        LogUtil.d(hidden+"onHiddenChanged");
+        LogUtil.d(hidden + "onHiddenChanged");
 
-        if(!hidden){
+        if (!hidden) {
             setCount();
+
         }
     }
 
@@ -89,18 +87,44 @@ public class SettingFragment extends BaseFragment {
         int intValue = SpUtils.getIntValue(MyConstant.tpMode, 0);
         if (intValue == 0) {
             int count = SpUtils.getIntValue("count", 0);
-            LogUtil.d("count"+count);
-            if(count >= counts.length){
-                count = counts.length-1;
-                SpUtils.putIntValue("count",counts.length-1);
+            LogUtil.d("count" + count);
+            if (count >= counts.length) {
+                count = counts.length - 1;
+                SpUtils.putIntValue("count", counts.length - 1);
             }
 
             tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts[count]);
 
-            tvMode.setText(UIUtils.getString(R.string.text_measure_mode) + "   " + UIUtils.getString(R.string.text_measure_normal_mode));
-        } else {
-            tvMode.setText(UIUtils.getString(R.string.text_measure_mode) + "   " + UIUtils.getString(R.string.text_measure_compression_mode));
-            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts1[SpUtils.getIntValue("count", 0)]);
+        } else if (intValue == 1) {
+            int count = SpUtils.getIntValue("count", 0);
+            LogUtil.d("count" + count);
+            if (count >= counts1.length) {
+                count = counts1.length - 1;
+                SpUtils.putIntValue("count", counts1.length - 1);
+            }
+
+            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts1[count]);
+        } else if (intValue == 2) {
+            int count = SpUtils.getIntValue("count", 0);
+            LogUtil.d("count" + count);
+            if (count >= counts2.length) {
+                count = counts2.length - 1;
+                SpUtils.putIntValue("count", counts2.length - 1);
+            }
+
+            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts2[count]);
+        } else if (intValue == 3) {
+
+            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts3[SpUtils.getIntValue("count", 0)]);
+        }
+        tvMinTp.setText(UIUtils.getString(R.string.text_min_tp) + "   " + SpUtils.getIntValue(MyConstant.min_limit0, 0) + "°C");
+        tvMAxTp.setText(UIUtils.getString(R.string.text_max_tp) + "   " + SpUtils.getIntValue(MyConstant.max_limit0, 20) + "°C");
+        if(intValue == 3){
+            tvMAxTp.setEnabled(false);
+            tvMinTp.setEnabled(false);
+        }else {
+            tvMAxTp.setEnabled(true);
+            tvMinTp.setEnabled(true);
         }
     }
 
@@ -156,17 +180,22 @@ public class SettingFragment extends BaseFragment {
                 showSingleChoiceDialog();
                 break;
             case R.id.tvCount:
-                if (SpUtils.getIntValue(MyConstant.tpMode, 0) == 0) {
+                int intValue = SpUtils.getIntValue(MyConstant.tpMode, 0);
+                if (intValue == 0) {
                     showNumpicker(counts, SpUtils.getIntValue("count", 0), 3);
-                } else {
+                } else if (intValue == 1) {
                     showNumpicker(counts1, SpUtils.getIntValue("count", 0), 3);
+                } else if (intValue == 2) {
+                    showNumpicker(counts2, SpUtils.getIntValue("count", 0), 3);
+                } else if (intValue == 3) {
+                    showNumpicker(counts3, SpUtils.getIntValue("count", 0), 3);
                 }
                 break;
             case R.id.tvMinTp:
-                showNumpicker(thresholds, SpUtils.getIntValue("min", 12), 4);
+                showNumpicker(thresholds, SpUtils.getIntValue(MyConstant.min_limit0 + "value", 12), 4);
                 break;
             case R.id.tvMAxTp:
-                showNumpicker(thresholds, SpUtils.getIntValue("max", 27), 5);
+                showNumpicker(thresholds, SpUtils.getIntValue(MyConstant.max_limit0 + "value", 27), 5);
                 break;
             case R.id.applyConfigButton:
                 String delay = tvDelay.getText().toString().trim();
@@ -198,11 +227,11 @@ public class SettingFragment extends BaseFragment {
                 String minTp = tvMinTp.getText().toString().trim();
                 String[] split3 = minTp.split(":");
                 int min = Integer.parseInt(split3[1].replace("°C", "").trim());
-                SpUtils.putIntValue(MyConstant.tpMin, min);
+                SpUtils.putIntValue(MyConstant.min_limit0, min);
                 String maxTp = tvMAxTp.getText().toString().trim();
                 String[] split4 = maxTp.split(":");
                 int max = Integer.parseInt(split4[1].replace("°C", "").trim());
-                SpUtils.putIntValue(MyConstant.tpMax, max);
+                SpUtils.putIntValue(MyConstant.max_limit0, max);
                 if (min > max) {
                     HintDialog.messageDialog(mContext, UIUtils.getString(R.string.text_min_max));
                     return;
@@ -250,7 +279,9 @@ public class SettingFragment extends BaseFragment {
     private String[] delayTime = {"0 minutes", "1 minutes", "2 minutes", " 5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour", "2 hour", "4 hour"};
     final private String[] intervals = {"1s", "2s", "5s", "6s", "8s", "10s", "12s", "15s", "20s", "25s", "30s", "35s", "40s", "50s", "60s", "75s", "90s", "100s", "120s", "5 minutes", "10 minutes", "15 minutes", "30 minutes", "1 hour"};
     final private String[] counts = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000", "4864"};
-    final private String[] counts1 = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000","4864", "5000", "8000", "10000", "13000", "14592"};
+    final private String[] counts1 = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000", "4864", "5000", "8000", "10000", "13000", "14592"};
+    final private String[] counts2 = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000", "4864", "5000", "8000", "9000", "9728"};
+    final private String[] counts3 = {"2", "3", "5", "8", "10", "20", "30", "50", "80", "100", "200", "300", "500", "800", "1000", "2000", "3000", "4000", "4864", "5000", "8000", "10000", "20000", "30000", "38912"};
     final private static String[] thresholds = new String[]{"-40°C", "-30°C", "-20°C", "-18°C", "-15°C", "-10°C", "-8°C", "-5°C", "-4°C", "-3°C", "-2°C", "-1°C", "0°C", "1°C", "2°C", "3°C", "4°C", "5°C", "8°C", "10°C", "15°C", "18°C", "20°C", "23°C", "25°C", "30°C", "35°C", "40°C", "50°C", "60°C", "70°C", "80°C"}; /* Celsius */
     final private static int[] thresholdUnitIds = new int[]{R.string.celsius};
 
@@ -317,19 +348,24 @@ public class SettingFragment extends BaseFragment {
                         int intValue = SpUtils.getIntValue(MyConstant.tpMode, 0);
                         if (intValue == 0) {
                             tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts[value]);
-                        } else {
+                        } else if (intValue == 1) {
                             tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts1[value]);
+                        } else if (intValue == 2) {
+                            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts2[value]);
+                        } else if (intValue == 3) {
+                            tvCount.setText(UIUtils.getString(R.string.text_measure_count) + "   " + counts3[value]);
                         }
                         break;
                     case 4:
-                        SpUtils.putIntValue("min", value);
+                        SpUtils.putIntValue(MyConstant.min_limit0 + "value", value);
                         tvMinTp.setText(UIUtils.getString(R.string.text_min_tp) + "   " + thresholds[value]);
-                        SpUtils.putIntValue(MyConstant.tpMin, Integer.parseInt(timeValue.replace("°C", "")));
+                        SpUtils.putIntValue(MyConstant.min_limit0, Integer.parseInt(timeValue.replace("°C", "")));
+
                         break;
                     case 5:
-                        SpUtils.putIntValue("max", value);
+                        SpUtils.putIntValue(MyConstant.max_limit0 + "value", value);
                         tvMAxTp.setText(UIUtils.getString(R.string.text_max_tp) + "   " + thresholds[value]);
-                        SpUtils.putIntValue(MyConstant.tpMax, Integer.parseInt(timeValue.replace("°C", "")));
+                        SpUtils.putIntValue(MyConstant.max_limit0, Integer.parseInt(timeValue.replace("°C", "")));
                         break;
                     default:
                         break;

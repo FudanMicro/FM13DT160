@@ -1,0 +1,41 @@
+//
+//  nfcTemperature.pch
+//  FMTemperature
+//
+//  Created by gaolailong on 2018/7/11.
+//  Copyright © 2018年 复旦微电子集团股份科技有限公司. All rights reserved.
+//
+
+#ifndef nfcTemperature_pch
+#define nfcTemperature_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__ //判断如果是OC文件才导入以下配置信息
+
+#import <UIKit/UIKit.h>
+#import "Commons.h"
+
+#endif
+
+#define TAG_MIN_TEMPERATURE         0                       //最小温度值
+#define TAG_MAX_TEMPERATURE         40                      //最大温度值
+#define TAG_LOGGING_COUNT           30                      //测温次数
+#define TAG_DELAY_MINUTES           0                       //延迟测温时间，分钟
+#define TAG_INTERVAL_SECONDS        5                       //测温间隔时间，秒
+
+//设备适配系数（以iPhone6尺寸为基准）
+#define DSAdaptCoefficient (([[UIScreen mainScreen] bounds].size.width)/375.0)
+//颜色
+#define DSColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+//基调蓝
+#define DSBlueColor [UIColor colorWithRed:20.0f/255.0f green:120.0f/240.0f blue:255.0f/255.0f alpha:1]
+//基调白
+#define DSCommonColor [UIColor whiteColor]
+//屏幕宽度
+#define DSScreenWidth [UIScreen mainScreen].bounds.size.width
+//屏幕高度
+#define DSScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#endif /* nfcTemperature_pch */

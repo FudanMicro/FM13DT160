@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		172952B622FA6ECF00D8387E /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 172952B422FA6ECF00D8387E /* CommonUtils.m */; };
+		1718889224EA8FDF00A89B54 /* libDT160SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1718889124EA8FDF00A89B54 /* libDT160SDK.a */; };
+		172952B622FA6ECF00D8387E /* Commons.m in Sources */ = {isa = PBXBuildFile; fileRef = 172952B422FA6ECF00D8387E /* Commons.m */; };
 		173CEC1D22EAF82E003F9833 /* ModelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 173CEC1B22EAF82E003F9833 /* ModelButton.m */; };
 		17555DC022ED2FD300453394 /* QFPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17555DBE22ED2FD200453394 /* QFPickerView.m */; };
-		176AD20E22E170280015D0A9 /* NFCTagHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 176AD20D22E170280015D0A9 /* NFCTagHelper.m */; };
-		17A282F022E55E2E0003EC57 /* NFCTagObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A282EC22E55E2E0003EC57 /* NFCTagObject.m */; };
 		17C0EF7F22EAE1DE00E06BFD /* MeasureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C0EF7D22EAE1DE00E06BFD /* MeasureViewController.m */; };
 		17D82CBD23210A0700DDC384 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17D82CBB23210A0700DDC384 /* LaunchScreen.storyboard */; };
 		D401D0882109A2EC0047EAEE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D401D08A2109A2EC0047EAEE /* Localizable.strings */; };
@@ -26,16 +25,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		172952B422FA6ECF00D8387E /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
-		172952B522FA6ECF00D8387E /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
+		1718889124EA8FDF00A89B54 /* libDT160SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDT160SDK.a; sourceTree = "<group>"; };
+		1718889324EA8FF000A89B54 /* NFCTagHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCTagHelper.h; sourceTree = "<group>"; };
+		172952B422FA6ECF00D8387E /* Commons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commons.m; sourceTree = "<group>"; };
+		172952B522FA6ECF00D8387E /* Commons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commons.h; sourceTree = "<group>"; };
 		173CEC1B22EAF82E003F9833 /* ModelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelButton.m; sourceTree = "<group>"; };
 		173CEC1C22EAF82E003F9833 /* ModelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelButton.h; sourceTree = "<group>"; };
 		17555DBE22ED2FD200453394 /* QFPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QFPickerView.m; sourceTree = "<group>"; };
 		17555DBF22ED2FD300453394 /* QFPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QFPickerView.h; sourceTree = "<group>"; };
-		176AD20C22E170280015D0A9 /* NFCTagHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCTagHelper.h; sourceTree = "<group>"; };
-		176AD20D22E170280015D0A9 /* NFCTagHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFCTagHelper.m; sourceTree = "<group>"; };
-		17A282EC22E55E2E0003EC57 /* NFCTagObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NFCTagObject.m; sourceTree = "<group>"; };
-		17A282ED22E55E2E0003EC57 /* NFCTagObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NFCTagObject.h; sourceTree = "<group>"; };
 		17C0EF7D22EAE1DE00E06BFD /* MeasureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeasureViewController.m; sourceTree = "<group>"; };
 		17C0EF7E22EAE1DE00E06BFD /* MeasureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeasureViewController.h; sourceTree = "<group>"; };
 		17D82CBC23210A0700DDC384 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = FMTemperature/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -63,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1718889224EA8FDF00A89B54 /* libDT160SDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,8 +70,8 @@
 		172952BB22FA6FAC00D8387E /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				172952B522FA6ECF00D8387E /* CommonUtils.h */,
-				172952B422FA6ECF00D8387E /* CommonUtils.m */,
+				172952B522FA6ECF00D8387E /* Commons.h */,
+				172952B422FA6ECF00D8387E /* Commons.m */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -98,11 +96,12 @@
 		D41BB43C20F32B05003B55EF /* FMTemperature */ = {
 			isa = PBXGroup;
 			children = (
+				1718889324EA8FF000A89B54 /* NFCTagHelper.h */,
+				1718889124EA8FDF00A89B54 /* libDT160SDK.a */,
 				172952BB22FA6FAC00D8387E /* Global */,
 				D47B8EDE20FF0DD70060FCCC /* FusionChart */,
 				D41BB47720F5FA6E003B55EF /* Language */,
 				D41BB47220F5EEE4003B55EF /* Model */,
-				D41BB45C20F36705003B55EF /* NFCHelper */,
 				D41BB45420F3319E003B55EF /* Controller */,
 				D41BB43D20F32B05003B55EF /* AppDelegate.h */,
 				D41BB43E20F32B05003B55EF /* AppDelegate.m */,
@@ -126,17 +125,6 @@
 				D41BB46720F5B395003B55EF /* MeasureView */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		D41BB45C20F36705003B55EF /* NFCHelper */ = {
-			isa = PBXGroup;
-			children = (
-				17A282ED22E55E2E0003EC57 /* NFCTagObject.h */,
-				17A282EC22E55E2E0003EC57 /* NFCTagObject.m */,
-				176AD20C22E170280015D0A9 /* NFCTagHelper.h */,
-				176AD20D22E170280015D0A9 /* NFCTagHelper.m */,
-			);
-			path = NFCHelper;
 			sourceTree = "<group>";
 		};
 		D41BB46020F36749003B55EF /* Frameworks */ = {
@@ -280,13 +268,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D41BB44D20F32B07003B55EF /* main.m in Sources */,
-				176AD20E22E170280015D0A9 /* NFCTagHelper.m in Sources */,
 				17555DC022ED2FD300453394 /* QFPickerView.m in Sources */,
 				17C0EF7F22EAE1DE00E06BFD /* MeasureViewController.m in Sources */,
 				D4C0F455210700DA001E9231 /* LoggingViewController.m in Sources */,
 				D41BB43F20F32B05003B55EF /* AppDelegate.m in Sources */,
-				172952B622FA6ECF00D8387E /* CommonUtils.m in Sources */,
-				17A282F022E55E2E0003EC57 /* NFCTagObject.m in Sources */,
+				172952B622FA6ECF00D8387E /* Commons.m in Sources */,
 				D41BB46F20F5B3F1003B55EF /* GraphicViewController.m in Sources */,
 				173CEC1D22EAF82E003F9833 /* ModelButton.m in Sources */,
 			);
@@ -433,17 +419,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FMTemperature/FMTemperature.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5;
+				CURRENT_PROJECT_VERSION = 1.0.6;
 				DEVELOPMENT_TEAM = C2TRZ3QGA9;
 				GCC_PREFIX_HEADER = "${SRCROOT}/FMTemperature/nfcTemperature.pch";
 				IBSC_FLATTEN_NIBS = NO;
 				INFOPLIST_FILE = FMTemperature/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FMTemperature",
+				);
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fmsh.TagMeasureNew;
 				PRODUCT_NAME = "DT160 TLogger";
@@ -458,17 +448,21 @@
 				CODE_SIGN_ENTITLEMENTS = FMTemperature/FMTemperature.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.5;
+				CURRENT_PROJECT_VERSION = 1.0.6;
 				DEVELOPMENT_TEAM = C2TRZ3QGA9;
 				GCC_PREFIX_HEADER = "${SRCROOT}/FMTemperature/nfcTemperature.pch";
 				IBSC_FLATTEN_NIBS = NO;
 				INFOPLIST_FILE = FMTemperature/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FMTemperature",
+				);
+				MARKETING_VERSION = 1.0.6;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fmsh.TagMeasureNew;
 				PRODUCT_NAME = "DT160 TLogger";
